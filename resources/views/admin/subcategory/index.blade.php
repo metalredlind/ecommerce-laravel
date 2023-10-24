@@ -15,7 +15,7 @@
               <div class="card-header">
                 <h4>All SubCategories</h4>
                 <div class="card-header-action">
-                    <a href="{{route('admin.category.create')}}" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Create New</a>
+                    <a href="{{route('admin.subcategory.create')}}" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Create New</a>
                 </div>
               </div>
               <div class="card-body">
