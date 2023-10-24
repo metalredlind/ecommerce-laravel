@@ -65,7 +65,9 @@ class SubCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categories = Category::all();
+        $subCategories = SubCategory::findOrFail($id);
+        return view('admin.subcategory.edit', compact('subCategories', 'categories'));
     }
 
     /**
@@ -73,7 +75,23 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'category' => ['required'],
+            'name'=> ['required', 'max:200', 'unique:sub_categories,name,'.$id],
+            'status' => ['required']
+        ]);
+
+        $subCategory = SubCategory::findOrFail($id);
+
+        $subCategory->category_id = $request->category;
+        $subCategory->name =$request->name;
+        $subCategory->slug = Str::slug($request->name);
+        $subCategory->status = $request->status;
+        $subCategory->save();
+
+        toastr('Subcategory updated succesfully', 'success');
+
+        return redirect()->route('admin.subcategory.index');
     }
 
     /**
@@ -81,6 +99,18 @@ class SubCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $subCategory = SubCategory::findOrFail($id);
+        $subCategory->delete();
+
+        return response(['status' => 'success', 'message' => 'Subcategory deleted successfully']);
+    }
+
+    public function changeStatus(Request $request)
+    {        
+        $category = subCategory::findOrFail($request->id);
+        $category->status = $request->status == 'true' ? 1 : 0;
+        $category->save();
+
+        return response(['message' => 'Status has been updated']);
     }
 }
