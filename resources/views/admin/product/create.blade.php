@@ -16,7 +16,7 @@
                 <h4>Create Product</h4>
               </div>
               <div class="card-body">
-                <form action="{{route('admin.slider.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('admin.products.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label>Image</label>
@@ -59,7 +59,7 @@
                     <div class="">
                         <div class="form-group">
                             <label for="inputState">Brand</label>
-                            <select id="inputState" class="form-control child-category" name="brand">
+                            <select id="inputState" class="form-control" name="brand">
                                 @foreach ($brands as $brand)
                                     <option value="{{$brand->id}}">{{$brand->name}}</option>
                                   @endforeach
@@ -151,7 +151,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>SEO Title/label>
+                        <label>SEO Title</label>
                         <input type="text" class="form-control" name="seo_title" value="{{old('seo_title')}}">
                     </div>
 
