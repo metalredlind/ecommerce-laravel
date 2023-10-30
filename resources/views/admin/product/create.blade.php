@@ -117,38 +117,16 @@
                         <textarea name="long_description" class="form-control summernote"></textarea>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="inputState">Is Top</label>
-                                <select id="inputState" class="form-control" name="is_top">
-                                    <option value="">Select</option>
-                                    <option value="1">Yes</option>
-                                    <option value="0">No</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="inputState">Is Best</label>
-                                <select id="inputState" class="form-control" name="is_best">
-                                    <option value="">Select</option>
-                                  <option value="1">Yes</option>
-                                  <option value="0">No</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="inputState">Is Featured</label>
-                                <select id="inputState" class="form-control" name="is_featured">
-                                    <option value="">Select</option>
-                                  <option value="1">Yes</option>
-                                  <option value="0">No</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="form-group">
+                        <label for="inputState">Product Type</label>
+                        <select id="inputState" class="form-control" name="product_type">
+                            <option value="">Select</option>
+                            <option value="new-arrival">New Arrival</option>
+                            <option value="featured_product">Featured</option>
+                            <option value="top_product">Top product</option>
+                            <option value="best_product">Best Product</option>
+                        </select>
+                    </div>    
 
                     <div class="form-group">
                         <label>SEO Title</label>
