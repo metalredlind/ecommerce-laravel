@@ -18,8 +18,8 @@ return new class extends Migration
             $table->text('thumb_image');
             $table->integer('vendor_id');
             $table->integer('category_id');
-            $table->integer('sub_category_id')->default(0);
-            $table->integer('child_category_id')->default(0);
+            $table->integer('sub_category_id')->nullable();
+            $table->integer('child_category_id')->nullable();
             $table->integer('brand_id');
             $table->integer('qty');
             $table->text('short_description');
