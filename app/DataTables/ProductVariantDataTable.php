@@ -83,9 +83,9 @@ class ProductVariantDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id')->width(70),
+            Column::make('id')->width(60),
             Column::make('name'),
-            Column::make('status'),
+            Column::make('status')->width(100),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
