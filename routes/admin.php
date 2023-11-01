@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
+use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -50,3 +51,5 @@ Route::get('product/get-child-categories', [ProductController::class, 'getChildC
 Route::resource('products', ProductController::class);
 //product's image gallery routes
 Route::resource('products-image-gallery', ProductImageGalleryController::class);
+//product's image variant routes
+Route::resource('products-variant', ProductVariantController::class);
