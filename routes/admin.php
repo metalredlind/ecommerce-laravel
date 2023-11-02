@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\ProductVariantItemController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Models\ProductVariantItem;
 use Illuminate\Support\Facades\Route;
 
 
@@ -57,3 +58,7 @@ Route::put('products-variant/change-status', [ProductVariantController::class, '
 Route::resource('products-variant', ProductVariantController::class);
 //product's image variant item routes
 Route::get('products-variant-item/{productId}/{variantId}', [ProductVariantItemController::class, 'index'])->name('products-variant-item.index');
+Route::get('products-variant-item/create/{productId}/{variantId}', [ProductVariantItemController::class, 'create'])->name('products-variant-item.create');
+Route::post('products-variant-item', [ProductVariantItemController::class, 'store'])->name('products-variant-item.store');
+Route::get('products-variant-item/{id}/edit', [ProductVariantItem::class, 'edit'])->name('products-variant-item.edit');
+Route::delete('products-variant-item/{id}', [ProductVariantItem::class, 'destroy'])->name('products-variant-item.destroy');
