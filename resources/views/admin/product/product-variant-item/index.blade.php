@@ -44,7 +44,7 @@
         console.log(id);
 
         $.ajax({
-          url:"{{route('admin.products-variant.change-status')}}",
+          url:"{{route('admin.products-variant-item.change-status')}}",
           method: 'PUT',
           data: {
             status: isChecked,

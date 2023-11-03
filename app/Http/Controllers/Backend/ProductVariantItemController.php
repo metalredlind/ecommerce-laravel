@@ -48,4 +48,48 @@ class ProductVariantItemController extends Controller
 
         return redirect()->route('admin.products-variant-item.index', ['productId' => $request->product_id, 'variantId' => $request->variant_id]);
     }
+
+    public function edit(string $variantItemId)
+    {
+        $variantItem = ProductVariantItem::findOrFail($variantItemId);
+        return view('admin.product.product-variant-item.edit', compact('variantItem'));
+    }
+
+    public function update(Request $request, string $variantItemId)
+    {
+        $request->validate([
+            'name' => ['required', 'max:200'],
+            'price' => ['integer', 'required'],
+            'is_default' => ['required'],
+            'status' => ['required']
+        ]);
+
+        $variantItem = ProductVariantItem::findOrFail($variantItemId);
+        $variantItem->name = $request->name;
+        $variantItem->price = $request->price;
+        $variantItem->is_default = $request->is_default;
+        $variantItem->status = $request->status;
+        $variantItem->save();
+
+        toastr("Variant item edited successfully", 'success');
+
+        return redirect()->route('admin.products-variant-item.index', ['productId' => $variantItem->productVariant->product_id, 'variantId' => $variantItem->product_variant_id]);
+    }
+
+    public function destroy(string $variantItemId)
+    {
+        $variantItem = ProductVariantItem::findOrFail($variantItemId);
+        $variantItem->delete();
+
+        return response(['status'=>'success', 'message'=>'Variant item deleted successfully']);
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $variantItem = ProductVariantItem::findOrFail($request->id);
+        $variantItem->status = $request->status == 'true' ? 1 : 0;
+        $variantItem->save();
+
+        return response(['message' => 'Status has been updated']);
+    }
 }
