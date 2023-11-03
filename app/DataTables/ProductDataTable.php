@@ -32,7 +32,6 @@ class ProductDataTable extends DataTable
                             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
                                 <a class="dropdown-item has-icon" href="'.route('admin.products-image-gallery.index', ['product' => $query->id]).'"><i class="far fa-heart"></i> Image Gallery</a>
                                 <a class="dropdown-item has-icon" href="'.route('admin.products-variant.index', ['product' => $query->id]).'"><i class="far fa-file"></i> Variant</a>
-                                <a class="dropdown-item has-icon" href="#"><i class="far fa-clock"></i> Something else here</a>
                             </div>
                             </div>';
                 return $editBtn.$deleteBtn.$moreBtn;
