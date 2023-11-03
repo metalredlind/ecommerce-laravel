@@ -16,7 +16,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h4>Variant</h4>
+                <h4>Variant: {{$variant->name}}</h4>
                 <div class="card-header-action">
                     <a href="{{route('admin.products-variant-item.create', ['productId'=>$product->id, 'variantId' => $variant->id])}}" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Create New</a>
                 </div>
