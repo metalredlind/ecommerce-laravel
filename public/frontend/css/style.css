@@ -9462,6 +9462,18 @@ a:not([href]):not([class]):hover {
   margin-bottom: 5px;
 }
 
+.wsus__input select{
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #353535;
+  resize: none;
+  border: 1px solid #eee;
+  margin-bottom: 5px;
+}
+
 .wsus__input textarea{
   width: 100%;
   padding: 10px;
@@ -9476,4 +9488,18 @@ a:not([href]):not([class]):hover {
 
 .wsus__input label{
   margin-bottom: 10px;
+}
+
+.create_button{
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+#flexSwitchCheckDefault {
+  height: 20px !important;
+  width: 40px !important;
+}
+
+.delete-item {
+  margin-left: 2px !important;
 }
