@@ -106,6 +106,11 @@ class VendorProductController extends Controller
         $childCategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
         $categories = Category::all();
         $brands = Brand::all();
+        //check if it's the owner of the product 
+        if($product->vendor_id != Auth::user()->vendor->id){
+            abort(404);
+        }
+
         return view('vendor.product.edit', 
         compact(
             'product', 
@@ -136,6 +141,10 @@ class VendorProductController extends Controller
         ]);
 
         $product = Product::findOrFail($id);
+
+        if($product->vendor_id != Auth::user()->vendor->id){
+            abort(404);
+        }
 
         //Handle image upload
         $imagePath = $this->updateImage($request, 'image', 'uploads', $product->thumb_image);
