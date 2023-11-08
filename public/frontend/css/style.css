@@ -9503,3 +9503,8 @@ a:not([href]):not([class]):hover {
 .delete-item {
   margin-left: 2px !important;
 }
+
+.btn-space-right{
+  margin-right: 3px;
+  color: white;
+}
