@@ -4,7 +4,6 @@ namespace App\DataTables;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -13,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class SellerProductDataTable extends DataTable
+class SellerPendingProductsDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -80,7 +79,7 @@ class SellerProductDataTable extends DataTable
             ->addColumn('approved', function($query){
                 return "<select class='form-control is_approved' data-id='$query->id'> 
                             <option value='0'>Pending</option>
-                            <option selected value='1'>Approved</option>
+                            <option value='1'>Approved</option>
                         </select>";
             })
             ->rawColumns(['action', 'image', 'type', 'status', 'approved'])
@@ -92,9 +91,7 @@ class SellerProductDataTable extends DataTable
      */
     public function query(Product $model): QueryBuilder
     {
-        return $model->where('vendor_id', '!=', Auth::user()->vendor->id)
-            ->where('is_approved', 1)
-            ->newQuery();
+        return $model->where('is_approved', 0)->newQuery();
     }
 
     /**
@@ -103,7 +100,7 @@ class SellerProductDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('sellerproduct-table')
+                    ->setTableId('sellerpendingproducts-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -130,9 +127,9 @@ class SellerProductDataTable extends DataTable
             Column::make('image'),
             Column::make('name'),
             Column::make('price'),
+            Column::make('type')->width(150),
             Column::make('status'),
             Column::make('approved'),
-            Column::make('type')->width(150),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
@@ -146,6 +143,6 @@ class SellerProductDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'SellerProduct_' . date('YmdHis');
+        return 'SellerPendingProducts_' . date('YmdHis');
     }
 }

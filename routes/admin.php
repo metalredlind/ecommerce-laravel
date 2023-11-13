@@ -68,3 +68,5 @@ Route::put('products-variant-item-status/', [ProductVariantItemController::class
 
 //seller product routes
 Route::get('seller-product', [SellerProductController::class, 'index'])->name('seller-product.index');
+Route::get('seller-pending-products', [SellerProductController::class, 'pendingProducts'])->name('seller-pending-products.index');
+Route::put('change-approved-status', [SellerProductController::class, 'changeApprovedStatus'])->name('change-approved-status');
