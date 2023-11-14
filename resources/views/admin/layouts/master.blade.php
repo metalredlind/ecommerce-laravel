@@ -17,10 +17,11 @@
   <link rel="stylesheet" href="{{asset('backend/assets/modules/summernote/summernote-bs4.css')}}">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <link rel="stylesheet" href="{{asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.css')}}">
+  <link rel="stylesheet" href="{{asset('backend/assets/modules/select2/dist/css/select2.min.css')}}">
+
 
   <!-- Bootstrap Icon Picker -->
   <link rel="stylesheet" href="{{asset('backend/assets/css/bootstrap-iconpicker.min.css')}}">
-
 
   <!-- Jquery Datatables -->
   <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -90,6 +91,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <script src="{{asset('backend/assets/js/bootstrap-iconpicker.bundle.min.js')}}"></script>
   <script src="{{asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+  <script src="{{asset('backend/assets/modules/select2/dist/js/select2.full.min.js')}}"></script>
 
   <!-- Jquery Datatables JS-->
   <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProductVariantController;
@@ -70,3 +71,6 @@ Route::put('products-variant-item-status/', [ProductVariantItemController::class
 Route::get('seller-product', [SellerProductController::class, 'index'])->name('seller-product.index');
 Route::get('seller-pending-products', [SellerProductController::class, 'pendingProducts'])->name('seller-pending-products.index');
 Route::put('change-approved-status', [SellerProductController::class, 'changeApprovedStatus'])->name('change-approved-status');
+
+//flash sale routes
+Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale.index');
