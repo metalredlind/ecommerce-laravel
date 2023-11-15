@@ -40,17 +40,40 @@
                 <h4>Add Flash Sale Products</h4>
               </div>
               <div class="card-body">
-                <form action="">
+                <form action="{{route('admin.flash-sale.add-product')}}" method="POST">
+                  @csrf
                     <div class="">
                         <div class="form-group">
-                            <label>Sale End Date</label>
-                            <select name="" id="" class="form-control select2">
-                                <option value="">test 1</option>
-                                <option value="">test 2</option>
-                                <option value="">test 3</option>
-                                <option value="">test 4</option>
+                            <label>Add Product</label>
+                            <select name="product" id="" class="form-control select2">
+                              <option value="">Select</option>
+                              @foreach ($products as $product)
+                                <option value="{{$product->id}}">{{$product->name}}</option>
+                              @endforeach
                             </select>
                         </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Show at home</label>
+                          <select name="show_at_home" id="" class="form-control">
+                            <option value="">Select</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Status</label>
+                          <select name="status" id="" class="form-control">
+                            <option value="">Select</option>
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
