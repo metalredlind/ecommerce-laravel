@@ -76,3 +76,5 @@ Route::put('change-approved-status', [SellerProductController::class, 'changeApp
 Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale.index');
 Route::put('flash-sale', [FlashSaleController::class, 'update'])->name('flash-sale.update');
 Route::post('flash-sale/add-product', [FlashSaleController::class, 'addProduct'])->name('flash-sale.add-product');
+Route::put('flash-sale/show-at-home/status-change', [FlashSaleController::class, 'changeShowAtHomeStatus'])->name('flash-sale.show-at-home.status-change');
+Route::put('flash-sale-status', [FlashSaleController::class, 'changeStatus'])->name('flash-sale-status');

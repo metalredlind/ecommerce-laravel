@@ -106,6 +106,7 @@
   {{ $dataTable->scripts(attributes: ['type' => 'module']) }} 
 
   <script>
+    //change the flash sale status
       $(document).ready(function(){
         $('body').on('click', '.change-status', function(){
           let isChecked = $(this).is(':checked');
@@ -113,7 +114,28 @@
           console.log(id);
 
           $.ajax({
-            url:"{{route('admin.product.change-status')}}",
+            url:"{{route('admin.flash-sale-status')}}",
+            method: 'PUT',
+            data: {
+              status: isChecked,
+              id: id
+            },
+            success: function(data){
+              toastr.success(data.message);
+            },
+            error: function(xhr, status, error){
+              console.log(error);
+            }
+          })
+        })
+        //change show at home status
+        $('body').on('click', '.change-at-home-status', function(){
+          let isChecked = $(this).is(':checked');
+          let id = $(this).data('id');
+          console.log(id);
+
+          $.ajax({
+            url:"{{route('admin.flash-sale.show-at-home.status-change')}}",
             method: 'PUT',
             data: {
               status: isChecked,
