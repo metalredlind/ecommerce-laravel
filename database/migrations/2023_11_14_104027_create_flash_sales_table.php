@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('flash_sales', function (Blueprint $table) {
             $table->id();
+            $table->date('end_date');
             $table->timestamps();
         });
     }
