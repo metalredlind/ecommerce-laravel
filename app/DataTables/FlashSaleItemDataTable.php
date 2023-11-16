@@ -23,7 +23,7 @@ class FlashSaleItemDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('action', function($query){
-            $deleteBtn = "<a href='".route('admin.products.destroy', $query->id)."' class='btn btn-danger ml-1 delete-item'><i class='fas fa-trash-alt'></i></a>";
+            $deleteBtn = "<a href='".route('admin.flash-sale.destroy', $query->id)."' class='btn btn-danger ml-1 delete-item'><i class='fas fa-trash-alt'></i></a>";
             return $deleteBtn;
         })
             ->addColumn('product_name', function($query){

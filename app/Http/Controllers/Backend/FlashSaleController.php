@@ -37,10 +37,14 @@ class FlashSaleController extends Controller
     public function addProduct(Request $request)
     {
         $request->validate([
-            'product' => ['required'],
+            'product' => ['required', 'unique:flash_sale_items,product_id'],
             'show_at_home' => ['required'],
             'status' => ['required'],
+        ],[
+            'product.unique' => 'The product is already been in flash sale'
         ]);
+
+
 
         $flashSaleDate = FlashSale::first();
 
@@ -54,6 +58,14 @@ class FlashSaleController extends Controller
         toastr('Product Added Successfully', 'success', 'Success');
 
         return redirect()->back();
+    }
+
+    public function destroy(Request $request)
+    {
+        $flashSaleitem = FlashSaleItem::findOrFail($request->id);
+        $flashSaleitem->delete();
+
+        return response(['status' => 'success', 'message'=> 'Flash sale item has been deleted successfully']);
     }
 
     public function changeShowAtHomeStatus(Request $request)
