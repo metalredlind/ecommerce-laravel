@@ -2,17 +2,17 @@
 
 @section('content')
     <!--============================
-            BREADCRUMB START
-        ==============================-->
+                BREADCRUMB START
+            ==============================-->
     <section id="wsus__breadcrumb">
         <div class="wsus_breadcrumb_overlay">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>offer detaila</h4>
+                        <h4>Flash Sale</h4>
                         <ul>
-                            <li><a href="#">daily deals</a></li>
-                            <li><a href="#">offer details</a></li>
+                            <li><a href="{{url('/')}}">Home</a></li>
+                            <li><a href="javascript:">Flash Sale</a></li>
                         </ul>
                     </div>
                 </div>
@@ -20,13 +20,13 @@
         </div>
     </section>
     <!--============================
-            BREADCRUMB END
-        ==============================-->
+                BREADCRUMB END
+            ==============================-->
 
 
     <!--============================
-            DAILY DEALS DETAILS START
-        ==============================-->
+                DAILY DEALS DETAILS START
+            ==============================-->
     <section id="wsus__daily_deals">
         <div class="container">
             <div class="wsus__offer_details_area">
@@ -112,7 +112,8 @@
                                     <a class="wsus__pro_name" href="#">{{ $product->name }}</a>
                                     @if (checkDiscount($product))
                                         <p class="wsus__price">${{ $product->offer_price }}
-                                            <del>${{ $product->price }}</del></p>
+                                            <del>${{ $product->price }}</del>
+                                        </p>
                                     @else
                                         <p class="wsus__price">${{ $product->price }}</p>
                                     @endif
@@ -124,15 +125,15 @@
                 </div>
                 <div class="mt-5">
                     @if ($flashSaleItems->hasPages())
-                    {{$flashSaleItems->links()}}
-                @endif
+                        {{ $flashSaleItems->links() }}
+                    @endif
                 </div>
             </div>
         </div>
     </section>
     <!--============================
-            DAILY DEALS DETAILS END
-        ==============================-->
+                DAILY DEALS DETAILS END
+            ==============================-->
 @endsection
 
 @push('scripts')

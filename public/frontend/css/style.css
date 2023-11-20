@@ -9508,3 +9508,59 @@ a:not([href]):not([class]):hover {
   margin-right: 3px;
   color: white;
 }
+
+.page-item.disabled > .page-link{
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  text-align: center;
+  line-height: 35px;
+  font-size: 13px;
+  font-weight: 400;
+  transition: all linear 0.3s;
+  -webkit-transition: all linear 0.3s;
+  -moz-transition: all linear 0.3s;
+  -ms-transition: all linear 0.3s;
+  -o-transition: all linear 0.3s;
+  border-radius: 50%;
+  border: 1px solid #08C;
+  margin-right: 10px;
+}
+
+.page-item.active > .page-link{
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  text-align: center;
+  line-height: 35px;
+  font-size: 13px;
+  font-weight: 400;
+  transition: all linear 0.3s;
+  -webkit-transition: all linear 0.3s;
+  -moz-transition: all linear 0.3s;
+  -ms-transition: all linear 0.3s;
+  -o-transition: all linear 0.3s;
+  border-radius: 50%;
+  border: 1px solid #08C;
+  margin-right: 10px;
+  background: #08C;
+  color: #fff;
+}
+
+.page-item > .page-link{
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  text-align: center;
+  line-height: 35px;
+  font-size: 13px;
+  font-weight: 400;
+  transition: all linear 0.3s;
+  -webkit-transition: all linear 0.3s;
+  -moz-transition: all linear 0.3s;
+  -ms-transition: all linear 0.3s;
+  -o-transition: all linear 0.3s;
+  border-radius: 100% !important;
+  border: 1px solid #08C;
+  margin-right: 10px;
+}
