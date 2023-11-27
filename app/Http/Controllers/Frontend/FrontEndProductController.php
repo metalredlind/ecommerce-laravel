@@ -11,7 +11,7 @@ class FrontEndProductController extends Controller
     //show product detail page
     public function showProduct(string $slug)
     {
-        $product = Product::where('slug', $slug)->where('status', 1)->first();
+        $product = Product::with(['vendor', 'category', 'productImageGalleries', 'variants', 'brand'])->where('slug', $slug)->where('status', 1)->first();
         return view('frontend.pages.product-detail', compact('product'));
     }
 }
