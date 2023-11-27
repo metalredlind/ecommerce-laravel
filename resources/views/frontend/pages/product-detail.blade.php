@@ -176,7 +176,7 @@
         <div class="container">
             <div class="wsus__details_bg">
                 <div class="row">
-                    <div class="col-xl-4 col-md-5 col-lg-5">
+                    <div class="col-xl-4 col-md-5 col-lg-5" style="z-index: 999 !important">
                         <div id="sticky_pro_zoom">
                             <div class="exzoom hidden" id="exzoom">
                                 <div class="exzoom_img_box">
@@ -239,7 +239,7 @@
                                 </div>
                             </div>
                             <div class="wsus__quentity">
-                                <h5>quentity :</h5>
+                                <h5>quantity :</h5>
                                 <form class="select_number">
                                     <input class="number_area" type="text" min="1" max="100"
                                         value="1" />
@@ -358,7 +358,7 @@
                                             <div class="col-xl-6 col-xxl-5 col-md-6">
                                                 <div class="wsus__vebdor_img">
                                                     <img src="{{asset($product->vendor->banner)}}" alt="vensor"
-                                                        class="img-fluid w-100">
+                                                        class="img-fluid w-100" width='300px'>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-xxl-7 col-md-6 mt-4 mt-md-0">
