@@ -19,8 +19,11 @@
                 </div>
                 <div class="form-group">
                     <label>Default Currency Name</label>
-                    <select name="currency_name" id="" class="form-control">
-                        <option value=""></option>
+                    <select name="currency_name" id="" class="form-control select2">
+                        <option value="">Select</option>
+                        @foreach (config('settings.currency_list') as $currency)
+                            <option value="{{$currency}}">{{$currency}}</option>
+                        @endforeach
                     </select> 
                 </div>
                 <div class="form-group">
@@ -29,8 +32,11 @@
                 </div>
                 <div class="form-group">
                     <label>Time Zone</label>
-                    <select name="time_zone" id="" class="form-control">
-                        <option value=""></option>
+                    <select name="time_zone" id="" class="form-control select2">
+                        <option value="">Select</option>
+                        @foreach (config('settings.time_zone') as $key => $timezone)
+                            <option value="{{$key}}">{{$key}}</option>
+                        @endforeach
                     </select> 
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
