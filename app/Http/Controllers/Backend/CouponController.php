@@ -74,7 +74,8 @@ class CouponController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $coupon = Coupon::findOrFail($id);
+        return view('admin.coupon.edit', compact('coupon'));
     }
 
     /**
@@ -82,7 +83,33 @@ class CouponController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:200'],
+            'code' => ['required', 'max:200'],
+            'quantity' => ['required', 'integer'],
+            'max_use' => ['required', 'integer'],
+            'start_date' => ['required'],
+            'end_date' => ['required'],
+            'discount_type' => ['required', 'max:200'],
+            'discount' => ['required', 'max:200'],
+            'status' => ['required', 'integer'],
+        ]);
+
+        $coupon = Coupon::findOrFail($id);
+        $coupon->name = $request->name;
+        $coupon->code = $request->code;
+        $coupon->quantity = $request->quantity;
+        $coupon->max_use = $request->max_use;
+        $coupon->start_date = $request->start_date;
+        $coupon->end_date = $request->end_date;
+        $coupon->discount_type = $request->discount_type;
+        $coupon->discount = $request->discount;
+        $coupon->status = $request->status;
+        $coupon->save();
+
+        toastr('Coupon edited successfully', 'success', 'Success');
+
+        return redirect()->route('admin.coupons.index');
     }
 
     /**
