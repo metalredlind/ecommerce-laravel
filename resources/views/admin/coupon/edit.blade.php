@@ -71,8 +71,8 @@
                                 <div class="form-group">
                                     <label for="inputState">Status</label>
                                     <select id="inputState" class="form-control" name="status">
-                                        <option {{$coupon->discount_type == 1 ? 'selected' : ''}} value="1">Active</option>
-                                        <option {{$coupon->discount_type == 0 ? 'selected' : ''}} value="0">Inactive</option>
+                                        <option {{$coupon->status == 1 ? 'selected' : ''}} value="1">Active</option>
+                                        <option {{$coupon->status == 0 ? 'selected' : ''}} value="0">Inactive</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Edit</button>
