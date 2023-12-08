@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\ProductVariantItemController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SellerProductController;
 use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -86,6 +87,9 @@ Route::delete('flash-sale/{id}', [FlashSaleController::class, 'destroy'])->name(
 Route::put('coupons/change-status', [CouponController::class, 'changeStatus'])->name('coupons.change-status');
 Route::resource('coupons', CouponController::class);
 
+//shipping rule route
+Route::put('shipping-rule/change-status', [ShippingRuleController::class, 'changeStatus'])->name('shipping-rule.change-status');
+Route::resource('shipping-rule', ShippingRuleController::class);
 
 // general setting route
 Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
