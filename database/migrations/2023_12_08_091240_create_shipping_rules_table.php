@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('shipping_rules', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('type');
+            $table->double('min_cost')->nullable();
+            $table->double('cost');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
