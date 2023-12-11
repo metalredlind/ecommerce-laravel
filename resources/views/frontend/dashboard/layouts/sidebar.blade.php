@@ -11,7 +11,7 @@
       <li><a href="dsahboard_review.html"><i class="far fa-star"></i> Reviews</a></li>
       <li><a href="dsahboard_wishlist.html"><i class="far fa-heart"></i> Wishlist</a></li>
       <li><a href="{{route('user.profile')}}"><i class="far fa-user"></i> My Profile</a></li>
-      <li><a href="dsahboard_address.html"><i class="fal fa-gift-card"></i> Addresses</a></li>
+      <li><a href="{{route('user.address.index')}}"><i class="fal fa-gift-card"></i> Addresses</a></li>
       <li>  
         <form method="POST" action="{{ route('logout') }}">
           @csrf
