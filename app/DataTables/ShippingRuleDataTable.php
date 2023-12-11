@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\GeneralSetting;
 use App\Models\ShippingRule;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -14,6 +15,13 @@ use Yajra\DataTables\Services\DataTable;
 
 class ShippingRuleDataTable extends DataTable
 {
+    //getting the currency Icon
+    protected $currencyIcon = '';
+
+    public function __construct()
+    {
+        $this->currencyIcon = GeneralSetting::first()->currency_icon;
+    }
     /**
      * Build the DataTable class.
      *
@@ -52,10 +60,13 @@ class ShippingRuleDataTable extends DataTable
             })
             ->addColumn('min_cost', function($query){
                 if($query->type == 'min_cost'){
-                    return $query->min_cost;
+                    return $this->currencyIcon.$query->min_cost;
                 }else{
-                    return '0';
-                }
+                    return $this->currencyIcon.'0';
+                }   
+            })
+            ->addColumn('cost', function($query){
+                return $this->currencyIcon.$query->cost;
             })
             ->rawColumns(['action','status','type'])
             ->setRowId('id');
@@ -97,7 +108,7 @@ class ShippingRuleDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
+            Column::make('id')->width(40),
             Column::make('name'),
             Column::make('type'),
             Column::make('min_cost'),
