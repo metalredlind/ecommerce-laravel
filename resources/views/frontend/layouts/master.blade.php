@@ -155,8 +155,9 @@
             toastr.error("{{$error}}")
           @endforeach
         @endif
-      </script>
-      @stack('scripts')
+    </script>
+    
+    @stack('scripts')
 </body>
 
 </html>
