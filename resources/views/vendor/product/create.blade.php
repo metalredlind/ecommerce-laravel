@@ -1,5 +1,9 @@
 @extends('vendor.layouts.master')
 
+@section('title')
+    {{$settings->site_name}} || Products Create
+@endsection
+
 @section('content')
 
       <!--=============================
