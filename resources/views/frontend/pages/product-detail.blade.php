@@ -232,12 +232,13 @@
                             <form class="shopping-cart-form">
                                 <div class="wsus__selectbox">
                                     <div class="row">
+                                        <input type="hidden" name="product_id" value="{{$product->id}}">
                                         @foreach ($product->variants as $variant)
                                             <div class="col-xl-6 col-sm-6">
                                                 <h5 class="mb-2">{{ $variant->name }}</h5>
-                                                <select class="select_2" name="variants[]">
+                                                <select class="select_2" name="variants_items[]">
                                                     @foreach ($variant->productVariantItem as $variantItem)
-                                                        <option {{ $variantItem->is_default == 1 ? 'selected' : '' }}>
+                                                        <option value="{{$variantItem->id}}" {{ $variantItem->is_default == 1 ? 'selected' : '' }}>
                                                             {{ $variantItem->name }} (${{ $variantItem->price }})</option>
                                                     @endforeach
                                                 </select>
