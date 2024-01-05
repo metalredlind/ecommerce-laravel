@@ -6,8 +6,8 @@
 
 @section('content')
     <!--============================
-                BREADCRUMB START
-            ==============================-->
+                    BREADCRUMB START
+                ==============================-->
     <section id="wsus__breadcrumb">
         <div class="wsus_breadcrumb_overlay">
             <div class="container">
@@ -25,13 +25,13 @@
         </div>
     </section>
     <!--============================
-                BREADCRUMB END
-            ==============================-->
+                    BREADCRUMB END
+                ==============================-->
 
 
     <!--============================
-                CART VIEW PAGE START
-            ==============================-->
+                    CART VIEW PAGE START
+                ==============================-->
     <section id="wsus__cart_view">
         <div class="container">
             <div class="row">
@@ -48,7 +48,7 @@
                                         <th class="wsus__pro_name">
                                             product details
                                         </th>
-                                        
+
                                         <th class="wsus__pro_tk">
                                             unit price
                                         </th>
@@ -67,31 +67,35 @@
                                     </tr>
                                     @foreach ($cartItems as $item)
                                         <tr class="d-flex">
-                                            <td class="wsus__pro_img"><img src="{{asset($item->options->image)}}" alt="product"
-                                                    class="img-fluid w-100">
+                                            <td class="wsus__pro_img"><img src="{{ asset($item->options->image) }}"
+                                                    alt="product" class="img-fluid w-100">
                                             </td>
 
                                             <td class="wsus__pro_name">
                                                 <p>{!! $item->name !!}</p>
                                                 @foreach ($item->options->variants as $key => $variant)
-                                                    <span>{{$key}}: {{$variant['name']}} ({{$settings->currency_icon.$variant['price']}})</span>
+                                                    <span>{{ $key }}: {{ $variant['name'] }}
+                                                        ({{ $settings->currency_icon . $variant['price'] }})</span>
                                                 @endforeach
-                                                
-                                            </td>
-                                            
-                                            <td class="wsus__pro_tk">
-                                                <h6>{{$settings->currency_icon.$item->price}}</h6>
+
                                             </td>
 
                                             <td class="wsus__pro_tk">
-                                                <h6>{{$settings->currency_icon.$item->price + $item->options->variants_total}}</h6>
+                                                <h6>{{ $settings->currency_icon . $item->price }}</h6>
+                                            </td>
+
+                                            <td class="wsus__pro_tk">
+                                                <h6>{{ $settings->currency_icon . $item->price + $item->options->variants_total }}
+                                                </h6>
                                             </td>
 
                                             <td class="wsus__pro_select">
-                                                <form class="select_number">
-                                                    <input class="number_area" type="text" min="1" max="100"
+                                                <div class="product_qty_wrapper">
+                                                    <button class="btn btn-danger product-decrement">-</button>
+                                                    <input class="product-qty" data-rowId="{{$item->rowId}}" type="text" min="1" max="100"
                                                         value="1" />
-                                                </form>
+                                                    <button class="btn btn-success product-increment">+</button>
+                                                </div>
                                             </td>
 
 
@@ -132,7 +136,8 @@
                 <div class="col-xl-6 col-lg-6">
                     <div class="wsus__single_banner_content">
                         <div class="wsus__single_banner_img">
-                            <img src="images/single_banner_2.jpg" alt="banner" class="img-fluid w-100">
+                            <img src="{{ asset('frontend/images/single_banner_2.jpg') }}" alt="banner"
+                                class="img-fluid w-100">
                         </div>
                         <div class="wsus__single_banner_text">
                             <h6>sell on <span>35% off</span></h6>
@@ -144,7 +149,8 @@
                 <div class="col-xl-6 col-lg-6">
                     <div class="wsus__single_banner_content single_banner_2">
                         <div class="wsus__single_banner_img">
-                            <img src="images/single_banner_3.jpg" alt="banner" class="img-fluid w-100">
+                            <img src="{{ asset('frontend/images/single_banner_3.jpg') }}" alt="banner"
+                                class="img-fluid w-100">
                         </div>
                         <div class="wsus__single_banner_text">
                             <h6>New Collection</h6>
@@ -157,6 +163,42 @@
         </div>
     </section>
     <!--============================
-                  CART VIEW PAGE END
-            ==============================-->
+                      CART VIEW PAGE END
+                ==============================-->
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.product-increment').on('click', function() {
+                let input = $(this).siblings('.product-qty');
+                let quantity = parseInt(input.val()) + 1;
+                let rowId = input.data('rowid');
+                input.val(quantity);
+
+                $.ajax({
+                    url: "{{route('cart.update-quantity')}}",
+                    method: 'POST',
+                    data: {
+                        rowId: rowId,
+                        quantity: quantity,
+                    },
+                    success: function(data) {
+                        if(data.status == 'success'){
+                            toastr.success(data.message);
+                        }
+                    },
+                    error: function(data) {
+
+                    },
+                })
+            })
+        })
+    </script>
+@endpush

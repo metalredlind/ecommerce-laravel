@@ -9573,3 +9573,13 @@ a:not([href]):not([class]):hover {
   -ms-transition: all linear 0.3s ease;
   -o-transition: all linear 0.3s ease;
 }
+
+.product_qty_wrapper {
+  display: flex;
+}
+
+.product_qty_wrapper>.product-qty {
+  width: 40px;
+  height: 33px;
+  padding-left: 5px;
+}
