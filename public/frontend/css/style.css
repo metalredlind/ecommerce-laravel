@@ -9583,3 +9583,7 @@ a:not([href]):not([class]):hover {
   height: 33px;
   padding-left: 5px;
 }
+
+.wsus__cart_list .wsus__pro_name {
+  width: 285px;
+}
