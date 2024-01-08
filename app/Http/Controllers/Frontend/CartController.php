@@ -64,7 +64,15 @@ class CartController extends Controller
     public function updateProductQty(Request $request)
     {
         Cart::update($request->rowId, $request->quantity);
+        $productTotal = $this->getProductTotal($request->rowId);
 
-        return response(['status' => 'success', 'message'=>'cart has been updated']);
+        return response(['status' => 'success', 'message'=>'cart has been updated', 'product_total'=>$productTotal]);
+    }
+
+    public function getProductTotal($rowId)
+    {
+        $product = Cart::get($rowId);
+        $total = ($product->price + $product->options->variants_total) * $product->qty;
+        return $total;
     }
 }
