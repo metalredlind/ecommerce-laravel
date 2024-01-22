@@ -767,7 +767,7 @@
                     data: formData,
                     url: "{{ route('add-to-cart') }}",
                     success: function(data) {
-
+                        toastr.success(data.message);
                     },
                     error: function(data) {
 
