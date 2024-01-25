@@ -92,8 +92,14 @@ class CartController extends Controller
     }
 
     //get card count
-    public function getCardCount()
+    public function getCartCount()
     {
         return Cart::content()->count();
+    }
+
+    //get all products
+    public function getCartProducts()
+    {
+        return Cart::content();
     }
 }

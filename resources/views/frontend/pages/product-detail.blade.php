@@ -6,8 +6,8 @@
 
 @section('content')
     <!--==========================
-         PRODUCT MODAL VIEW START
-        ===========================-->
+             PRODUCT MODAL VIEW START
+            ===========================-->
     <section class="product_popup_modal">
         <div class="modal fade" id="exampleModal2" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
@@ -145,13 +145,13 @@
         </div>
     </section>
     <!--==========================
-          PRODUCT MODAL VIEW END
-        ===========================-->
+              PRODUCT MODAL VIEW END
+            ===========================-->
 
 
     <!--============================
-           BREADCRUMB START
-        ==============================-->
+               BREADCRUMB START
+            ==============================-->
     <section id="wsus__breadcrumb">
         <div class="wsus_breadcrumb_overlay">
             <div class="container">
@@ -169,13 +169,13 @@
         </div>
     </section>
     <!--============================
-          BREADCRUMB END
-        ==============================-->
+              BREADCRUMB END
+            ==============================-->
 
 
     <!--============================
-          PRODUCT DETAILS START
-        ==============================-->
+              PRODUCT DETAILS START
+            ==============================-->
     <section id="wsus__product_details">
         <div class="container">
             <div class="wsus__details_bg">
@@ -215,7 +215,8 @@
                             <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
                             @if (checkDiscount($product))
                                 <h4>{{ $settings->currency_icon }}{{ $product->offer_price }}
-                                    <del>{{ $settings->currency_icon }}{{ $product->price }}</del></h4>
+                                    <del>{{ $settings->currency_icon }}{{ $product->price }}</del>
+                                </h4>
                             @else
                                 <h4>{{ $settings->currency_icon }}{{ $product->price }}</h4>
                             @endif
@@ -232,13 +233,14 @@
                             <form class="shopping-cart-form">
                                 <div class="wsus__selectbox">
                                     <div class="row">
-                                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         @foreach ($product->variants as $variant)
                                             <div class="col-xl-6 col-sm-6">
                                                 <h5 class="mb-2">{{ $variant->name }}</h5>
                                                 <select class="select_2" name="variants_items[]">
                                                     @foreach ($variant->productVariantItem as $variantItem)
-                                                        <option value="{{$variantItem->id}}" {{ $variantItem->is_default == 1 ? 'selected' : '' }}>
+                                                        <option value="{{ $variantItem->id }}"
+                                                            {{ $variantItem->is_default == 1 ? 'selected' : '' }}>
                                                             {{ $variantItem->name }} (${{ $variantItem->price }})</option>
                                                     @endforeach
                                                 </select>
@@ -576,12 +578,12 @@
         </div>
     </section>
     <!--============================
-          PRODUCT DETAILS END
-        ==============================-->
+              PRODUCT DETAILS END
+            ==============================-->
 
     <!--============================
-            RELATED PRODUCT START
-        ==============================-->
+                RELATED PRODUCT START
+            ==============================-->
     {{-- <section id="wsus__flash_sell">
         <div class="container">
             <div class="row">
@@ -745,8 +747,8 @@
         </div>
     </section> --}}
     <!--============================
-            RELATED PRODUCT END
-        ==============================-->
+                RELATED PRODUCT END
+            ==============================-->
 @endsection
 
 @push('scripts')
@@ -763,13 +765,14 @@
             $('.shopping-cart-form').on('submit', function(e) {
                 e.preventDefault();
                 let formData = $(this).serialize();
-                
+
                 $.ajax({
                     method: 'POST',
                     data: formData,
                     url: "{{ route('add-to-cart') }}",
                     success: function(data) {
-                        getCardCount();
+                        getCardCount()
+                        fetchSidebarCartProducts()
                         toastr.success(data.message);
                     },
                     error: function(data) {
@@ -778,12 +781,42 @@
                 })
             })
 
-            function getCardCount(){
+            function getCardCount() {
                 $.ajax({
                     method: 'GET',
                     url: "{{ route('cart-count') }}",
                     success: function(data) {
                         $('#cart-count').text(data);
+                    },
+                    error: function(data) {
+
+                    }
+                })
+            }
+
+            function fetchSidebarCartProducts() {
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('cart-products') }}",
+                    success: function(data) {
+                        console.log(data);
+                        $('.mini_card_wrapper').html("");
+                        var html = '';
+                        for (let item in data) {
+                            let product = data[item];
+                            html += `
+                            <li>
+                                <div class="wsus__cart_img">
+                                    <a href="{{url('product-detail')}}/${product.options.slug}"><img src="{{asset('/')}}${product.options.image}" alt="product" class="img-fluid w-100"></a>
+                                    <a class="wsis__del_icon" href=""><i class="fas fa-minus-circle"></i></a>
+                                </div>
+                                <div class="wsus__cart_text">
+                                    <a class="wsus__cart_title" href="{{url('product-detail')}}/${product.options.slug}">${product.name}</a>
+                                    <p>{{$settings->currency_icon}}${product.price}</p>
+                                </div>
+                            </li>`
+                        }
+                        $('.mini_card_wrapper').html(html);
                     },
                     error: function(data) {
 
