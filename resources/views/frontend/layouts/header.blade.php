@@ -48,12 +48,10 @@
             
 
             @foreach (Cart::content() as $sidebarProduct)
-                <li>
+                <li id="mini_cart_{{$sidebarProduct->rowId}}">
                     <div class="wsus__cart_img">
-                        <a href="#"><img src="{{ asset($sidebarProduct->options->image) }}" alt="product"
-                                class="img-fluid w-100"></a>
-                        <a class="wsis__del_icon remove_sidebar_product" href="#"
-                            datarowId="{{ $sidebarProduct->rowId }}"><i class="fas fa-minus-circle"></i></a>
+                        <a href="#"><img src="{{ asset($sidebarProduct->options->image) }}" alt="product" class="img-fluid w-100"></a>
+                        <a class="wsis__del_icon remove_sidebar_product" href="#" data-id="{{ $sidebarProduct->rowId }}"><i class="fas fa-minus-circle"></i></a>
                     </div>
                     <div class="wsus__cart_text">
                         <a class="wsus__cart_title"
