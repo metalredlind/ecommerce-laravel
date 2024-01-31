@@ -773,6 +773,7 @@
                     success: function(data) {
                         getCardCount()
                         fetchSidebarCartProducts()
+                        $('.mini_cart_actions').removeClass('d-none');
                         toastr.success(data.message);
                     },
                     error: function(data) {
@@ -824,6 +825,7 @@
                 })
             }
 
+            //remove product from sidebar
             $('body').on('click', '.remove_sidebar_product', function(e){
                 e.preventDefault()
                 let rowId = $(this).data('id');
@@ -836,6 +838,10 @@
                     success: function(data) {
                         let productId = '#mini_cart_'+rowId;
                         $(productId).remove()
+                        if($('.mini_card_wrapper').find('li').length == 0){
+                            $('.mini_card_wrapper').addClass('d-none');
+                            $('.mini_card_wrapper').html('<li class="text-center">Cart is Empty</li>')
+                        }
                         toastr.success(data.message)
                     },
                     error: function(data) {

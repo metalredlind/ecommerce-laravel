@@ -45,10 +45,9 @@
     <div class="wsus__mini_cart">
         <h4>shopping cart <span class="wsus_close_mini_cart"><i class="far fa-times"></i></span></h4>
         <ul class="mini_card_wrapper">
-            
 
             @foreach (Cart::content() as $sidebarProduct)
-                <li id="mini_cart_{{$sidebarProduct->rowId}}">
+                <li id="mini_cart_{{ $sidebarProduct->rowId }}">
                     <div class="wsus__cart_img">
                         <a href="#"><img src="{{ asset($sidebarProduct->options->image) }}" alt="product" class="img-fluid w-100"></a>
                         <a class="wsis__del_icon remove_sidebar_product" href="#" data-id="{{ $sidebarProduct->rowId }}"><i class="fas fa-minus-circle"></i></a>
@@ -63,13 +62,22 @@
                 </li>
             @endforeach
 
+            @if(Cart::content()->count() == 0)
+                <li class="text-center">Cart is Empty</li>
+            @endif
+
         </ul>
-        <h5>sub total <span>$3540</span></h5>
-        <div class="wsus__minicart_btn_area">
-            <a class="common_btn" href="{{ route('cart-details') }}">view cart</a>
-            <a class="common_btn" href="check_out.html">checkout</a>
+
+        <div class="mini_cart_actions {{Cart::content()->count() == 0 ? 'd-none': ''}}">
+            <h5>sub total <span>$3540</span></h5>
+            <div class="wsus__minicart_btn_area">
+                <a class="common_btn" href="{{ route('cart-details') }}">view cart</a>
+                <a class="common_btn" href="check_out.html">checkout</a>
+            </div>
         </div>
+
+        
+
     </div>
 
 </header>
-
