@@ -761,7 +761,6 @@
             });
 
             //add product into cart
-
             $('.shopping-cart-form').on('submit', function(e) {
                 e.preventDefault();
                 let formData = $(this).serialize();
@@ -771,7 +770,7 @@
                     data: formData,
                     url: "{{ route('add-to-cart') }}",
                     success: function(data) {
-                        getCardCount()
+                        getCartCount()
                         fetchSidebarCartProducts()
                         $('.mini_cart_actions').removeClass('d-none');
                         toastr.success(data.message);
@@ -782,7 +781,7 @@
                 })
             })
 
-            function getCardCount() {
+            function getCartCount() {
                 $.ajax({
                     method: 'GET',
                     url: "{{ route('cart-count') }}",
@@ -801,7 +800,7 @@
                     url: "{{ route('cart-products') }}",
                     success: function(data){
                         console.log(data);
-                        $('.mini_card_wrapper').html("");
+                        $('.mini_cart_wrapper').html("");
                         var html = '';
                         for (let item in data) {
                             let product = data[item];
@@ -820,7 +819,7 @@
                                 </div>
                             </li>`
                         }
-                        $('.mini_card_wrapper').html(html);
+                        $('.mini_cart_wrapper').html(html);
 
                         getSidebarCartSubtotal();
 
@@ -845,11 +844,11 @@
                         let productId = '#mini_cart_'+rowId;
                         $(productId).remove()
 
-                        getSidebarCartSubtotal()
+                        getSidebarCartSubtotal();
 
-                        if($('.mini_card_wrapper').find('li').length == 0){
-                            $('.mini_card_actions').addClass('d-none');
-                            $('.mini_card_wrapper').html('<li class="text-center">Cart is Empty</li>');
+                        if($('.mini_cart_wrapper').find('li').length == 0){
+                            $('.mini_cart_actions').addClass('d-none');
+                            $('.mini_cart_wrapper').html('<li class="text-center">Cart is Empty</li>');
                         }
                         toastr.success(data.message)
                     },

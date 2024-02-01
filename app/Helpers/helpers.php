@@ -57,7 +57,6 @@ function productType($type)
 }
 
 //get total cart amount
-
 function getCartTotal()
 {
     $total = 0;

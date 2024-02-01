@@ -44,7 +44,7 @@
     </div>
     <div class="wsus__mini_cart">
         <h4>shopping cart <span class="wsus_close_mini_cart"><i class="far fa-times"></i></span></h4>
-        <ul class="mini_card_wrapper">
+        <ul class="mini_cart_wrapper">
 
             @foreach (Cart::content() as $sidebarProduct)
                 <li id="mini_cart_{{ $sidebarProduct->rowId }}">
