@@ -69,10 +69,14 @@ class CartController extends Controller
         return response(['status' => 'success', 'message'=>'cart has been updated', 'product_total'=>$productTotal]);
     }
 
-    public function getProductTotal($rowId)
+    //get sidebar cart total amount
+    public function cartTotal()
     {
-        $product = Cart::get($rowId);
-        $total = ($product->price + $product->options->variants_total) * $product->qty;
+        $total = 0;
+        foreach(Cart::content() as $product){
+            $total += $this->getProductTotal($product->rowId);
+        }
+
         return $total;
     }
 

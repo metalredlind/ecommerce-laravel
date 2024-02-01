@@ -799,7 +799,7 @@
                 $.ajax({
                     method: 'GET',
                     url: "{{ route('cart-products') }}",
-                    success: function(data) {
+                    success: function(data){
                         console.log(data);
                         $('.mini_card_wrapper').html("");
                         var html = '';
@@ -814,10 +814,16 @@
                                 <div class="wsus__cart_text">
                                     <a class="wsus__cart_title" href="{{url('product-detail')}}/${product.options.slug}">${product.name}</a>
                                     <p>{{$settings->currency_icon}}${product.price}</p>
+                                    <small>Variants total: {{$settings->currency_icon}}${product.options.variants_total}</small>
+                                    <br>
+                                    <small>Qty: ${product.qty}</small>
                                 </div>
                             </li>`
                         }
                         $('.mini_card_wrapper').html(html);
+
+                        getSidebarCartSubtotal();
+
                     },
                     error: function(data) {
                         
@@ -838,9 +844,12 @@
                     success: function(data) {
                         let productId = '#mini_cart_'+rowId;
                         $(productId).remove()
+
+                        getSidebarCartSubtotal()
+
                         if($('.mini_card_wrapper').find('li').length == 0){
-                            $('.mini_card_wrapper').addClass('d-none');
-                            $('.mini_card_wrapper').html('<li class="text-center">Cart is Empty</li>')
+                            $('.mini_card_actions').addClass('d-none');
+                            $('.mini_card_wrapper').html('<li class="text-center">Cart is Empty</li>');
                         }
                         toastr.success(data.message)
                     },
@@ -849,6 +858,20 @@
                     }
                 })
             })
+
+            //get sidebarcart subtotal
+            function getSidebarCartSubtotal(){
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('cart.sidebar-product-total') }}",
+                    success: function(data) {
+                        $('#mini_cart_subtotal').text("{{$settings->currency_icon}}"+data);
+                    },
+                    error: function(data) {
+
+                    }
+                })
+            }
         })
     </script>
 @endpush
