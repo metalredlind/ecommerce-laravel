@@ -6,8 +6,8 @@
 
 @section('content')
     <!--==========================
-             PRODUCT MODAL VIEW START
-            ===========================-->
+                     PRODUCT MODAL VIEW START
+                    ===========================-->
     <section class="product_popup_modal">
         <div class="modal fade" id="exampleModal2" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
@@ -145,13 +145,13 @@
         </div>
     </section>
     <!--==========================
-              PRODUCT MODAL VIEW END
-            ===========================-->
+                      PRODUCT MODAL VIEW END
+                    ===========================-->
 
 
     <!--============================
-               BREADCRUMB START
-            ==============================-->
+                       BREADCRUMB START
+                    ==============================-->
     <section id="wsus__breadcrumb">
         <div class="wsus_breadcrumb_overlay">
             <div class="container">
@@ -169,13 +169,13 @@
         </div>
     </section>
     <!--============================
-              BREADCRUMB END
-            ==============================-->
+                      BREADCRUMB END
+                    ==============================-->
 
 
     <!--============================
-              PRODUCT DETAILS START
-            ==============================-->
+                      PRODUCT DETAILS START
+                    ==============================-->
     <section id="wsus__product_details">
         <div class="container">
             <div class="wsus__details_bg">
@@ -235,16 +235,21 @@
                                     <div class="row">
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         @foreach ($product->variants as $variant)
-                                            <div class="col-xl-6 col-sm-6">
-                                                <h5 class="mb-2">{{ $variant->name }}</h5>
-                                                <select class="select_2" name="variants_items[]">
-                                                    @foreach ($variant->productVariantItem as $variantItem)
-                                                        <option value="{{ $variantItem->id }}"
-                                                            {{ $variantItem->is_default == 1 ? 'selected' : '' }}>
-                                                            {{ $variantItem->name }} (${{ $variantItem->price }})</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                            @if ($variant->status != 0)
+                                                <div class="col-xl-6 col-sm-6">
+                                                    <h5 class="mb-2">{{ $variant->name }}</h5>
+                                                    <select class="select_2" name="variants_items[]">
+                                                        @foreach ($variant->productVariantItem as $variantItem)
+                                                            @if ($variantItem->status != 0)
+                                                                <option value="{{ $variantItem->id }}"
+                                                                    {{ $variantItem->is_default == 1 ? 'selected' : '' }}>
+                                                                    {{ $variantItem->name }} (${{ $variantItem->price }})
+                                                                </option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            @endif
                                         @endforeach
                                     </div>
                                 </div>
@@ -578,12 +583,12 @@
         </div>
     </section>
     <!--============================
-              PRODUCT DETAILS END
-            ==============================-->
+                      PRODUCT DETAILS END
+                    ==============================-->
 
     <!--============================
-                RELATED PRODUCT START
-            ==============================-->
+                        RELATED PRODUCT START
+                    ==============================-->
     {{-- <section id="wsus__flash_sell">
         <div class="container">
             <div class="row">
@@ -747,6 +752,6 @@
         </div>
     </section> --}}
     <!--============================
-                RELATED PRODUCT END
-            ==============================-->
+                        RELATED PRODUCT END
+                    ==============================-->
 @endsection
