@@ -15,6 +15,12 @@ class CartController extends Controller
     {
         $product = Product::findOrFail($request->product_id);
 
+        if($product->qty == 0){
+            return response(['status'=>'error', 'message'=>'Product stock out']);
+        }elseif($product->qty < $request->qty){
+            return response(['status'=>'error', 'message'=>'Quantity not evailable in our stock']);
+        }
+
         $variants = [];
         $variantTotalAmount = 0;
 
