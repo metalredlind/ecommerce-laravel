@@ -208,10 +208,11 @@
                     success: function(data) {
                         if (data.status == 'success') {
                             let productId = '#' + rowId;
-                            let totalAmount = "{{ $settings->currency_icon }}" + data
-                                .product_total;
-                            $(productId).text(totalAmount);
-                            toastr.success(data.message);
+                            let totalAmount = "{{ $settings->currency_icon }}" + data.product_total
+                            $(productId).text(totalAmount)
+                            toastr.success(data.message)
+                        }else if(data.status == 'error'){
+                            toastr.error(data.message)
                         }
                     },
                     error: function(data) {
@@ -237,10 +238,11 @@
                     success: function(data) {
                         if (data.status == 'success') {
                             let productId = '#' + rowId;
-                            let totalAmount = "{{ $settings->currency_icon }}" + data
-                                .product_total;
-                            $(productId).text(totalAmount);
-                            toastr.success(data.message);
+                            let totalAmount = "{{ $settings->currency_icon }}" + data.product_total
+                            $(productId).text(totalAmount)
+                            toastr.success(data.message)
+                        }else if(data.status == 'error'){
+                            toastr.error(data.message)
                         }
                     },
                     error: function(data) {
