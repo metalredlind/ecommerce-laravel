@@ -315,6 +315,8 @@
                     success: function(data) {
                         if(data.status == 'error'){
                             toastr.error(data.message);
+                        }else if(data.status == 'success'){
+                            toastr.success(data.message);
                         }
                     },
                     error: function(data) {
