@@ -6,8 +6,8 @@
 
 @section('content')
     <!--============================
-                        BREADCRUMB START
-                    ==============================-->
+      BREADCRUMB START
+    ==============================-->
     <section id="wsus__breadcrumb">
         <div class="wsus_breadcrumb_overlay">
             <div class="container">
@@ -16,7 +16,7 @@
                         <h4>cart View</h4>
                         <ul>
                             <li><a href="#">home</a></li>
-                            <li><a href="#">peoduct</a></li>
+                            <li><a href="#">product</a></li>
                             <li><a href="#">cart view</a></li>
                         </ul>
                     </div>
@@ -25,13 +25,13 @@
         </div>
     </section>
     <!--============================
-                        BREADCRUMB END
-                    ==============================-->
+      BREADCRUMB END
+    ==============================-->
 
 
     <!--============================
-                        CART VIEW PAGE START
-                    ==============================-->
+      CART VIEW PAGE START
+    ==============================-->
     <section id="wsus__cart_view">
         <div class="container">
             <div class="row">
@@ -129,8 +129,8 @@
                         <p>discount: <span>$10.00</span></p>
                         <p class="total"><span>total:</span> <span>$134.00</span></p>
 
-                        <form>
-                            <input type="text" placeholder="Coupon Code">
+                        <form id="coupon_form">
+                            <input type="text" placeholder="Coupon Code" name="coupon_code">
                             <button type="submit" class="common_btn">apply</button>
                         </form>
                         <a class="common_btn mt-4 w-100 text-center" href="check_out.html">checkout</a>
@@ -174,8 +174,8 @@
         </div>
     </section>
     <!--============================
-                          CART VIEW PAGE END
-                    ==============================-->
+        CART VIEW PAGE END
+    ==============================-->
 @endsection
 
 @push('scripts')
@@ -302,6 +302,26 @@
                     }
                 })
             }
+
+            //apply coupon on cart details
+            $('#coupon_form').on('submit', function(e){
+                e.preventDefault();
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('apply-coupon') }}",
+                    data: formData,
+                    success: function(data) {
+                        if(data.status == 'error'){
+                            toastr.error(data.message);
+                        }
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                })
+            })
         })
     </script>
 @endpush

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\ProductVariantItem;
 use Cart;
@@ -145,5 +146,23 @@ class CartController extends Controller
         Cart::remove($request->rowId);
 
         return response(['status' => 'success', 'message'=>'Product removed successfully']);
+    }
+
+    //applying coupon in cart detail
+    public function applyCoupon(Request $request)
+    {
+        if($request->coupon_code === null){
+            return response(['status'=>'error', 'message'=>'Coupon code required']);
+        }
+
+        $coupon = Coupon::where(['code'=>$request->coupon_code, 'status'=>1])->first();
+
+        if($coupon === null){
+            return response(['status'=>'error', 'message'=>"Coupon code does not exist!"]);
+        }elseif($coupon->start_date < date('Y-m-d')){
+            return response(['status'=>'error', 'message'=>"Coupon code does not exist!"]);
+        }elseif($coupon->start_date > date('Y-m-d')){
+            return response(['status'=>'error', 'message'=>"Coupon code has expired!"]);
+        }
     }
 }
