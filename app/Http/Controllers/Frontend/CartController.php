@@ -199,7 +199,7 @@ class CartController extends Controller
                 $total = $subtotal - $coupon['discount'];
                 return response(['status' => 'success', 'cart_total'=>$total, 'discount'=>$coupon['discount']]);
             }elseif($coupon['discount_type'] == 'percent'){
-                $discount = $subtotal - ($subtotal * $coupon['discount'] / 100);
+                $discount = $subtotal * $coupon['discount'] / 100;
                 $total = $subtotal - $discount;
                 return response(['status' => 'success', 'cart_total'=>$total, 'discount'=>$discount]);
             }

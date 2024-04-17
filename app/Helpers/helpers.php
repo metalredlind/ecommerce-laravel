@@ -80,7 +80,7 @@ function getMainCartTotal()
             $total = $subtotal - $coupon['discount'];
             return $total;
         }elseif($coupon['discount_type'] == 'percent'){
-            $discount = $subtotal - ($subtotal * $coupon['discount'] / 100);
+            $discount = $subtotal * $coupon['discount'] / 100;
             $total = $subtotal - $discount;
             return $total;
         }
@@ -98,7 +98,7 @@ function getMainCartDiscount()
         if($coupon['discount_type'] == 'amount'){
             return $coupon['discount'];
         }elseif($coupon['discount_type'] == 'percent'){
-            $discount = $subtotal - ($subtotal * $coupon['discount'] / 100);
+            $discount = $subtotal * $coupon['discount'] / 100;
             return $discount;
         }
     } else{
