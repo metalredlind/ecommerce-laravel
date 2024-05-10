@@ -124,18 +124,17 @@
                 <div class="col-xl-3">
                     <div class="wsus__cart_list_footer_button" id="sticky_sidebar">
                         <h6>total cart</h6>
-                        <p>subtotal: <span id='sub_total'>{{$settings->currency_icon}} {{getCartTotal()}}</span></p>
-                        <p>delivery: <span>$00.00</span></p>
-                        <p>discount: <span id='discount'>{{$settings->currency_icon}}{{getMainCartDiscount()}}</span></p>
+                        <p>subtotal: <span id='sub_total'>{{$settings->currency_icon}}{{getCartTotal()}}</span></p>
+                        <p>coupon(-): <span id='discount'>{{$settings->currency_icon}}{{getMainCartDiscount()}}</span></p>
                         <p class="total"><span>total:</span> <span id='cart_total'>{{$settings->currency_icon}}{{getMainCartTotal()}}</span></p>
 
                         <form id="coupon_form">
-                            <input type="text" placeholder="Coupon Code" name="coupon_code">
+                            <input type="text" placeholder="Coupon Code" name="coupon_code" value={{session()->has('coupon') ? session()->get('coupon')['coupon_code'] : ''}}>
                             <button type="submit" class="common_btn">apply</button>
                         </form>
                         <a class="common_btn mt-4 w-100 text-center" href="check_out.html">checkout</a>
-                        <a class="common_btn mt-1 w-100 text-center" href="product_grid_view.html"><i
-                                class="fab fa-shopify"></i> go shop</a>
+                        <a class="common_btn mt-1 w-100 text-center" href={{route('home')}}><i
+                                class="fab fa-shopify"></i> keep shopping</a>
                     </div>
                 </div>
             </div>

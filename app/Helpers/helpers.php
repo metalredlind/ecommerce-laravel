@@ -102,6 +102,6 @@ function getMainCartDiscount()
             return $discount;
         }
     } else{
-        return getCartTotal();
+        return 0;
     }
 }

@@ -18,6 +18,8 @@ class CartController extends Controller
         $cartItems = Cart::content();
 
         if(count($cartItems) == 0){
+            Session::forget('coupon');
+
             toastr('Please add some product into your cart', 'warning', 'Cart is empty');
             return redirect()->route('home');
         }
@@ -203,6 +205,9 @@ class CartController extends Controller
                 $total = $subtotal - $discount;
                 return response(['status' => 'success', 'cart_total'=>$total, 'discount'=>$discount]);
             }
+        } else{
+            $total = getCartTotal();
+            return response(['status'=>'success', 'cart_total'=> $total, 'discount'=>0]);
         }
     }
 }
