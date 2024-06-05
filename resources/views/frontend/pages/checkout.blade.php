@@ -68,27 +68,33 @@
                     <div class="col-xl-4 col-lg-5">
                         <div class="wsus__order_details" id="sticky_sidebar">
                             <p class="wsus__product">shipping Methods</p>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                                    value="option1" checked>
-                                <label class="form-check-label" for="exampleRadios1">
-                                    free shipping
-                                    <span>(10 - 12 days)</span>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                                    value="option2">
-                                <label class="form-check-label" for="exampleRadios2">
-                                    express shipping
-                                    <span>(5 - 10 days)</span>
-                                </label>
-                            </div>
+                            @foreach ($shippingMethods as $method)
+                                @if ($method->type === 'min_cost' && getCartTotal() >= $method->min_cost)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                                            value="option1" checked>
+                                        <label class="form-check-label" for="exampleRadios1">
+                                            {{$method->name}}
+                                            <span>cost: ({{$settings->currency_icon}}{{$method->cost}})</span>
+                                        </label>
+                                    </div>
+                                @elseif ($method->type === 'flat_cost')
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                                        value="option1" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        {{$method->name}}
+                                        <span>cost: ({{$settings->currency_icon}}{{$method->cost}})</span>
+                                    </label>
+                                </div>
+                                @endif
+                            @endforeach
+                            
                             <div class="wsus__order_details_summery">
-                                <p>subtotal: <span>$120.00</span></p>
-                                <p>shipping fee: <span>$20.00</span></p>
-                                <p>tax: <span>$00.00</span></p>
-                                <p><b>total:</b> <span><b>$140.00</b></span></p>
+                                <p>subtotal: <span>{{$settings->currency_icon}}{{getCartTotal()}}</span></p>
+                                <p>shipping fee: <span>{{$settings->currency_icon}}0</span></p>
+                                <p>coupon: <span>- {{$settings->currency_icon}}{{getMainCartDiscount()}}</span></p>
+                                <p><b>total:</b> <span><b>{{$settings->currency_icon}}{{getMainCartTotal()}}</b></span></p>
                             </div>
                             <div class="terms_area">
                                 <div class="form-check">
