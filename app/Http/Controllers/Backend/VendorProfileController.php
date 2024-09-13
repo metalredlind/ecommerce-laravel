@@ -22,7 +22,7 @@ class VendorProfileController extends Controller
             'image' => ['image', 'max:2048']
         ]);
 
-        $user = Authth::user();
+        $user = Auth::user();
 
         if($request->hasFile('image')){
             if(File::exists(public_path($user->image))){
