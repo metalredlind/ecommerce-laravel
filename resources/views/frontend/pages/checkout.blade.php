@@ -33,7 +33,6 @@
     ==============================-->
     <section id="wsus__cart_view">
         <div class="container">
-            <form class="wsus__checkout_form">
                 <div class="row">
                     <div class="col-xl-8 col-lg-7">
                         <div class="wsus__check_form">
@@ -98,8 +97,7 @@
                             </div>
                             <div class="terms_area">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked3"
-                                        checked>
+                                    <input class="form-check-input agree_term" type="checkbox" value="" id="flexCheckChecked3">
                                     <label class="form-check-label" for="flexCheckChecked3">
                                         I have read and agree to the website <a href="#">terms and conditions *</a>
                                     </label>
@@ -109,11 +107,10 @@
                                 <input type="hidden" name="shipping_method_id" value="" id="shipping_method_id">
                                 <input type="hidden" name="shipping_address_id" value="" id="shipping_address_id">
                             </form>
-                            <a href="payment.html" class="common_btn">Place Order</a>
+                            <a href="" id="submitCheckoutForm" class="common_btn">Place Order</a>
                         </div>
                     </div>
                 </div>
-            </form>
         </div>
     </section>
 
@@ -199,6 +196,12 @@
 
 <script>
     $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $('input[type="radio"]').prop('checked', false);
         $('#shipping_method_id').val("");
         $('#shipping_address_id').val("");
@@ -215,6 +218,36 @@
 
         $('.shipping_address').on('click', function(){
             $('#shipping_address_id').val($(this).data('id'));
+        })
+
+        //submit checkout form
+        $('#submitCheckoutForm').on('click', function(e){
+            e.preventDefault();
+
+            if($('#shipping_method_id').val() == ""){
+                toastr.error('Shipping Method is required');
+            }else if($('#shipping_address_id').val() == ""){
+                toastr.error('Shipping Address is required');
+            }else if(!$('.agree_term').prop('checked')){
+                toastr.error('You have to agree to the website terms and conditions');
+            }else{
+                $.ajax({
+                    url: "{{route('user.checkout.form-submit')}}",
+                    method: 'POST',
+                    data: $('#checkOutForm').serialize(),
+                    beforeSend: function(){
+                        $('#submitCheckoutForm').html('<i class="fas fa-spinner fa-spin fa-1x"></i>');
+                    },
+                    success: function(data){
+                        if(data.status === 'success'){
+                            $('#submitCheckoutForm').text('Place Order');
+                        }
+                    },
+                    error: function(data){
+                        console.log(data);
+                    }
+                })
+            }
         })
     })
 </script>
