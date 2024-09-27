@@ -241,6 +241,8 @@
                     success: function(data){
                         if(data.status === 'success'){
                             $('#submitCheckoutForm').text('Place Order');
+                            // redirect url
+                            window.location.href = data.redirect_url;
                         }
                     },
                     error: function(data){

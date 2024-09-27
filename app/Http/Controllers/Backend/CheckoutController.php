@@ -56,16 +56,20 @@ class CheckoutController extends Controller
         ]);
 
         $shippingMethod = ShippingRule::findOrFail($request->shipping_method_id);
-        Session::put('shipping_method', [
-            'id' => $shippingMethod->id,
-            'name' => $shippingMethod->name,
-            'type' => $shippingMethod->type,
-            'cost' => $shippingMethod->cost,
-        ]);
+        if($shippingMethod){
+            Session::put('shipping_method', [
+                'id' => $shippingMethod->id,
+                'name' => $shippingMethod->name,
+                'type' => $shippingMethod->type,
+                'cost' => $shippingMethod->cost,
+            ]);
+        }
 
         $address = UserAddress::findOrfail($request->shipping_address_id)->toArray();
-        Session::put('address', $address);
+        if($address){
+            Session::put('address', $address);
+        }
 
-        return response(['status'=>'success']);
+        return response(['status'=>'success', 'redirect_url' => route('user.payment')]);
     }
 }
