@@ -151,11 +151,11 @@
                     </div>
                     <div class="col-xl-4 col-lg-4">
                         <div class="wsus__pay_booking_summary" id="sticky_sidebar2">
-                            <h5>Booking Summary</h5>
-                            <p>subtotal: <span>$120.00</span></p>
-                            <p>shipping fee: <span>$20.00 </span></p>
-                            <p>tax: <span>$00.00</span></p>
-                            <h6>total <span>$140.00</span></h6>
+                            <h5>Order Summary</h5>
+                            <p>subtotal: <span>{{$settings->currency_icon}}{{getCartTotal()}}</span></p>
+                            <p>shipping fee(+): <span>{{$settings->currency_icon}}{{getShippingFee()}} </span></p>
+                            <p>coupon(-): <span>{{$settings->currency_icon}}{{getMainCartDiscount()}}</span></p>
+                            <h6>total <span>{{$settings->currency_icon}}{{getFinalPayableAmount()}}</span></h6>
                         </div>
                     </div>
                 </div>
