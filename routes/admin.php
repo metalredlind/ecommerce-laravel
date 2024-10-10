@@ -7,6 +7,8 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\PaymentSettingsController;
+use App\Http\Controllers\Backend\PaypalSettingsController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProductVariantController;
@@ -94,3 +96,7 @@ Route::resource('shipping-rule', ShippingRuleController::class);
 // general setting route
 Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
 Route::put('general-setting-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update');
+
+// payments setting route
+Route::get('payment-settings', [PaymentSettingsController::class, 'index'])->name('payment-settings.index');
+Route::resource('paypal-setting', PaypalSettingsController::class);
