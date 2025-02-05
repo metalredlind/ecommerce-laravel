@@ -135,8 +135,8 @@
 
                     <div class="form-group">
                         <label>SEO Description</label>
-                        <textarea name="seo_description" class="form-control"></textarea>                    </div>
-
+                        <textarea name="seo_description" class="form-control"></textarea>                    
+                    </div>
                     <div class="form-group">
                         <label for="inputState">Status</label>
                         <select id="inputState" class="form-control" name="status">
