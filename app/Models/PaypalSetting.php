@@ -16,6 +16,6 @@ class PaypalSetting extends Model
         'currency_name',
         'currency_rate',
         'client_id',
-        'secret_key',
+        'secret_key'
     ];
 }

@@ -26,7 +26,7 @@ class PaymentController extends Controller
             'sandbox' => [
                 'client_id'         => $paypalSetting->client_id,
                 'client_secret'     => $paypalSetting->secret_key,
-                'app_id'            => '',
+                'app_id'            => 'APP-80W284485P519543T',
             ],
             'live' => [
                 'client_id'         => $paypalSetting->client_id,
@@ -51,11 +51,13 @@ class PaymentController extends Controller
         $paypalSetting = PaypalSetting::first();
 
         $provider = new PayPalClient($config);
-        // $provider->setApiCredentials($config);
+        $provider->getAccessToken();
+        
 
         //calculate payable amount depending on currency rate
         $total = getFinalPayableAmount();
         $payableAmount = round($total*$paypalSetting->currency_rate, 2); 
+
 
         $response = $provider->createOrder([
             "intent" => "CAPTURE",
@@ -72,5 +74,7 @@ class PaymentController extends Controller
                 ]
             ]
         ]);
+
+        dd($response);
     }
 }
