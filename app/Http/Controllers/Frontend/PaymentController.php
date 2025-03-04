@@ -17,12 +17,17 @@ class PaymentController extends Controller
         }
         return view('frontend.pages.payment');    
     }
+
+    public function paymentSuccess()
+    {
+        return view('frontend.pages.payment-success');
+    }
     
     public function paypalConfig()
     {
         $paypalSetting = PaypalSetting::first();
         $config = [
-            'mode'    => $paypalSetting->mode == 1 ? 'live' : 'sandbox', 
+            'mode'    => $paypalSetting->mode === 1 ? 'live' : 'sandbox', 
             'sandbox' => [
                 'client_id'         => $paypalSetting->client_id,
                 'client_secret'     => $paypalSetting->secret_key,
@@ -52,16 +57,16 @@ class PaymentController extends Controller
 
         $provider = new PayPalClient($config);
         $provider->getAccessToken();
-        
 
-        //calculate payable amount depending on currency rate
+
+        // calculate payable amount depending on currency rate
         $total = getFinalPayableAmount();
-        $payableAmount = round($total*$paypalSetting->currency_rate, 2); 
+        $payableAmount = round($total*$paypalSetting->currency_rate, 2);
 
 
         $response = $provider->createOrder([
             "intent" => "CAPTURE",
-            "aaplication_context" => [
+            "application_context" => [
                 "return_url" => route('user.paypal.success'),
                 "cancel_url" => route('user.paypal.cancel'),
             ],
@@ -75,6 +80,37 @@ class PaymentController extends Controller
             ]
         ]);
 
-        dd($response);
+        if(isset($response['id']) && $response['id'] != null){
+            foreach($response['links'] as $link){
+                if($link['rel'] === 'approve'){
+                    return redirect()->away($link['href']);
+                }
+            }
+        } else {
+            return redirect()->route('user.paypal.cancel');
+        }
+
+    }
+
+    public function paypalSuccess(Request $request)
+    {
+        $config = $this->paypalConfig();
+        $provider = new PayPalClient($config);
+        $provider->getAccessToken();
+
+        $response = $provider->capturePaymentOrder($request->token);
+
+        if(isset($response['status']) && $response['status'] == 'COMPLETED') {
+            return redirect()->route('user.payment.success');
+        }
+
+        return redirect()->route('user.paypal.cancel');
+
+    }
+
+    public function paypalCancel()
+    {
+        toastr('Something went wrong, try again later', 'error', 'Error');
+        return redirect()->route('user.payment');
     }
 }
