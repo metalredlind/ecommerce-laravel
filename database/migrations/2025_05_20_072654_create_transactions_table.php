@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('payment_method');
             $table->double('amount');
             $table->double('amount_real_currency');
-            $table->string('amouamount_real_currency_name');
+            $table->string('amount_real_currency_name');
             $table->timestamps();
         });
     }
