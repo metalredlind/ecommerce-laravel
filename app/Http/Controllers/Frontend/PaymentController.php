@@ -185,4 +185,10 @@ class PaymentController extends Controller
         toastr('Something went wrong, try again later', 'error', 'Error');
         return redirect()->route('user.payment');
     }
+
+    // stripe payment
+    public function stripePayment(Request $request)
+    {
+        dd($request->all());
+    }
 }
