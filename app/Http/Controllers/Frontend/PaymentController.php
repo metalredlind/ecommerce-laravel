@@ -8,12 +8,15 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\PaypalSetting;
 use App\Models\Product;
+use App\Models\StripeSetting;
 use App\Models\Transaction;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use Stripe\Charge;
+use Stripe\Stripe;
 
 class PaymentController extends Controller
 {
@@ -22,7 +25,7 @@ class PaymentController extends Controller
         if(!Session::has('address')){
             return redirect()->route('user.checkout');
         }
-        return view('frontend.pages.payment');    
+        return view('frontend.pages.payment');
     }
 
     public function paymentSuccess()
@@ -49,7 +52,7 @@ class PaymentController extends Controller
         $order->order_status = 0;
 
         $order->save();
-        
+
         //store order products
         foreach(\Cart::content() as $item)
         {
@@ -72,8 +75,8 @@ class PaymentController extends Controller
         $transaction->transaction_id = $transactionId;
         $transaction->payment_method = $paymentMethod;
         $transaction->amount = getFinalPayableAmount();
-        $transaction->amount_real_currency = $paidAmount; 
-        $transaction->amount_real_currency_name = $paidCurrencyName; 
+        $transaction->amount_real_currency = $paidAmount;
+        $transaction->amount_real_currency_name = $paidCurrencyName;
         $transaction->save();
     }
 
@@ -83,13 +86,13 @@ class PaymentController extends Controller
         Session::forget('address');
         Session::forget('shipping_method');
         Session::forget('coupon');
-    } 
-    
+    }
+
     public function paypalConfig()
     {
         $paypalSetting = PaypalSetting::first();
         $config = [
-            'mode'    => $paypalSetting->mode === 1 ? 'live' : 'sandbox', 
+            'mode'    => $paypalSetting->mode === 1 ? 'live' : 'sandbox',
             'sandbox' => [
                 'client_id'         => $paypalSetting->client_id,
                 'client_secret'     => $paypalSetting->secret_key,
@@ -100,11 +103,11 @@ class PaymentController extends Controller
                 'client_secret'     => $paypalSetting->secret_key,
                 'app_id'            => '',
             ],
-        
-            'payment_action' => 'Sale', 
+
+            'payment_action' => 'Sale',
             'currency'       => $paypalSetting->currency_name,
             'notify_url'     => '',
-            'locale'         => 'en_US', 
+            'locale'         => 'en_US',
             'validate_ssl'   => true,
         ];
 
@@ -169,7 +172,7 @@ class PaymentController extends Controller
             $paidAmount = round($total*$paypalSetting->currency_rate, 2);
 
             $this->storeOrder('paypal', 1, $response['id'], $paidAmount, $paypalSetting->currency_name);
-            
+
             //clearsession
             $this->clearSession();
 
@@ -187,8 +190,30 @@ class PaymentController extends Controller
     }
 
     // stripe payment
-    public function stripePayment(Request $request)
+    public function payWithStripe(Request $request)
     {
-        dd($request->all());
+        $stripeSetting = StripeSetting::first();
+        // calculate payable amount depending on currency rate
+        $total = getFinalPayableAmount();
+        $payableAmount = round($total * $stripeSetting->currency_rate, 2);
+
+        Stripe::setApiKey($stripeSetting->secret_key);
+        $response = Charge::create([
+            'amount' => $payableAmount * 100,
+            'currency' => $stripeSetting->currency_name,
+            'source' => $request->stripe_token,
+            'description' => "Sazao ecommerce payment test"
+        ]);
+
+        if ($response->status === 'succeeded') {
+            $this->storeOrder('stripe', 1, $response->id, $payableAmount, $stripeSetting->currency_name);
+            //clearsession
+            $this->clearSession();
+
+            return redirect()->route('user.payment.success');
+        } else {
+            toastr("Something went wrong. Try again later!", 'error', 'Error');
+            return redirect()->route('user.payment');
+        }
     }
 }

@@ -1813,12 +1813,12 @@ PRODUCT MODAL VIEW END
   border-radius: 0;
 }
 
-/* .wsus__product_item:hover 
+/* .wsus__product_item:hover
 .wsus__product_details .add_cart {
   opacity: 1;
 }
 
-.wsus__product_item:hover 
+.wsus__product_item:hover
 .wsus__product_details .wsus__price {
   opacity: 0;
   visibility: hidden;
@@ -2356,11 +2356,11 @@ HOME BLOGS END
 }
 
 /*======================
-	HOT DEALS END  
+	HOT DEALS END
 ========================*/
 
 /*======================
-	LARGE BANNER START  
+	LARGE BANNER START
 ========================*/
 #wsus__large_banner {
   padding-top: 65px;
@@ -2415,11 +2415,11 @@ HOME BLOGS END
 }
 
 /*======================
-	LARGE BANNER  END  
+	LARGE BANNER  END
 ========================*/
 
 /*======================
-WEEKLY BEST ITEM START   
+WEEKLY BEST ITEM START
 ========================*/
 #wsus__weekly_best {
   margin-top: 67px;
@@ -2478,7 +2478,7 @@ WEEKLY BEST ITEM START
 }
 
 /*======================
-WEEKLY BEST ITEM END 
+WEEKLY BEST ITEM END
 ========================*/
 
 /*======================
@@ -8499,7 +8499,7 @@ DAILY DEALS DETAILS END
 ========================*/
 
 /*======================
-	HOME PAGE 2 START   
+	HOME PAGE 2 START
 ========================*/
 header .dropdown .nav-link {
   width: auto;
@@ -9591,4 +9591,8 @@ a:not([href]):not([class]):hover {
 .wsus__mini_cart .wsus__cart_img img {
   height: 70px;
   object-fit: cover;
+}
+
+#card-element {
+    padding: 18px;
 }
