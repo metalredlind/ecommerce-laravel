@@ -23,7 +23,7 @@ class OrderDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query){
-                $showBtn = "<a href='".route('admin.products.edit', $query->id)."' class='btn btn-primary'><i class='far fa-eye'></i></a>";
+                $showBtn = "<a href='".route('admin.order.show', $query->id)."' class='btn btn-primary'><i class='far fa-eye'></i></a>";
                 $deleteBtn = "<a href='".route('admin.products.destroy', $query->id)."' class='btn btn-danger ml-1 mr-1 delete-item'><i class='fas fa-trash-alt'></i></a>";
                 $statusBtn = "<a href='".route('admin.products.edit', $query->id)."' class='btn btn-warning'><i class='fas fa-truck'></i></i></a>";
                 return $showBtn.$deleteBtn.$statusBtn;
@@ -37,10 +37,17 @@ class OrderDataTable extends DataTable
             ->addColumn('date', function($query){
                 return date('d-M-Y', strtotime($query->created_at));
             })
+            ->addColumn('payment_status', function($query){
+                if ($query->payment_status === 1) {
+                    return "<span class='badge bg-success'>Complete</span>";
+                } else {
+                    return "<span class='badge bg-danger'>Pending</span>";
+                }
+            })
             ->addColumn('order_status', function($query){
                 return "<span class='badge bg-warning'>$query->order_status</span>";
             })
-            ->rawColumns(['order_status','action'])
+            ->rawColumns(['order_status','payment_status','action'])
             ->setRowId('id');
     }
 
@@ -87,7 +94,7 @@ class OrderDataTable extends DataTable
             Column::make('product_qty'),
             Column::make('amount'),
             Column::make('order_status'),
-            Column::make('payment_method'),
+            Column::make('payment_status'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
