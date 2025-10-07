@@ -89,7 +89,11 @@
                         @endphp
                         <tr>
                           <td>{{++$loop->index}}</td>
-                          <td>{{$product->product_name}}</td>
+                          @if ($product->product->slug)
+                            <td><a target="_blank" href="{{route('product-detail', $product->product->slug)}}">{{$product->product_name}}</a></td>
+                          @else
+                            <td>{{$product->product_name}}</td>
+                          @endif
                           <td>
                             @foreach ($variants as $key=>$variant)
                               <b>{{$key}}: </b>{{$variant->name}} ( {{$settings->currency_icon}}{{$variant->price}} )

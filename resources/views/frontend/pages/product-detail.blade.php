@@ -304,7 +304,7 @@
                                 </li>
                             </ul>
                             <div class="wsus__det_sidebar_banner">
-                                <img src="images/blog_1.jpg" alt="banner" class="img-fluid w-100">
+                                <img src="{{asset('frontend/images/blog_1.jpg')}}" alt="banner" class="img-fluid w-100">
                                 <div class="wsus__det_sidebar_banner_text_overlay">
                                     <div class="wsus__det_sidebar_banner_text">
                                         <p>Black Friday Sale</p>
@@ -421,7 +421,7 @@
                                                         <h4>Reviews <span>02</span></h4>
                                                         <div class="wsus__main_comment">
                                                             <div class="wsus__comment_img">
-                                                                <img src="images/client_img_3.jpg" alt="user"
+                                                                <img src="{{asset('frontend/images/client_img_3.jpg')}}" alt="user"
                                                                     class="img-fluid w-100">
                                                             </div>
                                                             <div class="wsus__comment_text reply">
@@ -433,11 +433,11 @@
                                                                     Cupiditate sint molestiae eos? Officia, fuga eaque.
                                                                 </p>
                                                                 <ul class="">
-                                                                    <li><img src="images/headphone_1.jpg" alt="product"
+                                                                    <li><img src="{{asset('frontend/images/headphone_1.jpg')}}" alt="product"
                                                                             class="img-fluid w-100"></li>
-                                                                    <li><img src="images/headphone_2.jpg" alt="product"
+                                                                    <li><img src="{{asset('frontend/images/headphone_2.jpg')}}" alt="product"
                                                                             class="img-fluid w-100"></li>
-                                                                    <li><img src="images/kids_1.jpg" alt="product"
+                                                                    <li><img src="{{asset('frontend/images/kids_1.jpg')}}" alt="product"
                                                                             class="img-fluid w-100"></li>
                                                                 </ul>
                                                                 <a href="#" data-bs-toggle="collapse"
@@ -467,7 +467,7 @@
                                                         </div>
                                                         <div class="wsus__main_comment">
                                                             <div class="wsus__comment_img">
-                                                                <img src="images/client_img_1.jpg" alt="user"
+                                                                <img src="{{asset('frontend/images/client_img_1.jpg')}}" alt="user"
                                                                     class="img-fluid w-100">
                                                             </div>
                                                             <div class="wsus__comment_text reply">
