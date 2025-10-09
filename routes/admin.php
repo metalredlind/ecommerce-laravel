@@ -96,7 +96,9 @@ Route::put('shipping-rule/change-status', [ShippingRuleController::class, 'chang
 Route::resource('shipping-rule', ShippingRuleController::class);
 
 // Order routes
+Route::get('order-status', [OrderController::class, 'changeOrderStatus'])->name('order.status');
 Route::resource('order', OrderController::class);
+
 
 // general setting route
 Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
