@@ -111,6 +111,13 @@
                     <div class="row mt-4">
                       <div class="col-lg-8">
                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Payment Status</label>
+                                <select name="payment_status" id="payment_status" data-id="{{ $order->id }}" class="form-control">
+                                    <option {{ $order->payment_status === 0 ? 'selected' : '' }} value="0">Pending</option>
+                                    <option {{ $order->payment_status === 1 ? 'selected' : '' }} value="1">Completed</option>
+                                </select>
+                          </div>
                           <div class="form-group">
                             <label for="">Order Status</label>
                             <select name="order_status" id="order_status" data-id="{{$order->id}}" class="form-control">
@@ -118,7 +125,7 @@
                                 <option {{$order->order_status === $key ? 'selected' : ''}} value="{{$key}}">{{$orderStatus['status']}}</option>
                               @endforeach
                             </select>
-                        </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-lg-4 text-right">
@@ -161,6 +168,7 @@
 @push('scripts')
   <script>
     $(document).ready(function(){
+
       $('#order_status').on('change', function(){
         let status = $(this).val();
         let id = $(this).data('id');
@@ -179,6 +187,26 @@
           }
         })
       })
+
+      $('#payment_status').on('change', function(){
+        let status = $(this).val();
+        let id = $(this).data('id');
+
+        $.ajax({
+          method: 'GET',
+          url: "{{route('admin.payment.status')}}",
+          data: {status: status, id: id},
+          success: function(data){
+            if (data.status === 'success'){
+              toastr.success(data.message);
+            }
+          },
+          error: function (data) {
+            console.log(data);
+          }
+        })
+      })
+
     })
   </script>
 @endpush
