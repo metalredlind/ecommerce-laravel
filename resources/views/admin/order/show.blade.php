@@ -7,7 +7,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    
+
 <!-- Main Content -->
     <section class="section">
       <div class="section-header">
@@ -66,7 +66,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <div class="section-title">Order Summary</div>
@@ -132,7 +132,7 @@
                         </div>
                         <div class="invoice-detail-item">
                           <div class="invoice-detail-name">Coupon</div>
-                          <div class="invoice-detail-value">-{{$settings->currency_icon}}{{$coupon->discount ? @$coupon->discount : 0}}</div>
+                          <div class="invoice-detail-value">-{{$settings->currency_icon}}{{$coupon?->discount ? @$coupon?->discount : 0}}</div>
                         </div>
                         <hr class="mt-2 mb-2">
                         <div class="invoice-detail-item">

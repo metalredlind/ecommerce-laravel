@@ -246,7 +246,7 @@ This project is developed as part of a Udemy tutorial and is intended for educat
 ## 🆘 **Support**
 
 If you encounter any issues or have questions:
-1. Check the [Issues](https://github.com/yourusername/ecommerce/issues) page
+1. Check the [Issues](https://github.com/metalredlind/ecommerce-laravel/issues) page
 2. Create a new issue with detailed information
 3. Contact the development team
 
