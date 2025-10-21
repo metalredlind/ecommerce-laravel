@@ -50,6 +50,9 @@
           </ul>
         </li>
 
+        <li class="{{setActive(['admin.transaction'])}}"><a class="nav-link" href="{{route('admin.transaction')}}"><i class="far fa-square"></i> <span>Transactions</span></a></li>
+
+
         <li class="dropdown {{setActive([
           'admin.brand.*',
           'admin.products.*',
