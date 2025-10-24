@@ -1,10 +1,15 @@
+
+@php
+    $popularCategories = json_decode($popularCategories->value, true);
+    // dd($popularCategories);
+@endphp
 <section id="wsus__monthly_top" class="wsus__monthly_top_2">
     <div class="container">
         <div class="row">
             <div class="col-xl-12 col-lg-12">
                 <div class="wsus__monthly_top_banner">
                     <div class="wsus__monthly_top_banner_img">
-                        <img src="images/monthly_top_img3.jpg" alt="img" class="img-fluid w-100">
+                        <img src="{{asset('frontend/images/monthly_top_img3.jpg')}}" alt="img" class="img-fluid w-100">
                         <span></span>
                     </div>
                     <div class="wsus__monthly_top_banner_text">
@@ -19,14 +24,28 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="wsus__section_header for_md">
-                    <h3>Top Categories Of The Month</h3>
+                    <h3>Popular Categories</h3>
                     <div class="monthly_top_filter">
-                        <button class=" active" data-filter="*">music</button>
-                        <button data-filter=".cloth">clothing</button>
-                        <button data-filter=".elec">Electronic</button>
-                        <button data-filter=".spk">Speakers</button>
-                        <button data-filter=".cam">Cameras</button>
-                        <button data-filter=".wat">Watches</button>
+                        <button class=" active" data-filter="*">All</button>
+                        @foreach ($popularCategories as $popularCategory)
+                            @php
+                                $lastKey = [];
+                                foreach ($popularCategory as $key => $category) {
+                                    if ($category === null)  {
+                                        break;
+                                    }
+                                    $lastKey = [$key => $category];
+                                };
+                                if (array_keys($lastKey)[0] === 'category') {
+                                    $category = \App\Models\Category::find($lastKey['category']);
+                                } elseif(array_keys($lastKey)[0] === 'sub_category') {
+                                    $category = \App\Models\SubCategory::find($lastKey['sub_category']);
+                                } else {
+                                    $category = \App\Models\ChildCategory::find($lastKey['child_category']);
+                                }
+                            @endphp
+                            <button data-filter=".cloth">{{$category->name}}</button>
+                        @endforeach
                     </div>
                 </div>
             </div>
