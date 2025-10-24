@@ -26,7 +26,9 @@
                 <div class="wsus__section_header for_md">
                     <h3>Popular Categories</h3>
                     <div class="monthly_top_filter">
-                        <button class=" active" data-filter="*">All</button>
+                        @php
+                            $products = [];
+                        @endphp
                         @foreach ($popularCategories as $popularCategory)
                             @php
                                 $lastKey = [];
@@ -38,13 +40,16 @@
                                 };
                                 if (array_keys($lastKey)[0] === 'category') {
                                     $category = \App\Models\Category::find($lastKey['category']);
+                                    $products[] = \App\Models\Product::where('category_id', $category->id)->orderBy('id','DESC')->take(12)->get();
                                 } elseif(array_keys($lastKey)[0] === 'sub_category') {
                                     $category = \App\Models\SubCategory::find($lastKey['sub_category']);
+                                    $products[] = \App\Models\Product::where('sub_category_id', $category->id)->orderBy('id','DESC')->take(12)->get();
                                 } else {
                                     $category = \App\Models\ChildCategory::find($lastKey['child_category']);
+                                    $products[] = \App\Models\Product::where('child_category_id', $category->id)->orderBy('id','DESC')->take(12)->get();
                                 }
                             @endphp
-                            <button data-filter=".cloth">{{$category->name}}</button>
+                            <button class="{{ $loop->index === 0 ? 'auto_click active' : '' }}" data-filter=".category-{{ $loop->index }}">{{$category->name}}</button>
                         @endforeach
                     </div>
                 </div>
@@ -53,224 +58,36 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12">
                 <div class="row grid">
-                    <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  elec cam wat">
-                        <a class="wsus__hot_deals__single" href="#">
-                            <div class="wsus__hot_deals__single_img">
-                                <img src="images/pro8_8.jpg" alt="bag" class="img-fluid w-100">
+                    @foreach ($products as $key => $product)
+                        @foreach ($product as $item)
+                            <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3 category-{{ $key }}">
+                                <a class="wsus__hot_deals__single" href="#">
+                                    <div class="wsus__hot_deals__single_img">
+                                        <img src="{{ asset($item->thumb_image) }}" alt="bag" class="img-fluid w-100">
+                                    </div>
+                                    <div class="wsus__hot_deals__single_text">
+                                        <h5>{!!limitText($item->name)!!}</h5>
+                                        <p class="wsus__rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </p>
+                                        @if (checkDiscount($item))
+                                            <p class="wsus__tk">{{$settings->currency_icon}}{{$item->offer_price}} <del>{{$settings->currency_icon}}{{$item->price}}</del></p>
+                                        @else
+                                            <p class="wsus__tk">{{$settings->currency_icon}}{{$item->price}} </p>
+                                        @endif
+                                    </div>
+                                </a>
                             </div>
-                            <div class="wsus__hot_deals__single_text">
-                                <h5>wemen's one pcs</h5>
-                                <p class="wsus__rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </p>
-                                <p class="wsus__tk">$120.20 <del>130.00</del></p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  cloth spk">
-                        <a class="wsus__hot_deals__single" href="#">
-                            <div class="wsus__hot_deals__single_img">
-                                <img src="images/pro4_4.jpg" alt="bag" class="img-fluid w-100">
-                            </div>
-                            <div class="wsus__hot_deals__single_text">
-                                <h5>men's casual watch</h5>
-                                <p class="wsus__rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </p>
-                                <p class="wsus__tk">$120.20 <del>130.00</del></p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  elec cam wat">
-                        <a class="wsus__hot_deals__single" href="#">
-                            <div class="wsus__hot_deals__single_img">
-                                <img src="images/pro9.jpg" alt="bag" class="img-fluid w-100">
-                            </div>
-                            <div class="wsus__hot_deals__single_text">
-                                <h5>men's sholder bag</h5>
-                                <p class="wsus__rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </p>
-                                <p class="wsus__tk">$120.20 <del>130.00</del></p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  cloth spk">
-                        <a class="wsus__hot_deals__single" href="#">
-                            <div class="wsus__hot_deals__single_img">
-                                <img src="images/pro9_9.jpg" alt="bag" class="img-fluid w-100">
-                            </div>
-                            <div class="wsus__hot_deals__single_text">
-                                <h5>men's sholder bag</h5>
-                                <p class="wsus__rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </p>
-                                <p class="wsus__tk">$120.20 <del>130.00</del></p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  elec cam">
-                        <a class="wsus__hot_deals__single" href="#">
-                            <div class="wsus__hot_deals__single_img">
-                                <img src="images/pro10.jpg" alt="bag" class="img-fluid w-100">
-                            </div>
-                            <div class="wsus__hot_deals__single_text">
-                                <h5>MSI gaming chair</h5>
-                                <p class="wsus__rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </p>
-                                <p class="wsus__tk">$120.20 <del>130.00</del></p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  cloth cam wat">
-                        <a class="wsus__hot_deals__single" href="#">
-                            <div class="wsus__hot_deals__single_img">
-                                <img src="images/pro2.jpg" alt="bag" class="img-fluid w-100">
-                            </div>
-                            <div class="wsus__hot_deals__single_text">
-                                <h5>men's shoes</h5>
-                                <p class="wsus__rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </p>
-                                <p class="wsus__tk">$120.20 <del>130.00</del></p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  elec spk">
-                        <a class="wsus__hot_deals__single" href="#">
-                            <div class="wsus__hot_deals__single_img">
-                                <img src="images/pro2.jpg" alt="bag" class="img-fluid w-100">
-                            </div>
-                            <div class="wsus__hot_deals__single_text">
-                                <h5>men's shoes</h5>
-                                <p class="wsus__rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </p>
-                                <p class="wsus__tk">$120.20 <del>130.00</del></p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  cloth cam wat">
-                        <a class="wsus__hot_deals__single" href="#">
-                            <div class="wsus__hot_deals__single_img">
-                                <img src="images/pro10.jpg" alt="bag" class="img-fluid w-100">
-                            </div>
-                            <div class="wsus__hot_deals__single_text">
-                                <h5>MSI gaming chair</h5>
-                                <p class="wsus__rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </p>
-                                <p class="wsus__tk">$120.20 <del>130.00</del></p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  elec cam wat">
-                        <a class="wsus__hot_deals__single" href="#">
-                            <div class="wsus__hot_deals__single_img">
-                                <img src="images/pro8_8.jpg" alt="bag" class="img-fluid w-100">
-                            </div>
-                            <div class="wsus__hot_deals__single_text">
-                                <h5>wemen's one pcs</h5>
-                                <p class="wsus__rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </p>
-                                <p class="wsus__tk">$120.20 <del>130.00</del></p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  cloth spk">
-                        <a class="wsus__hot_deals__single" href="#">
-                            <div class="wsus__hot_deals__single_img">
-                                <img src="images/pro4_4.jpg" alt="bag" class="img-fluid w-100">
-                            </div>
-                            <div class="wsus__hot_deals__single_text">
-                                <h5>men's casual watch</h5>
-                                <p class="wsus__rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </p>
-                                <p class="wsus__tk">$120.20 <del>130.00</del></p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  elec wat">
-                        <a class="wsus__hot_deals__single" href="#">
-                            <div class="wsus__hot_deals__single_img">
-                                <img src="images/pro9.jpg" alt="bag" class="img-fluid w-100">
-                            </div>
-                            <div class="wsus__hot_deals__single_text">
-                                <h5>men's sholder bag</h5>
-                                <p class="wsus__rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </p>
-                                <p class="wsus__tk">$120.20 <del>130.00</del></p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  cloth spk">
-                        <a class="wsus__hot_deals__single" href="#">
-                            <div class="wsus__hot_deals__single_img">
-                                <img src="images/pro9_9.jpg" alt="bag" class="img-fluid w-100">
-                            </div>
-                            <div class="wsus__hot_deals__single_text">
-                                <h5>men's sholder bag</h5>
-                                <p class="wsus__rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </p>
-                                <p class="wsus__tk">$120.20 <del>130.00</del></p>
-                            </div>
-                        </a>
-                    </div>
+                        @endforeach
+                    @endforeach
+
                 </div>
             </div>
         </div>
     </div>
 </section>
+

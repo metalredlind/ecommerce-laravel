@@ -23,9 +23,9 @@ function checkDiscount($product)
     if($product->offer_price > 0 && $currentDate >= $product->offer_start_date && $currentDate <= $product->offer_end_date){
         return true;
     }
-    
+
     return false;
-    
+
 }
 
 // calculate discount percent
@@ -46,7 +46,7 @@ function productType($type)
             break;
         case 'featured_product':
             return "Featured";
-            break;    
+            break;
         case 'top_product':
             return "Top";
             break;
@@ -118,4 +118,10 @@ function getShippingFee(){
 //get payable amount
 function getFinalPayableAmount(){
     return getMainCartTotal() + getShippingFee();
+}
+
+//
+function limitText($text, $limit = 20)
+{
+    return \Str::limit($text,$limit);
 }
