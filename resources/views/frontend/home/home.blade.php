@@ -38,7 +38,7 @@
     <!--============================
         BRAND SLIDER START
     ==============================-->
-    {{-- @include('frontend.home.sections.brandslider') --}}
+    @include('frontend.home.sections.brandslider')
     <!--============================
         BRAND SLIDER END
     ==============================-->
