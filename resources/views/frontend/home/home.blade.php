@@ -65,7 +65,7 @@
     <!--============================
         ELECTRONIC PART START  
     ==============================-->
-    {{-- @include('frontend.home.sections.categoryproductslider1') --}}
+    @include('frontend.home.sections.categoryproductslider1')
     <!--============================
         ELECTRONIC PART END  
     ==============================-->
