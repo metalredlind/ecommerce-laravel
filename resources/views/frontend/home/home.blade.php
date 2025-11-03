@@ -74,7 +74,7 @@
     <!--============================
         ELECTRONIC PART START  
     ==============================-->
-    {{-- @include('frontend.home.sections.categoryproductslider2') --}}
+    @include('frontend.home.sections.categoryproductslider2')
     <!--============================
         ELECTRONIC PART END  
     ==============================-->
