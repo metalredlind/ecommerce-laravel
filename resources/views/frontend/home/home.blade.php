@@ -56,7 +56,7 @@
     <!--============================
         HOT DEALS START
     ==============================-->
-    {{-- @include('frontend.home.sections.hotdeals') --}}
+    @include('frontend.home.sections.hotdeals')
     <!--============================
         HOT DEALS END  
     ==============================-->
