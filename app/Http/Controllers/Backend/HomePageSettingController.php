@@ -15,12 +15,14 @@ class HomePageSettingController extends Controller
         $popularCategorySection = HomePageSetting::where('key','popular_category_section')->first();
         $sliderSectionOne = HomePageSetting::where('key','product-slider-section-one')->first();
         $sliderSectionTwo = HomePageSetting::where('key','product-slider-section-two')->first();
+        $sliderSectionThree = HomePageSetting::where('key','product-slider-section-three')->first();
 
         return view('admin.home-page-setting.index', compact(
             'categories',
             'popularCategorySection',
             'sliderSectionOne',
-            'sliderSectionTwo'
+            'sliderSectionTwo',
+            'sliderSectionThree'
         ));
     }
 
@@ -133,5 +135,43 @@ class HomePageSettingController extends Controller
         toastr('Updated Successfully','success','Success');
 
         return redirect()->back();
+    }
+
+    public function updateProductSliderSectionThree(Request $request)
+    {
+        $request->validate([
+            'cat_one' => ['required'],
+            'cat_two' => ['required']
+        ], [
+            'cat_one.required' => 'Part 1 Category field is required',
+            'cat_two.required' => 'Part 2 Category field is required'
+        ]);
+
+        $data = [
+            [
+                'category' => $request->cat_one,
+                'sub_category' => $request->sub_cat_one,
+                'child_category' => $request->child_cat_one
+            ],
+            [
+                'category' => $request->cat_two,
+                'sub_category' => $request->sub_cat_two,
+                'child_category' => $request->child_cat_two
+            ]
+        ];
+
+        HomePageSetting::updateOrCreate(
+            [
+                'key' => 'product-slider-section-three'
+            ],
+            [
+                'value' => json_encode($data)
+            ]
+        );
+
+        toastr('Updated Successfully','success','Success');
+
+        return redirect()->back();
+
     }
 }

@@ -92,7 +92,7 @@
     <!--============================
         WEEKLY BEST ITEM START  
     ==============================-->
-    {{-- @include('frontend.home.sections.weeklybestitem') --}}
+    @include('frontend.home.sections.weeklybestitem')
     <!--============================
         WEEKLY BEST ITEM END 
     ==============================-->
