@@ -6,8 +6,8 @@
 
 @section('content')
     <!--==========================
-                         PRODUCT MODAL VIEW START
-                        ===========================-->
+        PRODUCT MODAL VIEW START
+    ===========================-->
     <section class="product_popup_modal">
         <div class="modal fade" id="exampleModal2" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">

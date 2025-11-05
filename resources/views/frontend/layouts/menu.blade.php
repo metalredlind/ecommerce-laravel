@@ -20,7 +20,7 @@
                     <ul class="wsus_menu_cat_item show_home toggle_menu">
                         {{-- <li><a href="#"><i class="fas fa-star"></i> hot promotions</a></li> --}}
                         @foreach ($categories as $category)
-                            <li><a class="{{count($category->subCategories) > 0 ? 'wsus__droap_arrow' : ''}}" href="#"><i class="{{$category->icon}}"></i> {{$category->name}} </a> {{-- show/hide the arrow button depending on if they have sub-categories --}}
+                            <li><a class="{{count($category->subCategories) > 0 ? 'wsus__droap_arrow' : ''}}" href="{{route('products.index',['category'=>$category->slug])}}"><i class="{{$category->icon}}"></i> {{$category->name}} </a> {{-- show/hide the arrow button depending on if they have sub-categories --}}
                                 @if (count($category->subCategories) > 0)  {{-- show/hide the subcategories depending on if they have sub-categories or not --}}
                                 <ul class="wsus_menu_cat_droapdown">
                                     @foreach ($category->subCategories as $subCategory)

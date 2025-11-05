@@ -39,7 +39,8 @@ Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login'
 
 Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale');
 
-// Product details route
+// Product route
+Route::get('products', [FrontEndProductController::class, 'productIndex'])->name('products.index');
 Route::get('product-detail/{slug}', [FrontEndProductController::class, 'showProduct'])->name('product-detail');
 
 // add to cart routes
