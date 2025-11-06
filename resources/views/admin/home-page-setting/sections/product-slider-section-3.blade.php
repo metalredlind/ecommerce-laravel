@@ -1,5 +1,21 @@
 @php
-    $sliderSectionThree = json_decode($sliderSectionThree->value, true);
+    // Safely decode stored JSON. Expecting an array with two parts; provide defaults if missing.
+    if (isset($sliderSectionThree) && isset($sliderSectionThree->value)) {
+        $sliderSectionThree = json_decode($sliderSectionThree->value, true);
+    } else {
+        $sliderSectionThree = [
+            [
+                'category' => null,
+                'sub_category' => null,
+                'child_category' => null,
+            ],
+            [
+                'category' => null,
+                'sub_category' => null,
+                'child_category' => null,
+            ],
+        ];
+    }
 @endphp
 
 <div class="tab-pane fade" id="list-slider-three" role="tabpanel" aria-labelledby="list-slider-three">
@@ -76,7 +92,7 @@
                             <select name="sub_cat_two" id="" class="form-control sub-category">
                                 <option value="">Select</option>
                                 @foreach ($subCategories as $subCategory)
-                                    <option {{$subCategory->id == $sliderSectionThree[1]->sub_category ? 'selected' : ''}} value="{{$subCategory->id}}">{{ $subCategory->name }}</option>
+                                    <option {{$subCategory->id == ($sliderSectionThree[1]['sub_category'] ?? null) ? 'selected' : ''}} value="{{$subCategory->id}}">{{ $subCategory->name }}</option>
                                 @endforeach
                             </select>
                         </div>

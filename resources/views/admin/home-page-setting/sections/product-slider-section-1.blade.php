@@ -1,5 +1,15 @@
 @php
-    $sliderSectionOne = json_decode($sliderSectionOne->value);
+    // Safely decode stored JSON. If the DB record is null or value is null,
+    // provide a default object with expected properties to avoid "Attempt to read property 'value' on null".
+    if (isset($sliderSectionOne) && isset($sliderSectionOne->value)) {
+        $sliderSectionOne = json_decode($sliderSectionOne->value);
+    } else {
+        $sliderSectionOne = (object) [
+            'category' => null,
+            'sub_category' => null,
+            'child_category' => null,
+        ];
+    }
 @endphp
 <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
     <div class="card border">
