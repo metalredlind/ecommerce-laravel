@@ -242,12 +242,12 @@
                             <div class="wsus__product_topbar_left">
                                 <div class="nav nav-pills" id="v-pills-tab" role="tablist"
                                     aria-orientation="vertical">
-                                    <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
+                                    <button class="nav-link {{ session()->has('product_list_style') && session()->get('product_list_style') == 'grid' ? 'active' : '' }} {{ !session()->has('product_list_style') ? 'active' : ''}} list-view" id="v-pills-home-tab" data-id="grid" data-bs-toggle="pill"
                                         data-bs-target="#v-pills-home" type="button" role="tab"
                                         aria-controls="v-pills-home" aria-selected="true">
                                         <i class="fas fa-th"></i>
                                     </button>
-                                    <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                    <button class="nav-link {{ session()->has('product_list_style') && session()->get('product_list_style') == 'list' ? 'active' : '' }} list-view" id="v-pills-profile-tab" data-id="list" data-bs-toggle="pill"
                                         data-bs-target="#v-pills-profile" type="button" role="tab"
                                         aria-controls="v-pills-profile" aria-selected="false">
                                         <i class="fas fa-list-ul"></i>
@@ -274,7 +274,7 @@
                         </div>
                     </div>
                     <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                        <div class="tab-pane fade {{ session()->has('product_list_style') && session()->get('product_list_style') == 'grid' ? 'show active' : '' }} {{ !session()->has('product_list_style') ? 'active' : ''}}" id="v-pills-home" role="tabpanel"
                             aria-labelledby="v-pills-home-tab">
                             <div class="row">
 
@@ -373,7 +373,7 @@
 
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                        <div class="tab-pane fade {{ session()->has('product_list_style') && session()->get('product_list_style') == 'list' ? 'show active' : '' }}" id="v-pills-profile" role="tabpanel"
                             aria-labelledby="v-pills-profile-tab">
                             <div class="row">
 
@@ -471,3 +471,25 @@
 ==============================-->
 
 @endsection
+
+@push('scripts')
+
+    <script>
+        $(document).ready(function(){
+            $('.list-view').on('click', function(){
+                let style = $(this).data('id');
+                
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('change-product-list-view') }}",
+                    data: {style: style},
+                    success: function(data){
+
+                    }
+                })
+            })
+        })
+    </script> 
+
+
+@endpush

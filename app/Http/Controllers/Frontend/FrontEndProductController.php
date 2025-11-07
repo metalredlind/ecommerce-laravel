@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FrontEndProductController extends Controller
 {
@@ -30,4 +31,11 @@ class FrontEndProductController extends Controller
         $product = Product::with(['vendor', 'category', 'productImageGalleries', 'variants', 'brand'])->where('slug', $slug)->where('status', 1)->first();
         return view('frontend.pages.product-detail', compact('product'));
     }
+
+    public function changeListView(Request $request)
+    {
+        Session::put('product_list_style', $request->style);
+
+    }
+    
 }
