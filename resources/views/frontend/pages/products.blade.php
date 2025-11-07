@@ -253,23 +253,6 @@
                                         <i class="fas fa-list-ul"></i>
                                     </button>
                                 </div>
-                                <div class="wsus__topbar_select">
-                                    <select class="select_2" name="state">
-                                        <option>default shorting</option>
-                                        <option>short by rating</option>
-                                        <option>short by latest</option>
-                                        <option>low to high </option>
-                                        <option>high to low</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="wsus__topbar_select">
-                                <select class="select_2" name="state">
-                                    <option>show 12</option>
-                                    <option>show 15</option>
-                                    <option>show 18</option>
-                                    <option>show 21</option>
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -440,6 +423,15 @@
                         </div>
                     </div>
                 </div>
+                @if (count($products) === 0)
+                <div class="text-center mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>Product not Found</h2>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
             <div class="col-xl-12 text-center">
                 <div class="mt-5" style="display:flex; justify-content:center">
