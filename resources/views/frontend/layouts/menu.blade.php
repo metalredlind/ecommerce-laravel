@@ -24,12 +24,12 @@
                                 @if (count($category->subCategories) > 0)  {{-- show/hide the subcategories depending on if they have sub-categories or not --}}
                                 <ul class="wsus_menu_cat_droapdown">
                                     @foreach ($category->subCategories as $subCategory)
-                                    <li><a href="#">{{$subCategory->name}}<i class="{{count($subCategory->childCategories) > 0 ? 'fas fa-angle-right' : ''}}"></i></a> {{-- show/hide the child-categories depending on if they have child-categories or not --}}
+                                    <li><a href="{{route('products.index', ['subcategory'=>$subCategory->slug])}}">{{$subCategory->name}}<i class="{{count($subCategory->childCategories) > 0 ? 'fas fa-angle-right' : ''}}"></i></a> {{-- show/hide the child-categories depending on if they have child-categories or not --}}
                                         @if(count($subCategory->childCategories) > 0) {{-- show/hide the child-categories depending on if they have child-categories or not --}}
                                         <ul class="wsus__sub_category">
                                             @foreach ($subCategory->childCategories as $childCategory)
                                                 <li>
-                                                    <a href="#">{{$childCategory->name}}</a>
+                                                    <a href="{{route('products.index', ['childcategory'=>$childCategory->slug])}}">{{$childCategory->name}}</a>
                                                 </li>
                                             @endforeach
                                         </ul>
