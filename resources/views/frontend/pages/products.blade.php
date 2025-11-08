@@ -467,7 +467,30 @@
                 })
             })
         })
+
+        @php
+            if (request()->has('range')) {
+                $price = explode(';', request()->range);
+                $from = $price[0];
+                $to = $price[1];
+            } else {
+                $from = 0;
+                $to = 200;
+            }
+        @endphp
+
+        jQuery(function () {
+            jQuery("#slider_range").flatslider({
+                min: 0, max: 2000,
+                step: 50,
+                values: [{{ $from }}, {{ $to }}],
+                range: true,
+                einheit: '{{ $settings->currency_icon }}'
+            });
+        });
     </script>
+
+
 
 
 @endpush
