@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Product;
@@ -61,11 +62,27 @@ class FrontEndProductController extends Controller
                 return $query->where('price', '>=', $from)->where('price', '<=', $to);
             })
             ->paginate(12);
+        } elseif($request->has('brand')){
+            $brand = Brand::where('slug', $request->brand)->firstOrFail();
+            $products = Product::where([
+                'brand_id' => $brand->id,
+                'status' => 1,
+                'is_approved' => 1
+            ])
+            ->when($request->has('range'), function($query) use($request){
+                $price = explode(';', $request->range);
+                $from = $price[0];
+                $to = $price[1];
+
+                return $query->where('price', '>=', $from)->where('price', '<=', $to);
+            })
+            ->paginate(12);
         }
 
         $categories = Category::where(['status'=>1])->get();
+        $brands = Brand::where(['status'=>1])->get();
 
-        return view('frontend.pages.products', compact('products','categories'));
+        return view('frontend.pages.products', compact('products','categories','brands'));
     }
 
     //show product detail page
