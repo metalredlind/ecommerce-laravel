@@ -7,7 +7,7 @@
         }]);
     }])
     ->get();
-    
+
 @endphp
 <nav class="wsus__main_menu d-none d-lg-block">
     <div class="container">
@@ -38,7 +38,7 @@
                                     @endforeach
                                 </ul>
                                 @endif
-                            </li> 
+                            </li>
                         @endforeach
                         <li><a href="#"><i class="fal fa-gem"></i> View All Categories</a></li>
                     </ul>
@@ -153,8 +153,8 @@
 
         <li><a href="compare.html"><i class="far fa-random"></i> </i><span>3</span></a></li>
     </ul>
-    <form>
-        <input type="text" placeholder="Search">
+    <form action="" method="GET">
+        <input type="text" placeholder="Search" name="search">
         <button type="submit"><i class="far fa-search"></i></button>
     </form>
 
