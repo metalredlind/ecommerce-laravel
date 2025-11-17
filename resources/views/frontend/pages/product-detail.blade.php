@@ -145,13 +145,13 @@
         </div>
     </section>
     <!--==========================
-                          PRODUCT MODAL VIEW END
-                        ===========================-->
+        PRODUCT MODAL VIEW END
+    ===========================-->
 
 
     <!--============================
-                           BREADCRUMB START
-                        ==============================-->
+        BREADCRUMB START
+    ==============================-->
     <section id="wsus__breadcrumb">
         <div class="wsus_breadcrumb_overlay">
             <div class="container">
@@ -169,13 +169,13 @@
         </div>
     </section>
     <!--============================
-                          BREADCRUMB END
-                        ==============================-->
+        BREADCRUMB END
+    ==============================-->
 
 
     <!--============================
-                          PRODUCT DETAILS START
-                        ==============================-->
+        PRODUCT DETAILS START
+    ==============================-->
     <section id="wsus__product_details">
         <div class="container">
             <div class="wsus__details_bg">
@@ -270,8 +270,8 @@
                                 <ul class="wsus__button_area">
                                     <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
                                     <li><a class="buy_now" href="#">buy now</a></li>
-                                    <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="far fa-random"></i></a></li>
+                                    <li><a href="" class="add_to_wishlist" data-id="{{$product->id}}"><i class="fal fa-heart"></i></a></li>
+                                    {{-- <li><a href="#"><i class="far fa-random"></i></a></li> --}}
                                 </ul>
                             </form>
 
@@ -588,12 +588,12 @@
         </div>
     </section>
     <!--============================
-                          PRODUCT DETAILS END
-                        ==============================-->
+        PRODUCT DETAILS END
+    ==============================-->
 
     <!--============================
-                            RELATED PRODUCT START
-                        ==============================-->
+        RELATED PRODUCT START
+    ==============================-->
     {{-- <section id="wsus__flash_sell">
         <div class="container">
             <div class="row">
@@ -757,6 +757,6 @@
         </div>
     </section> --}}
     <!--============================
-                            RELATED PRODUCT END
-                        ==============================-->
+        RELATED PRODUCT END
+    ==============================-->
 @endsection

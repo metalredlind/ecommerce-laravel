@@ -61,8 +61,8 @@
                             <li><a href="#" data-bs-toggle="modal"
                                     data-bs-target="#product-slider-two-{{ $product->id }}"><i class="far fa-eye"></i></a>
                             </li>
-                            <li><a href="#"><i class="far fa-heart"></i></a></li>
-                            <li><a href="#"><i class="far fa-random"></i></a>
+                            <li><a href="#" class="add_to_wishlist" data-id="{{$product->id}}"><i class="far fa-heart"></i></a></li>
+                            {{-- <li><a href="#"><i class="far fa-random"></i></a> --}}
                         </ul>
                         <div class="wsus__product_details">
                             <a class="wsus__category" href="#">{{ $product->category->name }} </a>
@@ -74,8 +74,7 @@
                                 <i class="fas fa-star-half-alt"></i>
                                 <span>(133 review)</span>
                             </p>
-                            <a class="wsus__pro_name"
-                                href="{{ route('product-detail', $product->slug) }}">{{ $product->name }}</a>
+                            <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug) }}">{{ limitText($product->name, 50) }}</a>
                             @if (checkDiscount($product))
                                 <p class="wsus__price">{{ $settings->currency_icon }}{{ $product->offer_price }}
                                     <del>${{ $product->price }}</del>
@@ -202,8 +201,8 @@
                                         <ul class="wsus__button_area">
                                             <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
                                             <li><a class="buy_now" href="#">buy now</a></li>
-                                            <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-random"></i></a></li>
+                                            <li><a href="#" class="add_to_wishlist" data-id="{{$product->id}}"><i class="fal fa-heart"></i></a></li>
+                                            {{-- <li><a href="#"><i class="far fa-random"></i></a></li> --}}
                                         </ul>
                                     </form>
 
