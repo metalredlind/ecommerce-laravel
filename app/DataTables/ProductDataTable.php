@@ -42,7 +42,7 @@ class ProductDataTable extends DataTable
             })
             ->addColumn('type', function($query){
                 switch ($query->product_type) {
-                    case 'new-arrival':
+                    case 'new_arrival':
                         return "<i class='badge badge-success'>New Arrival</i>";
                         break;
                     case 'featured_product':
