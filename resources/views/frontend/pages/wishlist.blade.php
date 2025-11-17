@@ -46,19 +46,15 @@
                                             product item
                                         </th>
 
-                                        <th class="wsus__pro_name">
+                                        <th class="wsus__pro_name" style="width:500px">
                                             product details
                                         </th>
 
                                         <th class="wsus__pro_status">
-                                            status
+                                            Quantity
                                         </th>
 
-                                        <th class="wsus__pro_select">
-                                            quantity
-                                        </th>
-
-                                        <th class="wsus__pro_tk">
+                                        <th class="wsus__pro_tk" style="width:235px">
                                             price
                                         </th>
 
@@ -66,117 +62,31 @@
                                             action
                                         </th>
                                     </tr>
-                                    <tr class="d-flex">
-                                        <td class="wsus__pro_img"><img src="images/pro9_9.jpg" alt="product"
-                                                class="img-fluid w-100">
-                                            <a href="#"><i class="far fa-times"></i></a>
-                                        </td>
+                                    @foreach ($wishlistProducts as $item)
+                                        <tr class="d-flex">
+                                            <td class="wsus__pro_img"><img src="{{asset($item->product->thumb_image)}}" alt="product"
+                                                    class="img-fluid w-100">
+                                                <a href="{{route('user.wishlist.destroy', $item->id)}}"><i class="far fa-times"></i></a>
+                                            </td>
 
-                                        <td class="wsus__pro_name">
-                                            <p>men's fashion sholder leather bag</p>
-                                        </td>
+                                            <td class="wsus__pro_name" style="width:500px">
+                                                <p>{{ $item->product->name }}</p>
+                                            </td>
 
-                                        <td class="wsus__pro_status">
-                                            <p>in stock</p>
-                                        </td>
+                                            <td class="wsus__pro_status">
+                                                <p>{{ $item->product->qty }}</p>
+                                            </td>
 
-                                        <td class="wsus__pro_select">
-                                            <form class="select_number">
-                                                <input class="number_area" type="text" min="1" max="100" value="1" />
-                                            </form>
-                                        </td>
+                                            <td class="wsus__pro_tk" style="width:235px">
+                                                <h6>{{ $settings->currency_icon }}{{ $item->product->price }}</h6>
+                                            </td>
 
-                                        <td class="wsus__pro_tk">
-                                            <h6>$180,00</h6>
-                                        </td>
-
-                                        <td class="wsus__pro_icon">
-                                            <a class="common_btn" href="#">add to cart</a>
-                                        </td>
-                                    </tr>
-                                    <tr class="d-flex">
-                                        <td class="wsus__pro_img">
-                                            <img src="images/pro4.jpg" alt="product" class="img-fluid w-100">
-                                            <a href="#"><i class="far fa-times"></i></a>
-                                        </td>
-
-                                        <td class="wsus__pro_name">
-                                            <p>mean's casula fashion watch</p>
-                                        </td>
-
-                                        <td class="wsus__pro_status">
-                                            <p>in stock</p>
-                                        </td>
-
-                                        <td class="wsus__pro_select">
-                                            <form class="select_number">
-                                                <input class="number_area" type="text" min="1" max="100" value="1" />
-                                            </form>
-                                        </td>
-
-                                        <td class="wsus__pro_tk">
-                                            <h6>$140,00</h6>
-                                        </td>
-
-                                        <td class="wsus__pro_icon">
-                                            <a class="common_btn" href="#">add to cart</a>
-                                        </td>
-                                    </tr>
-                                    <tr class="d-flex">
-                                        <td class="wsus__pro_img">
-                                            <img src="images/blazer_1.jpg" alt="product" class="img-fluid w-100">
-                                            <a href="#"><i class="far fa-times"></i></a>
-                                        </td>
-
-                                        <td class="wsus__pro_name">
-                                            <p>product name and details</p>
-                                        </td>
-
-                                        <td class="wsus__pro_status">
-                                            <span> out of stock</span>
-                                        </td>
-
-                                        <td class="wsus__pro_select">
-                                            <form class="select_number">
-                                                <input class="number_area" type="text" min="1" max="100" value="1" />
-                                            </form>
-                                        </td>
-
-                                        <td class="wsus__pro_tk">
-                                            <h6>$220,00</h6>
-                                        </td>
-
-                                        <td class="wsus__pro_icon">
-                                            <a class="common_btn" href="#">add to cart</a>
-                                        </td>
-                                    </tr>
-                                    <tr class="d-flex">
-                                        <td class="wsus__pro_img">
-                                            <img src="images/pro2.jpg" alt="product" class="img-fluid w-100">
-                                            <a href="#"><i class="far fa-times"></i></a>
-                                        </td>
-                                        <td class="wsus__pro_name">
-                                            <p>product name and details</p>
-                                        </td>
-
-                                        <td class="wsus__pro_status">
-                                            <p>in stock</p>
-                                        </td>
-
-                                        <td class="wsus__pro_select">
-                                            <form class="select_number">
-                                                <input class="number_area" type="text" min="1" max="100" value="1" />
-                                            </form>
-                                        </td>
-
-                                        <td class="wsus__pro_tk">
-                                            <h6>$180.00</h6>
-                                        </td>
-
-                                        <td class="wsus__pro_icon">
-                                            <a class="common_btn" href="#">add to cart</a>
-                                        </td>
-                                    </tr>
+                                            <td class="wsus__pro_icon">
+                                                <a class="common_btn" href="{{ route('product-detail', $item->product->slug) }}">view product</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    
                                 </tbody>
                             </table>
                         </div>
