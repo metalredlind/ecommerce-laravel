@@ -1,16 +1,20 @@
+@php
+    $footerInfo = \App\Models\FooterInfo::first();
+@endphp
+
 <footer class="footer_2">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-xl-3 col-sm-7 col-md-6 col-lg-3">
                     <div class="wsus__footer_content">
                         <a class="wsus__footer_2_logo" href="#">
-                            <img src="images/logo_2.png" alt="logo">
+                            <img src="{{asset(@$footerInfo->logo)}}" alt="logo">
                         </a>
-                        <a class="action" href="callto:+8896254857456"><i class="fas fa-phone-alt"></i>
-                            +8896254857456</a>
-                        <a class="action" href="mailto:example@gmail.com"><i class="far fa-envelope"></i>
-                            example@gmail.com</a>
-                        <p><i class="fal fa-map-marker-alt"></i> San Francisco City Hall, San Francisco, CA</p>
+                        <a class="action" href="callto:{{$footerInfo->phone}}"><i class="fas fa-phone-alt"></i>
+                            {{$footerInfo->phone}}</a>
+                        <a class="action" href="mailto:{{$footerInfo->email}}"><i class="far fa-envelope"></i>
+                            {{$footerInfo->email}}</a>
+                        <p><i class="fal fa-map-marker-alt"></i> {{$footerInfo->address}} </p>
                         <ul class="wsus__footer_social">
                             <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
@@ -59,7 +63,7 @@
                         </form>
                         <div class="footer_payment">
                             <p>We're using safe payment for :</p>
-                            <img src="images/credit2.png" alt="card" class="img-fluid">
+                            <img src="{{asset('frontend/images/credit2.png')}}" alt="card" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -70,7 +74,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="wsus__copyright d-flex justify-content-center">
-                            <p>Copyright © 2021 Sazao shop. All Rights Reserved.</p>
+                            <p>{{$footerInfo->copyright}}</p>
                         </div>
                     </div>
                 </div>
