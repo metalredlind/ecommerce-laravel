@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\FooterInfoController;
 use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingsController;
@@ -125,7 +126,8 @@ Route::put('product-slider-section-one', [HomePageSettingController::class, 'upd
 Route::put('product-slider-section-two', [HomePageSettingController::class, 'updateProductSliderSectionTwo'])->name('product-slider-section-two');
 Route::put('product-slider-section-three', [HomePageSettingController::class, 'updateProductSliderSectionThree'])->name('product-slider-section-three');
 
-
+// footer routes
+Route::resource('footer-info', FooterInfoController::class);
 
 // payments setting route
 Route::get('payment-settings', [PaymentSettingsController::class, 'index'])->name('payment-settings.index');
