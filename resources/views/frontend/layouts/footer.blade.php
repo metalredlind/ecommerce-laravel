@@ -1,5 +1,6 @@
 @php
     $footerInfo = \App\Models\FooterInfo::first();
+    $footerSocials = \App\Models\FooterSocial::where('status',1)->get();
 @endphp
 
 <footer class="footer_2">
@@ -16,11 +17,9 @@
                             {{$footerInfo->email}}</a>
                         <p><i class="fal fa-map-marker-alt"></i> {{$footerInfo->address}} </p>
                         <ul class="wsus__footer_social">
-                            <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a class="whatsapp" href="#"><i class="fab fa-whatsapp"></i></a></li>
-                            <li><a class="pinterest" href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                            <li><a class="behance" href="#"><i class="fab fa-behance"></i></a></li>
+                            @foreach ($footerSocials as $social)
+                            <li><a class="facebook" href="{{{ $social->url}}}"><i class="{{ $social->icon }}"></i></a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
