@@ -135,6 +135,7 @@ Route::put('footer-socials/change-status', [FooterSocialController::class, 'chan
 Route::resource('footer-socials', FooterSocialController::class);
 
 Route::put('footer-grid-two/change-status', [FooterGridTwoController::class, 'changeStatus'])->name('footer-grid-two.change-status');
+Route::put('footer-grid-two/change-title', [FooterGridTwoController::class, 'changeTitle'])->name('footer-grid-two.change-title');
 Route::resource('footer-grid-two', FooterGridTwoController::class);
 
 // payments setting route

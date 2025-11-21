@@ -1,6 +1,8 @@
 @php
     $footerInfo = \App\Models\FooterInfo::first();
     $footerSocials = \App\Models\FooterSocial::where('status',1)->get();
+    $footerGridTwoLinks = \App\Models\FooterGridTwo::where('status',1)->get();
+    $footerTitle = \App\Models\FooterTitle::first();
 @endphp
 
 <footer class="footer_2">
@@ -25,15 +27,11 @@
                 </div>
                 <div class="col-xl-2 col-sm-5 col-md-4 col-lg-2">
                     <div class="wsus__footer_content">
-                        <h5>Company</h5>
+                        <h5>{{$footerTitle->footer_grid_two_title}}</h5>
                         <ul class="wsus__footer_menu">
-                            <li><a href="#"><i class="fas fa-caret-right"></i> About Us</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Career</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Contact Us</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Affilate</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Order History</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
+                            @foreach ($footerGridTwoLinks as $link)
+                                <li><a href="{{$link->url}}"><i class="fas fa-caret-right"></i> {{$link->name}}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
