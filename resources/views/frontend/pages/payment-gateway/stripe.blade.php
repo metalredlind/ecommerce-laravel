@@ -23,7 +23,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-    var stripe = Stripe("{{$stripeSetting->client_id}}");
+    var stripe = Stripe("{{$stripeSetting?->client_id}}");
     var elements = stripe.elements();
     var cardElement = elements.create('card');
     cardElement.mount('#card-element')

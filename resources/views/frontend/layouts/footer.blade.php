@@ -12,36 +12,36 @@
                 <div class="col-xl-3 col-sm-7 col-md-6 col-lg-3">
                     <div class="wsus__footer_content">
                         <a class="wsus__footer_2_logo" href="#">
-                            <img src="{{asset(@$footerInfo->logo)}}" alt="logo">
+                            <img src="{{asset(@$footerInfo?->logo)}}" alt="logo">
                         </a>
-                        <a class="action" href="callto:{{$footerInfo->phone}}"><i class="fas fa-phone-alt"></i>
-                            {{$footerInfo->phone}}</a>
-                        <a class="action" href="mailto:{{$footerInfo->email}}"><i class="far fa-envelope"></i>
-                            {{$footerInfo->email}}</a>
-                        <p><i class="fal fa-map-marker-alt"></i> {{$footerInfo->address}} </p>
+                        <a class="action" href="callto:{{$footerInfo?->phone}}"><i class="fas fa-phone-alt"></i>
+                            {{$footerInfo?->phone}}</a>
+                        <a class="action" href="mailto:{{$footerInfo?->email}}"><i class="far fa-envelope"></i>
+                            {{$footerInfo?->email}}</a>
+                        <p><i class="fal fa-map-marker-alt"></i> {{$footerInfo?->address}} </p>
                         <ul class="wsus__footer_social">
                             @foreach ($footerSocials as $social)
-                            <li><a class="facebook" href="{{{ $social->url}}}"><i class="{{ $social->icon }}"></i></a></li>
+                            <li><a class="facebook" href="{{{ $social?->url}}}"><i class="{{ $social?->icon }}"></i></a></li>
                             @endforeach
                         </ul>
                     </div>
                 </div>
                 <div class="col-xl-2 col-sm-5 col-md-4 col-lg-2">
                     <div class="wsus__footer_content">
-                        <h5>{{$footerTitle->footer_grid_two_title}}</h5>
+                        <h5>{{$footerTitle?->footer_grid_two_title}}</h5>
                         <ul class="wsus__footer_menu">
                             @foreach ($footerGridTwoLinks as $link)
-                                <li><a href="{{$link->url}}"><i class="fas fa-caret-right"></i> {{$link->name}}</a></li>
+                                <li><a href="{{$link?->url}}"><i class="fas fa-caret-right"></i> {{$link?->name}}</a></li>
                             @endforeach
                         </ul>
                     </div>
                 </div>
                 <div class="col-xl-2 col-sm-5 col-md-4 col-lg-2">
                     <div class="wsus__footer_content">
-                        <h5>{{$footerTitle->footer_grid_three_title}}</h5>
+                        <h5>{{$footerTitle?->footer_grid_three_title}}</h5>
                         <ul class="wsus__footer_menu">
                             @foreach ($footerGridThreeLinks as $link)
-                                <li><a href="{{$link->url}}"><i class="fas fa-caret-right"></i> {{$link->name}}</a></li>
+                                <li><a href="{{$link?->url}}"><i class="fas fa-caret-right"></i> {{$link?->name}}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -68,7 +68,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="wsus__copyright d-flex justify-content-center">
-                            <p>{{$footerInfo->copyright}}</p>
+                            <p>{{$footerInfo?->copyright}}</p>
                         </div>
                     </div>
                 </div>
