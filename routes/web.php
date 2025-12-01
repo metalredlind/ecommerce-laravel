@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontEndProductController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\NewsLetterController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserOrderController;
@@ -57,6 +58,9 @@ Route::post('cart/remove-sidebar-product', [CartController::class, 'removeSideba
 Route::get('cart/sidebar-product-total', [CartController::class, 'cartTotal'])->name('cart.sidebar-product-total');
 Route::get('apply-coupon', [CartController::class, 'applyCoupon'])->name('apply-coupon');
 Route::get('coupon-calculation', [CartController::class, 'couponCalculation'])->name('coupon-calculation');
+
+//Newsletter routes
+Route::post('newsletter-request', [NewsLetterController::class, 'newsLetterRequest'])->name('newsletter-request');
 
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function(){
