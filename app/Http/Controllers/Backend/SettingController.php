@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmailConfiguration;
 use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class SettingController extends Controller
     public function index()
     {
         $generalSettings = GeneralSetting::first();
-        return view('admin.setting.index', compact('generalSettings'));
+        $emailSettings = EmailConfiguration::first();
+        return view('admin.setting.index', compact('generalSettings','emailSettings'));
     }
 
     public function generalSettingUpdate(Request $request)
@@ -38,6 +40,34 @@ class SettingController extends Controller
         );
 
         toastr('General Setting Updated Successfully', 'success', 'Success');
+
+        return redirect()->back();
+    }
+
+    public function emailConfigSettingUpdate(Request $request)
+    {
+        $request->validate([
+            'email' => ['required','email'],
+            'host' => ['required','max:200'],
+            'username' => ['required','max:200'],
+            'password' => ['required','max:200'],
+            'port' => ['required','max:200'],
+            'encryption' => ['required','max:200'],
+        ]);
+
+        EmailConfiguration::updateOrCreate(
+            ['id' => 1],
+            [
+                'email' => $request->email,
+                'host' => $request->host,
+                'username' => $request->username,
+                'password' => $request->password,
+                'port' => $request->port,
+                'encryption' => $request->encryption,
+            ]
+        );
+
+        toastr('Updated successfully!','success','Success');
 
         return redirect()->back();
     }
