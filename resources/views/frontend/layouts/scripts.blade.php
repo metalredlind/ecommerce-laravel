@@ -158,13 +158,17 @@
                 url: "{{ route('newsletter-request') }}",
                 data: data,
                 success: function(data){
-
+                    if(data.status === 'success'){
+                        toastr.success(data.message);
+                    }else if(data.status === 'error'){
+                        toastr.error(data.message);
+                    }
                 },
                 error: function(data){
                     let errors = data.responseJSON.errors;
                     if(errors){
                         $.each(errors, function(key,value){
-                            toastr.error(value)
+                            toastr.error(value);
                         })
                     }
                 }

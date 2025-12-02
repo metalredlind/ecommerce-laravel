@@ -61,6 +61,7 @@ Route::get('coupon-calculation', [CartController::class, 'couponCalculation'])->
 
 //Newsletter routes
 Route::post('newsletter-request', [NewsLetterController::class, 'newsLetterRequest'])->name('newsletter-request');
+Route::get('newsletter-verify/{token}', [NewsLetterController::class, 'newsLetterEmailVerify'])->name('newsletter-verify');
 
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function(){
