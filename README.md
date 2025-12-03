@@ -52,6 +52,8 @@ A modern, feature-rich ecommerce platform built with Laravel 10, featuring a mul
 - Homepage settings management (popular categories + multi product sliders)
 - Slider management
 - Payment settings (Stripe/PayPal) and transaction reports
+- Footer management (footer info, social links, grid sections)
+- Newsletter/Subscriber management with email campaigns
 
 ### 🎨 **Frontend Features**
 - Responsive design
@@ -59,6 +61,8 @@ A modern, feature-rich ecommerce platform built with Laravel 10, featuring a mul
 - Product sliders and banners
 - Flash sale displays
 - Shopping cart sidebar
+- Newsletter subscription with email verification
+- Dynamic footer with customizable sections
 
 ## 🛠️ **Technology Stack**
 
@@ -187,15 +191,16 @@ ecommerce/
 │   ├── css/                  # CSS files
 │   └── js/                   # JavaScript files
 ├── routes/
-│   ├── web.php               # Main web routes
-│   ├── admin.php             # Admin routes
-│   ├── vendor.php            # Vendor routes
+│   ├── web.php               # Main web routes (frontend, user dashboard, cart, checkout, payment)
+│   ├── admin.php             # Admin routes (dashboard, products, orders, settings, footer, subscribers)
+│   ├── vendor.php            # Vendor routes (dashboard, products, orders, shop profile)
 │   ├── api.php               # API routes
 │   └── auth.php              # Authentication routes
 ├── config/                   # Configuration files
 │   ├── settings.php          # Application settings
 │   ├── order_status.php      # Order status configurations
-│   └── paypal.php            # PayPal configuration
+│   ├── paypal.php            # PayPal configuration
+│   └── datatables.php        # DataTables configuration
 ├── tailwind.config.js        # Tailwind CSS configuration
 └── public/
     ├── backend/              # Admin assets
@@ -212,9 +217,10 @@ After running the seeders, you can access the admin panel with:
 
 ### Multi-Vendor System
 - Vendor Registration: Complete vendor onboarding process
-- Vendor Profiles: Comprehensive vendor shop profiles
-- Product Approval: Admin approval system for vendor products
-- Vendor Dashboard: Dedicated dashboard for vendors to manage products and orders
+- Vendor Profiles: Comprehensive vendor shop profiles with customizable settings
+- Product Approval: Admin approval system for vendor products with pending/approved status
+- Vendor Dashboard: Dedicated dashboard for vendors to manage products, variants, and orders
+- Vendor Orders: Separate order management for vendors with status updates
 
 ### Product Management
 - Categories: Hierarchical category system (Category → Subcategory → Child Category)
@@ -241,7 +247,7 @@ After running the seeders, you can access the admin panel with:
 - Profile management
 - Address book management
 - Account settings
-- Wishlist management
+- Wishlist management with add/remove functionality
 
 ### Admin Panel
 - Product approval system
@@ -250,9 +256,12 @@ After running the seeders, you can access the admin panel with:
 - System settings
 - Payment gateway configuration
 - Analytics and reporting
-- Homepage settings (popular categories + multi product sliders)
-- Slider management
-- Payment settings and transactions
+- Homepage settings (popular categories + 3 customizable product slider sections)
+- Slider management with image uploads
+- Payment settings and transaction reports
+- Footer management (footer info, social links, customizable grid sections)
+- Newsletter subscriber management with bulk email campaigns
+- Email configuration settings (SMTP)
 
 ### Payment Processing
 - PayPal Integration: Complete PayPal payment flow
@@ -263,7 +272,14 @@ After running the seeders, you can access the admin panel with:
 ### Shipping Management
 - Shipping Rules: Configurable shipping rules based on location/weight
 - Address Management: User address book functionality
-- Order Tracking: Complete order status tracking system
+- Order Tracking: Complete order status tracking system with 7 statuses:
+  - Pending Orders
+  - Processed Orders
+  - Dropped Off Orders
+  - Shipped Orders
+  - Out for Delivery Orders
+  - Delivered Orders
+  - Canceled Orders
 
 ## 🔒 **Security Features**
 
@@ -299,6 +315,7 @@ php artisan test
 - jQuery Nice Number: Styled number inputs
 - jQuery Waypoints: Scroll-based triggers
 - Axios: Promise-based HTTP client
+- DataTables: Advanced table features with server-side processing (Yajra DataTables)
 
 ## 📝 **API Documentation**
 
@@ -336,13 +353,18 @@ If you encounter any issues or have questions:
 - ✅ Core features implemented and tested
 - ✅ Multi-vendor marketplace functionality
 - ✅ Payment gateway integrations (PayPal & Stripe)
-- ✅ Complete order management system
+- ✅ Complete order management system with 7 order statuses
 - ✅ Responsive frontend design
 - ✅ Admin and vendor dashboards
 - ✅ Advanced product management with variants
 - ✅ Flash sales and coupon system
 - ✅ Shipping and tax management
 - ✅ User authentication and authorization (Breeze + Sanctum)
+- ✅ Footer management system (info, social links, grid sections)
+- ✅ Newsletter subscription with email verification
+- ✅ Subscriber management with bulk email campaigns
+- ✅ Homepage customization (sliders, popular categories, product sections)
+- ✅ Transaction tracking and reporting
 - 🔄 Continuous improvements and optimizations
 
 ---
