@@ -22,5 +22,9 @@ class MailHelper
 
         config(['mail.mailers.smtp' => $config ]);
         config(['mail.from.address' => $emailConfig->email]);
+
+        // Force Laravel to rebuild the mail manager with new config
+        app()->forgetInstance('mail.manager');
+        app()->forgetInstance(\Illuminate\Mail\Mailer::class);
     }
 }

@@ -15,32 +15,32 @@ class NewsLetterController extends Controller
     public function newsLetterRequest(Request $request)
     {
         $request->validate([
-            'email' => ['required','email']
+            'email' => ['required', 'email'],
         ]);
 
         $existSubscriber = NewsletterSubscriber::where('email', $request->email)->first();
 
         if ($existSubscriber) {
-            if($existSubscriber->is_verified == 0){
-                //send verification link
+            if ($existSubscriber->is_verified == 0) {
+                // send verification link
             } elseif ($existSubscriber->is_verified == 1) {
-                return response(['status'=>'error', 'message'=>'You already subscribed with this email!']);
+                return response(['status' => 'error', 'message' => 'You already subscribed with this email!']);
             }
         } else {
-            $subscriber = new NewsletterSubscriber();
+            $subscriber = new NewsletterSubscriber;
             $subscriber->email = $request->email;
             $subscriber->verified_token = Str::random(25);
             $subscriber->is_verified = 0;
 
             $subscriber->save();
 
-            //set mail config
+            // set mail config
             MailHelper::setMailConfig();
 
-            //send mail
+            // send mail
             Mail::to($subscriber->email)->send(new SubscriptionVerification($subscriber));
 
-            return response(['status'=>'success', 'message'=>'A verification link has been sent to your email!']);
+            return response(['status' => 'success', 'message' => 'A verification link has been sent to your email!']);
         }
     }
 
