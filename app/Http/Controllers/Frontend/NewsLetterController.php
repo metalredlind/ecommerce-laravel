@@ -22,7 +22,15 @@ class NewsLetterController extends Controller
 
         if ($existSubscriber) {
             if ($existSubscriber->is_verified == 0) {
-                // send verification link
+                $existSubscriber->verified_token = Str::random(25);
+                $existSubscriber->save();
+                // set mail config
+                MailHelper::setMailConfig();
+
+                // send mail
+                Mail::to($existSubscriber->email)->send(new SubscriptionVerification($existSubscriber));
+
+                return response(['status' => 'success', 'message' => 'A verification link has been sent to your email!']);
             } elseif ($existSubscriber->is_verified == 1) {
                 return response(['status' => 'error', 'message' => 'You already subscribed with this email!']);
             }
