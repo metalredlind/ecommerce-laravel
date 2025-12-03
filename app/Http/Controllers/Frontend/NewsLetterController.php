@@ -46,6 +46,19 @@ class NewsLetterController extends Controller
 
     public function newsLetterEmailVerify($token)
     {
-        dd($token);
+        $verify = NewsletterSubscriber::where('verified_token', $token)->first();
+        if ($verify) {
+            $verify->verified_token = 'verified';
+            $verify->is_verified = 1;
+            $verify->save();
+
+            toastr('Email verification success', 'success', 'Sucess!');
+
+            return redirect()->route('home');
+        } else {
+            toastr('Invalid token', 'error', 'Error!');
+
+            return redirect()->route('home');
+        }
     }
 }

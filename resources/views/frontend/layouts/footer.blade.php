@@ -53,8 +53,8 @@
                             Get all the latest information on Events.</p>
                         <form action="" method="POST" id="newsletter">
                             @csrf
-                            <input type="text" placeholder="Email.." name="email">
-                            <button type="submit" class="common_btn">subscribe</button>
+                            <input type="text" placeholder="Email.." name="email" class="newsletter_email">
+                            <button type="submit" class="common_btn subscribe_btn">subscribe</button>
                         </form>
                         <div class="footer_payment">
                             <p>We're using safe payment for :</p>
