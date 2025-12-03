@@ -26,17 +26,17 @@ use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\SubscribersController;
 use App\Http\Controllers\Backend\TransactionController;
 use Illuminate\Support\Facades\Route;
 
-
-//admin Route
+// admin Route
 Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-//Profile route
+// Profile route
 Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 Route::post('profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
-Route::post('profile/update/password', [ProfileController::class, 'updatePassword'])->name('password.update'); //update password
+Route::post('profile/update/password', [ProfileController::class, 'updatePassword'])->name('password.update'); // update password
 
 // slider routes
 Route::resource('slider', SliderController::class);
@@ -66,12 +66,12 @@ Route::get('product/get-subcategories', [ProductController::class, 'getSubCatego
 Route::get('product/get-child-categories', [ProductController::class, 'getChildCategories'])->name('product.get-child-categories');
 Route::put('product/change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
 Route::resource('products', ProductController::class);
-//product's image gallery routes
+// product's image gallery routes
 Route::resource('products-image-gallery', ProductImageGalleryController::class);
-//product's image variant routes
+// product's image variant routes
 Route::put('products-variant/change-status', [ProductVariantController::class, 'changeStatus'])->name('products-variant.change-status');
 Route::resource('products-variant', ProductVariantController::class);
-//product's image variant item routes
+// product's image variant item routes
 Route::get('products-variant-item/{productId}/{variantId}', [ProductVariantItemController::class, 'index'])->name('products-variant-item.index');
 Route::get('products-variant-item/create/{productId}/{variantId}', [ProductVariantItemController::class, 'create'])->name('products-variant-item.create');
 Route::post('products-variant-item', [ProductVariantItemController::class, 'store'])->name('products-variant-item.store');
@@ -80,12 +80,12 @@ Route::put('products-variant-item-update/{variantItemId}/edit', [ProductVariantI
 Route::delete('products-variant-item/{variantItemId}', [ProductVariantItemController::class, 'destroy'])->name('products-variant-item.destroy');
 Route::put('products-variant-item-status/', [ProductVariantItemController::class, 'changeStatus'])->name('products-variant-item.change-status');
 
-//seller product routes
+// seller product routes
 Route::get('seller-product', [SellerProductController::class, 'index'])->name('seller-product.index');
 Route::get('seller-pending-products', [SellerProductController::class, 'pendingProducts'])->name('seller-pending-products.index');
 Route::put('change-approved-status', [SellerProductController::class, 'changeApprovedStatus'])->name('change-approved-status');
 
-//flash sale routes
+// flash sale routes
 Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale.index');
 Route::put('flash-sale', [FlashSaleController::class, 'update'])->name('flash-sale.update');
 Route::post('flash-sale/add-product', [FlashSaleController::class, 'addProduct'])->name('flash-sale.add-product');
@@ -93,11 +93,11 @@ Route::put('flash-sale/show-at-home/status-change', [FlashSaleController::class,
 Route::put('flash-sale-status', [FlashSaleController::class, 'changeStatus'])->name('flash-sale-status');
 Route::delete('flash-sale/{id}', [FlashSaleController::class, 'destroy'])->name('flash-sale.destroy');
 
-//coupons route
+// coupons route
 Route::put('coupons/change-status', [CouponController::class, 'changeStatus'])->name('coupons.change-status');
 Route::resource('coupons', CouponController::class);
 
-//shipping rule route
+// shipping rule route
 Route::put('shipping-rule/change-status', [ShippingRuleController::class, 'changeStatus'])->name('shipping-rule.change-status');
 Route::resource('shipping-rule', ShippingRuleController::class);
 
@@ -114,21 +114,26 @@ Route::get('canceled-orders', [OrderController::class, 'canceledOrders'])->name(
 
 Route::resource('order', OrderController::class);
 
-//order transaction route
+// order transaction route
 Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
 
 // general setting route
 Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
 Route::put('general-setting-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update');
-Route::put('email-setting-update',[SettingController::class, 'emailConfigSettingUpdate'])->name('email-setting-update');
+Route::put('email-setting-update', [SettingController::class, 'emailConfigSettingUpdate'])->name('email-setting-update');
 
-//home page setting route
+// home page setting route
 Route::get('home-page-setting', [HomePageSettingController::class, 'index'])->name('home-page-setting');
 Route::put('popular-category-section', [HomePageSettingController::class, 'updatePopularCategorySection'])->name('popular-category-section');
 
 Route::put('product-slider-section-one', [HomePageSettingController::class, 'updateProductSliderSectionOne'])->name('product-slider-section-one');
 Route::put('product-slider-section-two', [HomePageSettingController::class, 'updateProductSliderSectionTwo'])->name('product-slider-section-two');
 Route::put('product-slider-section-three', [HomePageSettingController::class, 'updateProductSliderSectionThree'])->name('product-slider-section-three');
+
+// Subscribers routes
+Route::get('subscribers', [SubscribersController::class, 'index'])->name('subscribers.index');
+Route::delete('subscribers/{id}', [SubscribersController::class, 'destroy'])->name('subscribers.destroy');
+Route::post('subscribers-send-mail', [SubscribersController::class, 'sendMail'])->name('subscribers-send-mail');
 
 // footer routes
 Route::resource('footer-info', FooterInfoController::class);
@@ -139,7 +144,6 @@ Route::resource('footer-socials', FooterSocialController::class);
 Route::put('footer-grid-two/change-status', [FooterGridTwoController::class, 'changeStatus'])->name('footer-grid-two.change-status');
 Route::put('footer-grid-two/change-title', [FooterGridTwoController::class, 'changeTitle'])->name('footer-grid-two.change-title');
 Route::resource('footer-grid-two', FooterGridTwoController::class);
-
 
 Route::put('footer-grid-three/change-status', [FooterGridThreeController::class, 'changeStatus'])->name('footer-grid-three.change-status');
 Route::put('footer-grid-three/change-title', [FooterGridThreeController::class, 'changeTitle'])->name('footer-grid-three.change-title');

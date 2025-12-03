@@ -119,6 +119,7 @@
           </ul>
         </li>
 
+        <li class="{{setActive(['admin.subscribers.*'])}}"><a href="{{route('admin.subscribers.index')}}"><i class="far fa-square"></i> <span>Subscriber</span></a></li>
         <li class="{{setActive(['admin.settings.*'])}}"><a href="{{route('admin.settings.index')}}"><i class="far fa-square"></i> <span>Settings</span></a></li>
 
 
