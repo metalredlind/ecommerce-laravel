@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
+use App\Http\Controllers\Backend\AdvertisementController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
@@ -134,6 +135,9 @@ Route::put('product-slider-section-three', [HomePageSettingController::class, 'u
 Route::get('subscribers', [SubscribersController::class, 'index'])->name('subscribers.index');
 Route::delete('subscribers/{id}', [SubscribersController::class, 'destroy'])->name('subscribers.destroy');
 Route::post('subscribers-send-mail', [SubscribersController::class, 'sendMail'])->name('subscribers-send-mail');
+
+// advertisement routes
+Route::get('advertisement', [AdvertisementController::class, 'index'])->name('advertisement.index');
 
 // footer routes
 Route::resource('footer-info', FooterInfoController::class);
