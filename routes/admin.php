@@ -138,6 +138,7 @@ Route::post('subscribers-send-mail', [SubscribersController::class, 'sendMail'])
 
 // advertisement routes
 Route::get('advertisement', [AdvertisementController::class, 'index'])->name('advertisement.index');
+Route::put('advertisement/homepage-banner-one', [AdvertisementController::class, 'homepageBannerSectionOne'])->name('advertisement.homepage-banner-one');
 
 // footer routes
 Route::resource('footer-info', FooterInfoController::class);
