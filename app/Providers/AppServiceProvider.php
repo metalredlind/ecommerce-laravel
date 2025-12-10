@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         //Set Timezone default
         $generalSetting = GeneralSetting::first();
 
-        Config::set('app.timezone', $generalSetting->time_zone);
+        Config::set('app.timezone', $generalSetting?->time_zone);
 
         //share variable at all views
         View::composer('*', function($view) use($generalSetting){

@@ -90,10 +90,10 @@
                             @endforeach
                             
                             <div class="wsus__order_details_summery">
-                                <p>subtotal: <span>{{$settings->currency_icon}}{{getCartTotal()}}</span></p>
-                                <p>shipping fee: <span id="shipping_fee">{{$settings->currency_icon}}0</span></p>
-                                <p>coupon: <span>- {{$settings->currency_icon}}{{getMainCartDiscount()}}</span></p>
-                                <p><b>total:</b> <span><b id="total_amount" data-id="{{getMainCartTotal()}}">{{$settings->currency_icon}}{{getMainCartTotal()}}</b></span></p>
+                                <p>subtotal: <span>{{ $settings->currency_icon ?? '$' }}{{ getCartTotal() }}</span></p>
+                                <p>shipping fee: <span id="shipping_fee">{{ $settings->currency_icon ?? '$' }}0</span></p>
+                                <p>coupon: <span>- {{ $settings->currency_icon ?? '$' }}{{ getMainCartDiscount() }}</span></p>
+                                <p><b>total:</b> <span><b id="total_amount" data-id="{{ getMainCartTotal() }}">{{ $settings->currency_icon ?? '$' }}{{ getMainCartTotal() }}</b></span></p>
                             </div>
                             <div class="terms_area">
                                 <div class="form-check">
@@ -211,9 +211,9 @@
             let totalAmount = currentTotalAmount + $(this).data('id');
 
             $('#shipping_method_id').val($(this).val());
-            $('#shipping_fee').text("{{$settings->currency_icon}}"+ shippingFee);
+            $('#shipping_fee').text("{{ $settings->currency_icon ?? '$' }}"+ shippingFee);
 
-            $('#total_amount').text("{{$settings->currency_icon}}"+ totalAmount) ;
+            $('#total_amount').text("{{ $settings->currency_icon ?? '$' }}"+ totalAmount) ;
         })
 
         $('.shipping_address').on('click', function(){

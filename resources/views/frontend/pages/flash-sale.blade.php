@@ -114,11 +114,11 @@
                                     </p>
                                     <a class="wsus__pro_name" href="#">{{ $product->name }}</a>
                                     @if (checkDiscount($product))
-                                        <p class="wsus__price">{{ $settings->currency_icon }}{{ $product->offer_price }}
+                                        <p class="wsus__price">{{ $settings->currency_icon ?? '$' }}{{ $product->offer_price }}
                                             <del>${{ $product->price }}</del>
                                         </p>
                                     @else
-                                        <p class="wsus__price">{{ $settings->currency_icon }}{{ $product->price }}</p>
+                                        <p class="wsus__price">{{ $settings->currency_icon ?? '$' }}{{ $product->price }}</p>
                                     @endif
                                     <form class="shopping-cart-form">
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -208,11 +208,11 @@
                                         <a class="title" href="#">{{ $product->name }}</a>
                                         <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
                                         @if (checkDiscount($product))
-                                            <h4>{{ $settings->currency_icon }}{{ $product->offer_price }}
-                                                <del>{{ $settings->currency_icon }}{{ $product->price }}</del>
+                                            <h4>{{ $settings->currency_icon ?? '$' }}{{ $product->offer_price }}
+                                                <del>{{ $settings->currency_icon ?? '$' }}{{ $product->price }}</del>
                                             </h4>
                                         @else
-                                            <h4>{{ $settings->currency_icon }}{{ $product->price }}</h4>
+                                            <h4>{{ $settings->currency_icon ?? '$' }}{{ $product->price }}</h4>
                                         @endif
                                         <p class="review">
                                             <i class="fas fa-star"></i>

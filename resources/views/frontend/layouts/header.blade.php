@@ -62,10 +62,10 @@
                         <a class="wsus__cart_title"
                             href="{{ route('product-detail', $sidebarProduct->options->slug) }}">{{ $sidebarProduct->name }}</a>
                         <p>
-                            {{ $settings->currency_icon }}{{ $sidebarProduct->price }}
+                            {{ $settings->currency_icon ?? '$' }}{{ $sidebarProduct->price }}
                         </p>
 
-                        <small>Variants total: {{$settings->currency_icon}}{{$sidebarProduct->options->variants_total}}</small>
+                        <small>Variants total: {{ $settings->currency_icon ?? '$' }}{{ $sidebarProduct->options->variants_total }}</small>
                         <br>
                         <small>Qty: {{$sidebarProduct->qty}}</small>
 
@@ -80,7 +80,7 @@
         </ul>
 
         <div class="mini_cart_actions {{Cart::content()->count() == 0 ? 'd-none': ''}}">
-            <h5>sub total <span id="mini_cart_subtotal">{{$settings->currency_icon}}{{getCartTotal()}}</span></h5>
+            <h5>sub total <span id="mini_cart_subtotal">{{ $settings->currency_icon ?? '$' }}{{ getCartTotal() }}</span></h5>
             <div class="wsus__minicart_btn_area">
                 <a class="common_btn" href="{{ route('cart-details') }}">view cart</a>
                 <a class="common_btn" href="check_out.html">checkout</a>

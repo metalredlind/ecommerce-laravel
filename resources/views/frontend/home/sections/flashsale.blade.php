@@ -13,34 +13,35 @@
             </div>
         </div>
         <div class="row flash_sell_slider">
-            @foreach ($flashSaleItems as $item)
+            @foreach ($flashSaleItems ?? [] as $item)
                 @php
                     $product = \App\Models\Product::find($item->product_id);
                 @endphp
+                @if($product)
                 <div class="col-xl-3 col-sm-6 col-lg-4">
                     <div class="wsus__product_item">
-                        <span class="wsus__new">{{ productType($product->product_type) }}</span>
+                        <span class="wsus__new">{{ productType($product->product_type ?? '') }}</span>
                         @if (checkDiscount($product))
-                            <span class="wsus__minus">-{{ calculateDiscountPercent($product->price, $product->offer_price) }}%</span>
+                            <span class="wsus__minus">-{{ calculateDiscountPercent($product->price ?? 0, $product->offer_price ?? 0) }}%</span>
                         @endif
 
-                        <a class="wsus__pro_link" href="{{ route('product-detail', $product->slug) }}">
-                            <img src="{{ asset($product->thumb_image) }}" alt="product" class="img-fluid w-100 img_1" />
+                        <a class="wsus__pro_link" href="{{ route('product-detail', $product->slug ?? '') }}">
+                            <img src="{{ asset($product->thumb_image ?? 'frontend/images/default-product.jpg') }}" alt="product" class="img-fluid w-100 img_1" />
                             <img src="
                             @if (isset($product->productImageGalleries[0]->image)) {{ asset($product->productImageGalleries[0]->image) }}
                             @else
-                                {{ asset($product->thumb_image) }}
+                                {{ asset($product->thumb_image ?? 'frontend/images/default-product.jpg') }}
                             @endif
                             " alt="product" class="img-fluid w-100 img_2" />
                         </a>
                         <ul class="wsus__single_pro_icon">
                             <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $product->id }}"><i class="far fa-eye"></i></a>
                             </li>
-                            <li><a href="" class="add_to_wishlist" data-id="{{$product->id}}"><i class="far fa-heart"></i></a></li>
+                            <li><a href="" class="add_to_wishlist" data-id="{{ $product->id }}"><i class="far fa-heart"></i></a></li>
                             {{-- <li><a href="#"><i class="far fa-random"></i></a> --}}
                         </ul>
                         <div class="wsus__product_details">
-                            <a class="wsus__category" href="#">{{ $product->category->name }} </a>
+                            <a class="wsus__category" href="#">{{ $product->category->name ?? 'Uncategorized' }} </a>
                             <p class="wsus__pro_rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -49,22 +50,22 @@
                                 <i class="fas fa-star-half-alt"></i>
                                 <span>(133 review)</span>
                             </p>
-                            <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug) }}">{{ limitText($product->name, 50) }}</a>
+                            <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug ?? '') }}">{{ limitText($product->name ?? '', 50) }}</a>
                             @if (checkDiscount($product))
-                                <p class="wsus__price">{{ $settings->currency_icon }}{{ $product->offer_price }}
-                                    <del>${{ $product->price }}</del>
+                                <p class="wsus__price">{{ $settings->currency_icon ?? '$' }}{{ $product->offer_price ?? '0.00' }}
+                                    <del>${{ $product->price ?? '0.00' }}</del>
                                 </p>
                             @else
-                                <p class="wsus__price">{{ $settings->currency_icon }}{{ $product->price }}</p>
+                                <p class="wsus__price">{{ $settings->currency_icon ?? '$' }}{{ $product->price ?? '0.00' }}</p>
                             @endif
                             <form class="shopping-cart-form">
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                @foreach ($product->variants as $variant)
+                                @foreach ($product->variants ?? [] as $variant)
                                     <select class="d-none" name="variants_items[]">
-                                        @foreach ($variant->productVariantItem as $variantItem)
-                                            <option value="{{ $variantItem->id }}"
-                                                {{ $variantItem->is_default == 1 ? 'selected' : '' }}>
-                                                {{ $variantItem->name }} (${{ $variantItem->price }})</option>
+                                        @foreach ($variant->productVariantItem ?? [] as $variantItem)
+                                            <option value="{{ $variantItem->id ?? '' }}"
+                                                {{ ($variantItem->is_default ?? 0) == 1 ? 'selected' : '' }}>
+                                                {{ $variantItem->name ?? '' }} (${{ $variantItem->price ?? '0.00' }})</option>
                                         @endforeach
                                     </select>
                                 @endforeach
@@ -74,6 +75,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             @endforeach
         </div>
     </div>
@@ -215,11 +217,13 @@
     <script>
         $(document).ready(function() {
             // default example
+            @if(isset($flashSaleDate) && $flashSaleDate->end_date)
             simplyCountdown('.simply-countdown-one', {
                 year: {{ date('Y', strtotime($flashSaleDate->end_date)) }},
                 month: {{ date('m', strtotime($flashSaleDate->end_date)) }},
                 day: {{ date('d', strtotime($flashSaleDate->end_date)) }}
             });
+            @endif
         })
     </script>
 @endpush

@@ -229,12 +229,12 @@
                                                     <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug) }}">{{ limitText($product->name), 50 }}</a>
                                                     @if (checkDiscount($product))
                                                         <p class="wsus__price">
-                                                            {{ $settings->currency_icon }}{{ $product->offer_price }}
+                                                            {{ $settings->currency_icon ?? '$' }}{{ $product->offer_price }}
                                                             <del>${{ $product->price }}</del>
                                                         </p>
                                                     @else
                                                         <p class="wsus__price">
-                                                            {{ $settings->currency_icon }}{{ $product->price }}</p>
+                                                            {{ $settings->currency_icon ?? '$' }}{{ $product->price }}</p>
                                                     @endif
                                                     <form class="shopping-cart-form">
                                                         <input type="hidden" name="product_id"
@@ -299,11 +299,11 @@
                                                         href="{{ route('product-detail', $product->slug) }}">{{ @$product->name }}</a>
                                                     @if (checkDiscount($product))
                                                         <p class="wsus__price">
-                                                            {{ $settings->currency_icon }}{{ $product->offer_price }}<del>${{ $product->price }}</del>
+                                                            {{ $settings->currency_icon ?? '$' }}{{ $product->offer_price }}<del>${{ $product->price }}</del>
                                                         </p>
                                                     @else
                                                         <p class="wsus__price">
-                                                            {{ $settings->currency_icon }}{{ $product->price }}</p>
+                                                            {{ $settings->currency_icon ?? '$' }}{{ $product->price }}</p>
                                                     @endif
                                                     <p class="list_description">{{ $product->short_description }} </p>
                                                     <ul class="wsus__single_pro_icon">
@@ -413,11 +413,11 @@
                                     <a class="title" href="#">{{ $product->name }}</a>
                                     <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
                                     @if (checkDiscount($product))
-                                        <h4>{{ $settings->currency_icon }}{{ $product->offer_price }}
-                                            <del>{{ $settings->currency_icon }}{{ $product->price }}</del>
+                                        <h4>{{ $settings->currency_icon ?? '$' }}{{ $product->offer_price }}
+                                            <del>{{ $settings->currency_icon ?? '$' }}{{ $product->price }}</del>
                                         </h4>
                                     @else
-                                        <h4>{{ $settings->currency_icon }}{{ $product->price }}</h4>
+                                        <h4>{{ $settings->currency_icon ?? '$' }}{{ $product->price }}</h4>
                                     @endif
                                     <p class="review">
                                         <i class="fas fa-star"></i>
@@ -522,7 +522,7 @@
                 step: 50,
                 values: [{{ $from }}, {{ $to }}],
                 range: true,
-                einheit: '{{ $settings->currency_icon }}'
+                einheit: '{{ $settings->currency_icon ?? "$" }}'
             });
         });
     </script>

@@ -78,7 +78,7 @@
                                             </td>
 
                                             <td class="wsus__pro_tk" style="width:235px">
-                                                <h6>{{ $settings->currency_icon }}{{ $item->product->price }}</h6>
+                                                <h6>{{ $settings->currency_icon ?? '$' }}{{ $item->product->price }}</h6>
                                             </td>
 
                                             <td class="wsus__pro_icon">

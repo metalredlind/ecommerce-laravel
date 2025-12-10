@@ -124,9 +124,9 @@
                 <div class="col-xl-3">
                     <div class="wsus__cart_list_footer_button" id="sticky_sidebar">
                         <h6>total cart</h6>
-                        <p>subtotal: <span id='sub_total'>{{$settings->currency_icon}}{{getCartTotal()}}</span></p>
-                        <p>coupon(-): <span id='discount'>{{$settings->currency_icon}}{{getMainCartDiscount()}}</span></p>
-                        <p class="total"><span>total:</span> <span id='cart_total'>{{$settings->currency_icon}}{{getMainCartTotal()}}</span></p>
+                        <p>subtotal: <span id='sub_total'>{{ $settings->currency_icon ?? '$' }}{{ getCartTotal() }}</span></p>
+                        <p>coupon(-): <span id='discount'>{{ $settings->currency_icon ?? '$' }}{{ getMainCartDiscount() }}</span></p>
+                        <p class="total"><span>total:</span> <span id='cart_total'>{{ $settings->currency_icon ?? '$' }}{{ getMainCartTotal() }}</span></p>
 
                         <form id="coupon_form">
                             <input type="text" placeholder="Coupon Code" name="coupon_code" value={{session()->has('coupon') ? session()->get('coupon')['coupon_code'] : ''}}>
@@ -207,7 +207,7 @@
                     success: function(data) {
                         if (data.status == 'success') {
                             let productId = '#' + rowId;
-                            let totalAmount = "{{ $settings->currency_icon }}" + data.product_total
+                            let totalAmount = "{{ $settings->currency_icon ?? '$' }}" + data.product_total
                             $(productId).text(totalAmount)
                             renderCartSubTotal()
                             calculateCouponDiscount()
@@ -239,7 +239,7 @@
                     success: function(data) {
                         if (data.status == 'success') {
                             let productId = '#' + rowId;
-                            let totalAmount = "{{ $settings->currency_icon }}" + data.product_total
+                            let totalAmount = "{{ $settings->currency_icon ?? '$' }}" + data.product_total
                             $(productId).text(totalAmount)
                             renderCartSubTotal()
                             calculateCouponDiscount()
@@ -296,7 +296,7 @@
                     method: 'GET',
                     url: "{{ route('cart.sidebar-product-total') }}",
                     success: function(data) {
-                        $('#sub_total').text("{{$settings->currency_icon}}"+data);
+                        $('#sub_total').text("{{ $settings->currency_icon ?? '$' }}"+data);
                     },
                     error: function(data) {
                         console.log(data);
@@ -334,8 +334,8 @@
                     url: "{{ route('coupon-calculation') }}",
                     success: function(data) {
                         if(data.status == 'success'){
-                            $('#discount').text('{{$settings->currency_icon}}'+data.discount);
-                            $('#cart_total').text('{{$settings->currency_icon}}'+data.cart_total);  
+                            $('#discount').text('{{ $settings->currency_icon ?? "$" }}'+data.discount);
+                            $('#cart_total').text('{{ $settings->currency_icon ?? "$" }}'+data.cart_total);
                         }
                         
                     },

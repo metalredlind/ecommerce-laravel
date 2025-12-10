@@ -1,6 +1,6 @@
 
 @php
-    $popularCategories = json_decode($popularCategories->value, true);
+    $popularCategories = $popularCategories ? json_decode($popularCategories->value, true) : [];
     // dd($popularCategories);
 @endphp
 <section id="wsus__monthly_top" class="wsus__monthly_top_2">
@@ -49,7 +49,9 @@
                                     $products[] = \App\Models\Product::where('child_category_id', $category->id)->orderBy('id','DESC')->take(12)->get();
                                 }
                             @endphp
-                            <button class="{{ $loop->index === 0 ? 'auto_click active' : '' }}" data-filter=".category-{{ $loop->index }}">{{$category->name}}</button>
+                            @if(isset($category->name))
+                            <button class="{{ $loop->index === 0 ? 'auto_click active' : '' }}" data-filter=".category-{{ $loop->index }}">{{ $category->name }}</button>
+                            @endif
                         @endforeach
                     </div>
                 </div>
@@ -66,7 +68,7 @@
                                         <img src="{{ asset($item->thumb_image) }}" alt="bag" class="img-fluid w-100">
                                     </div>
                                     <div class="wsus__hot_deals__single_text">
-                                        <h5>{!!limitText($item->name)!!}</h5>
+                                        <h5>{!!limitText($item->name ?? '')!!}</h5>
                                         <p class="wsus__rating">
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
@@ -75,9 +77,9 @@
                                             <i class="fas fa-star-half-alt"></i>
                                         </p>
                                         @if (checkDiscount($item))
-                                            <p class="wsus__tk">{{$settings->currency_icon}}{{$item->offer_price}} <del>{{$settings->currency_icon}}{{$item->price}}</del></p>
+                                            <p class="wsus__tk">{{ $settings->currency_icon ?? '$' }}{{ $item->offer_price ?? '0.00' }} <del>{{ $settings->currency_icon ?? '$' }}{{ $item->price ?? '0.00' }}</del></p>
                                         @else
-                                            <p class="wsus__tk">{{$settings->currency_icon}}{{$item->price}} </p>
+                                            <p class="wsus__tk">{{ $settings->currency_icon ?? '$' }}{{ $item->price ?? '0.00' }} </p>
                                         @endif
                                     </div>
                                 </a>

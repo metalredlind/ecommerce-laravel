@@ -63,8 +63,8 @@
                             </div>
                             <div class="wsus__cart_text">
                                 <a class="wsus__cart_title" href="{{ url('product-detail') }}/${product.options.slug}">${product.name}</a>
-                                <p>{{ $settings->currency_icon }}${product.price}</p>
-                                <small>Variants total: {{ $settings->currency_icon }}${product.options.variants_total}</small>
+                                <p>{{ $settings->currency_icon ?? '$' }}${product.price}</p>
+                                <small>Variants total: {{ $settings->currency_icon ?? '$' }}${product.options.variants_total}</small>
                                 <br>
                                 <small>Qty: ${product.qty}</small>
                             </div>
@@ -116,7 +116,7 @@
                 method: 'GET',
                 url: "{{ route('cart.sidebar-product-total') }}",
                 success: function(data) {
-                    $('#mini_cart_subtotal').text("{{ $settings->currency_icon }}" + data);
+                    $('#mini_cart_subtotal').text("{{ $settings->currency_icon ?? '$' }}" + data);
                 },
                 error: function(data) {
 

@@ -41,7 +41,7 @@
                                     {{-- <li><a href="#"><i class="far fa-random"></i></a> --}}
                                 </ul>
                                 <div class="wsus__product_details">
-                                    <a class="wsus__category" href="#">{{ $product->category->name }} </a>
+                                    <a class="wsus__category" href="#">{{ $product->category->name ?? 'Uncategorized' }} </a>
                                     <p class="wsus__pro_rating">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
@@ -50,14 +50,14 @@
                                         <i class="fas fa-star-half-alt"></i>
                                         <span>(133 review)</span>
                                     </p>
-                                    <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug) }}">{{ limitText($product->name, 52) }}</a>
+                                    <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug ?? '') }}">{{ limitText($product->name ?? '', 52) }}</a>
                                     @if (checkDiscount($product))
                                         <p class="wsus__price">
-                                            {{ $settings->currency_icon }}{{ $product->offer_price }}
-                                            <del>${{ $product->price }}</del>
+                                            {{ $settings->currency_icon ?? '$' }}{{ $product->offer_price ?? '0.00' }}
+                                            <del>${{ $product->price ?? '0.00' }}</del>
                                         </p>
                                     @else
-                                        <p class="wsus__price">{{ $settings->currency_icon }}{{ $product->price }}</p>
+                                        <p class="wsus__price">{{ $settings->currency_icon ?? '$' }}{{ $product->price ?? '0.00' }}</p>
                                     @endif
                                     <form class="shopping-cart-form">
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -237,7 +237,7 @@
                                         </ul>
                                     </form>
 
-                                    <p class="brand_model"><span>brand :</span> {{ $product->brand->name }}</p>
+                                    <p class="brand_model"><span>brand :</span> {{ $product->brand->name ?? 'Unknown' }}</p>
 
                                 </div>
                             </div>
