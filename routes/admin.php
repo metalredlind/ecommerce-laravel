@@ -140,6 +140,8 @@ Route::post('subscribers-send-mail', [SubscribersController::class, 'sendMail'])
 Route::get('advertisement', [AdvertisementController::class, 'index'])->name('advertisement.index');
 Route::put('advertisement/homepage-banner-one', [AdvertisementController::class, 'homepageBannerSectionOne'])->name('advertisement.homepage-banner-one');
 Route::put('advertisement/homepage-banner-two', [AdvertisementController::class, 'homepageBannerSectionTwo'])->name('advertisement.homepage-banner-two');
+Route::put('advertisement/homepage-banner-three', [AdvertisementController::class, 'homepageBannerSectionThree'])->name('advertisement.homepage-banner-three');
+Route::put('advertisement/homepage-banner-four', [AdvertisementController::class, 'homepageBannerSectionFour'])->name('advertisement.homepage-banner-four');
 
 
 // footer routes
