@@ -18,8 +18,8 @@
                     <div class="list-group" id="list-tab" role="tablist">
                       <a class="list-group-item list-group-item-action active" id="list-banner-1-list" data-toggle="list" href="#list-banner-1" role="tab">Homepage Banner Section 1</a>
                       <a class="list-group-item list-group-item-action" id="list-banner-2-list" data-toggle="list" href="#list-banner-2" role="tab">Homepage Banner Section 2</a>
-                      <a class="list-group-item list-group-item-action" id="list-banner-3-list" data-toggle="list" href="#list-banner-3" role="tab">Homepage Banner First 3</a>
-                      <a class="list-group-item list-group-item-action" id="list-banner-4-list" data-toggle="list" href="#list-banner-4" role="tab">Homepage Banner First 4</a>
+                      <a class="list-group-item list-group-item-action" id="list-banner-3-list" data-toggle="list" href="#list-banner-3" role="tab">Homepage Banner Section 3</a>
+                      <a class="list-group-item list-group-item-action" id="list-banner-4-list" data-toggle="list" href="#list-banner-4" role="tab">Homepage Banner Section 4</a>
                     </div>
                   </div>
                   <div class="col-10">
