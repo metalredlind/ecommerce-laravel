@@ -142,6 +142,9 @@ Route::put('advertisement/homepage-banner-one', [AdvertisementController::class,
 Route::put('advertisement/homepage-banner-two', [AdvertisementController::class, 'homepageBannerSectionTwo'])->name('advertisement.homepage-banner-two');
 Route::put('advertisement/homepage-banner-three', [AdvertisementController::class, 'homepageBannerSectionThree'])->name('advertisement.homepage-banner-three');
 Route::put('advertisement/homepage-banner-four', [AdvertisementController::class, 'homepageBannerSectionFour'])->name('advertisement.homepage-banner-four');
+Route::put('advertisement/product-page-banner', [AdvertisementController::class, 'productPageBanner'])->name('advertisement.product-page-banner');
+Route::put('advertisement/cart-page-banner', [AdvertisementController::class, 'cartPageBanner'])->name('advertisement.cart-page-banner');
+
 
 
 // footer routes

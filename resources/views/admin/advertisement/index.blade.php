@@ -20,6 +20,8 @@
                       <a class="list-group-item list-group-item-action" id="list-banner-2-list" data-toggle="list" href="#list-banner-2" role="tab">Homepage Banner Section 2</a>
                       <a class="list-group-item list-group-item-action" id="list-banner-3-list" data-toggle="list" href="#list-banner-3" role="tab">Homepage Banner Section 3</a>
                       <a class="list-group-item list-group-item-action" id="list-banner-4-list" data-toggle="list" href="#list-banner-4" role="tab">Homepage Banner Section 4</a>
+                      <a class="list-group-item list-group-item-action" id="list-banner-product-list" data-toggle="list" href="#list-banner-product" role="tab">Product Page Banner</a>
+                      <a class="list-group-item list-group-item-action" id="list-banner-cart-list" data-toggle="list" href="#list-cart-product" role="tab">Cart Page Banner</a>
                     </div>
                   </div>
                   <div class="col-10">
@@ -33,12 +35,10 @@
                       
                       @include('admin.advertisement.homepage-banner-4')
                       
-                      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                        In quis non esse eiusmod sunt fugiat magna pariatur officia anim ex officia nostrud amet nisi pariatur eu est id ut exercitation ex ad reprehenderit dolore nostrud sit ut culpa consequat magna ad labore proident ad qui et tempor exercitation in aute veniam et velit dolore irure qui ex magna ex culpa enim anim ea mollit consequat ullamco exercitation in.
-                      </div>
-                      <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-                        Lorem ipsum culpa in ad velit dolore anim labore incididunt do aliqua sit veniam commodo elit dolore do labore occaecat laborum sed quis proident fugiat sunt pariatur. Cupidatat ut fugiat anim ut dolore excepteur ut voluptate dolore excepteur mollit commodo. 
-                      </div>
+                      @include('admin.advertisement.product-page-banner')
+
+                      @include('admin.advertisement.cart-page-banner')
+                      
                     </div>
                   </div>
                 </div>
