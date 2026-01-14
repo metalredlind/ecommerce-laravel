@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Advertisement;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\ProductVariantItem;
@@ -16,6 +17,10 @@ class CartController extends Controller
     public function cartDetails()
     {
         $cartItems = Cart::content();
+        
+        $cart_page_banner = Advertisement::where('key','cart_page_banner')->first();
+        $cart_page_banner = json_decode($cart_page_banner?->value);
+
 
         if(count($cartItems) == 0){
             Session::forget('coupon');
@@ -24,7 +29,7 @@ class CartController extends Controller
             return redirect()->route('home');
         }
         
-        return view('frontend.pages.cart-detail', compact('cartItems'));
+        return view('frontend.pages.cart-detail', compact('cartItems','cart_page_banner'));
     }
 
     //add item to cart

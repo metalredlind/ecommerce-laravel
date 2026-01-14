@@ -47,7 +47,7 @@
     <!--============================
         SINGLE BANNER START
     ==============================-->
-    {{-- @include('frontend.home.sections.singlebanner') --}}
+    @include('frontend.home.sections.singlebanner')
     <!--============================
         SINGLE BANNER END  
     ==============================-->
@@ -83,7 +83,7 @@
     <!--============================
         LARGE BANNER  START  
     ==============================-->
-    {{-- @include('frontend.home.sections.largebanner') --}}
+    @include('frontend.home.sections.largebanner')
     <!--============================
         LARGE BANNER  END  
     ==============================-->
