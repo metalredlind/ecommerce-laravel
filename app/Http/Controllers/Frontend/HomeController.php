@@ -55,9 +55,7 @@ class HomeController extends Controller
             'homepage_section_banner_one',
             'homepage_section_banner_two',
             'homepage_section_banner_three',
-            'homepage_section_banner_four',
-            'product_page_banner',
-            'cart_page_banner'
+            'homepage_section_banner_four'
         ));
     }
 
