@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontEndProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsLetterController;
+use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserOrderController;
@@ -81,6 +82,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
     Route::get('wishlist/add-product', [WishlistController::class, 'addToWishlist'])->name('wishlist.store');
     Route::get('wishlist/remove-product/{id}', [WishlistController::class, 'removeFromWishlist'])->name('wishlist.destroy');
+    
+    //review routes
+    Route::post('review', [ReviewController::class, 'create'])->name('review.create');
 
     //checkout routes
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
