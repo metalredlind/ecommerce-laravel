@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-12 col-lg-12">
-                @if ($homepage_section_banner_one->banner_one->status == 1)
+                @if (!empty($homepage_section_banner_one) && !empty($homepage_section_banner_one->banner_one) && $homepage_section_banner_one->banner_one->status == 1)
                     <div class="wsus__monthly_top_banner">
                         <a href="{{ $homepage_section_banner_one->banner_one->banner_url }}">
                             <img class="img-fluid" src="{{ asset($homepage_section_banner_one->banner_one->banner_image) }}" alt="">
@@ -26,26 +26,39 @@
                         @endphp
                         @foreach ($popularCategories as $popularCategory)
                             @php
-                                $lastKey = [];
-                                foreach ($popularCategory as $key => $category) {
-                                    if ($category === null)  {
-                                        break;
+                                // find last non-null entry in the configured category array
+                                $lastKey = null;
+                                if (is_array($popularCategory)) {
+                                    foreach ($popularCategory as $k => $v) {
+                                        if ($v !== null) {
+                                            $lastKey = [$k => $v];
+                                        }
                                     }
-                                    $lastKey = [$key => $category];
-                                };
-                                if (array_keys($lastKey)[0] === 'category') {
-                                    $category = \App\Models\Category::find($lastKey['category']);
-                                    $products[] = \App\Models\Product::where('category_id', $category->id)->orderBy('id','DESC')->take(12)->get();
-                                } elseif(array_keys($lastKey)[0] === 'sub_category') {
-                                    $category = \App\Models\SubCategory::find($lastKey['sub_category']);
-                                    $products[] = \App\Models\Product::where('sub_category_id', $category->id)->orderBy('id','DESC')->take(12)->get();
-                                } else {
-                                    $category = \App\Models\ChildCategory::find($lastKey['child_category']);
-                                    $products[] = \App\Models\Product::where('child_category_id', $category->id)->orderBy('id','DESC')->take(12)->get();
                                 }
+
+                                $categoryModel = null;
+                                $items = collect();
+
+                                if ($lastKey) {
+                                    $type = array_keys($lastKey)[0];
+                                    $id = $lastKey[$type];
+
+                                    if ($type === 'category') {
+                                        $categoryModel = \App\Models\Category::find($id);
+                                        $items = $categoryModel ? \App\Models\Product::where('category_id', $categoryModel->id)->orderBy('id','DESC')->take(12)->get() : collect();
+                                    } elseif ($type === 'sub_category') {
+                                        $categoryModel = \App\Models\SubCategory::find($id);
+                                        $items = $categoryModel ? \App\Models\Product::where('sub_category_id', $categoryModel->id)->orderBy('id','DESC')->take(12)->get() : collect();
+                                    } elseif ($type === 'child_category') {
+                                        $categoryModel = \App\Models\ChildCategory::find($id);
+                                        $items = $categoryModel ? \App\Models\Product::where('child_category_id', $categoryModel->id)->orderBy('id','DESC')->take(12)->get() : collect();
+                                    }
+                                }
+
+                                $products[] = $items;
                             @endphp
-                            @if(isset($category->name))
-                            <button class="{{ $loop->index === 0 ? 'auto_click active' : '' }}" data-filter=".category-{{ $loop->index }}">{{ $category->name }}</button>
+                            @if(isset($categoryModel->name))
+                            <button class="{{ $loop->index === 0 ? 'auto_click active' : '' }}" data-filter=".category-{{ $loop->index }}">{{ $categoryModel->name }}</button>
                             @endif
                         @endforeach
                     </div>

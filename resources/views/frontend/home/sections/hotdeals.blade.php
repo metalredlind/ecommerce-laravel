@@ -41,7 +41,7 @@
                                     {{-- <li><a href="#"><i class="far fa-random"></i></a> --}}
                                 </ul>
                                 <div class="wsus__product_details">
-                                    <a class="wsus__category" href="#">{{ $product->category->name ?? 'Uncategorized' }} </a>
+                                    <a class="wsus__category" href="#">{{ optional($product->category)->name ?? 'Uncategorized' }} </a>
                                     <p class="wsus__pro_rating">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
@@ -86,7 +86,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6">
-                        @if ($homepage_section_banner_three->banner_one->status == 1)
+                        @if (!empty($homepage_section_banner_three) && !empty($homepage_section_banner_three->banner_one) && $homepage_section_banner_three->banner_one->status == 1)
                             <div class="wsus__single_banner_content banner_1">
                                 <a href="{{ $homepage_section_banner_three->banner_one->banner_url }}">
                                     <img class="img-fluid" src="{{ $homepage_section_banner_three->banner_one->banner_image }}" alt="">
@@ -97,7 +97,7 @@
                     <div class="col-xl-6 col-lg-6">
                         <div class="row">
                             <div class="col-12">
-                                @if ($homepage_section_banner_three->banner_two->status == 1)
+                                @if (!empty($homepage_section_banner_three) && !empty($homepage_section_banner_three->banner_two) && $homepage_section_banner_three->banner_two->status == 1)
                                     <div class="wsus__single_banner_content single_banner_2">
                                         <a href="{{ $homepage_section_banner_three->banner_two->banner_url }}">
                                             <img class="img-fluid" src="{{ $homepage_section_banner_three->banner_two->banner_image }}" alt="">
@@ -107,7 +107,7 @@
                                 
                             </div>
                             <div class="col-12 mt-lg-4">
-                                @if ($homepage_section_banner_three->banner_three->status == 1)
+                                @if (!empty($homepage_section_banner_three) && !empty($homepage_section_banner_three->banner_three) && $homepage_section_banner_three->banner_three->status == 1)
                                     <div class="wsus__single_banner_content">
                                         <a href="{{ $homepage_section_banner_three->banner_three->banner_url }}">
                                             <img class="img-fluid" src="{{ $homepage_section_banner_three->banner_three->banner_image }}" alt="">
@@ -230,7 +230,7 @@
                                         </ul>
                                     </form>
 
-                                    <p class="brand_model"><span>brand :</span> {{ $product->brand->name ?? 'Unknown' }}</p>
+                                    <p class="brand_model"><span>brand :</span> {{ optional($product->brand)->name ?? 'Unknown' }}</p>
 
                                 </div>
                             </div>

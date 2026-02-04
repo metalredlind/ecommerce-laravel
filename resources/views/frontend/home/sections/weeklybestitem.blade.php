@@ -28,7 +28,7 @@
 
             <div class="col-xl-6 col-sm-6">
                 <div class="wsus__section_header">
-                    <h3>{{ $category->name ?? 'Products' }}</h3>
+                    <h3>{{ optional($category)->name ?? 'Products' }}</h3>
                 </div>
                 <div class="row weekly_best2">
                     {{-- <div class="col-xl-4 col-lg-4">
