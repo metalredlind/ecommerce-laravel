@@ -533,43 +533,57 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 col-lg-5 mt-4 mt-lg-0">
-                                                    <div class="wsus__post_comment rev_mar" id="sticky_sidebar3">
-                                                        <h4>write a Review</h4>
-                                                        <form action="{{ route('user.review.create') }}" method="POST" enctype="multipart/form-data">
-                                                            @csrf
-                                                            <p class="rating">
-                                                                <span>select your rating : </span>
-                                                            </p>
-                                                            <div class="row">
-                                                                <div class="col-xl-12 mb-4">
-                                                                    <div class="wsus__single_com">
-                                                                        <select name="rating" id="" class="form-control">
-                                                                            <option value="">Select</option>
-                                                                            <option value="1">1</option>
-                                                                            <option value="2">2</option>
-                                                                            <option value="3">3</option>
-                                                                            <option value="4">4</option>
-                                                                            <option value="5">5</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-12">
-                                                                    <div class="col-xl-12">
+                                                    @php
+                                                    $isBrought = false;
+                                                        $orders = \App\Models\Order::where(['user_id' => auth()->user()->id, 'order_status' => 'delivered'])->get();
+                                                        foreach ($orders as $key => $order) {
+                                                            $existItem = $order->orderProducts()->where('product_id', $product->id)->first();
+                                                            if ($existItem) {
+                                                                $isBrought = true;
+                                                            }
+                                                        }
+                                                    @endphp
+
+                                                    @if ($isBrought === true)
+                                                        <div class="wsus__post_comment rev_mar" id="sticky_sidebar3">
+                                                            <h4>write a Review</h4>
+                                                            <form action="{{ route('user.review.create') }}" method="POST" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <p class="rating">
+                                                                    <span>select your rating : </span>
+                                                                </p>
+                                                                <div class="row">
+                                                                    <div class="col-xl-12 mb-4">
                                                                         <div class="wsus__single_com">
-                                                                            <textarea cols="3" rows="3" name="review" placeholder="Write your review"></textarea>
+                                                                            <select name="rating" id="" class="form-control">
+                                                                                <option value="">Select</option>
+                                                                                <option value="1">1</option>
+                                                                                <option value="2">2</option>
+                                                                                <option value="3">3</option>
+                                                                                <option value="4">4</option>
+                                                                                <option value="5">5</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xl-12">
+                                                                        <div class="col-xl-12">
+                                                                            <div class="wsus__single_com">
+                                                                                <textarea cols="3" rows="3" name="review" placeholder="Write your review"></textarea>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="img_upload">
-                                                                <div class="gallery">
-                                                                    <input type="file" name="image[]">
+                                                                <div class="img_upload">
+                                                                    <div class="gallery">
+                                                                        <input type="file" name="image[]">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <button class="common_btn" type="submit">submit
-                                                                review</button>
-                                                        </form>
-                                                    </div>
+                                                                <button class="common_btn" type="submit">submit
+                                                                    review</button>
+                                                            </form>
+                                                        </div>
+                                                    @endif
+                                                    
                                                 </div>
                                             </div>
                                         </div>
