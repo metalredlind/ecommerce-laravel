@@ -4168,8 +4168,8 @@ PRODUCT DETAILS START
 }
 
 .wsus__pro_det_review .wsus__comment_text ul li {
-  width: 70px !important;
-  height: 70px !important;
+  width: 20% !important;
+  height: 20%;
   margin-right: 10px;
   float: left;
 }
@@ -9620,3 +9620,10 @@ a:not([href]):not([class]):hover {
   background: #08C;
   margin-right: 10px;
 }
+/* 
+.wsus__pro_det_review .wsus__comment_text ul li {
+  width: 20% !important;
+  height: 20%;
+  margin-right: 10px;
+  float:left;
+} */
