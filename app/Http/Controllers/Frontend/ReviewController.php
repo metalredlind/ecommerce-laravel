@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\DataTables\UserProductReviewsDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\ProductReview;
 use App\Models\ProductReviewGallery;
@@ -12,6 +13,11 @@ use Illuminate\Support\Facades\Auth;
 class ReviewController extends Controller
 {
     use ImageUploadTrait;
+
+    public function index(UserProductReviewsDataTable $dataTable)
+    {
+        return $dataTable->render('frontend.dashboard.review.index');   
+    }
 
     public function create(Request $request)
     {

@@ -82,7 +82,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
     Route::get('wishlist/add-product', [WishlistController::class, 'addToWishlist'])->name('wishlist.store');
     Route::get('wishlist/remove-product/{id}', [WishlistController::class, 'removeFromWishlist'])->name('wishlist.destroy');
-    
+
+    Route::get('reviews', [ReviewController::class, 'index'])->name('review.index');
+
     //review routes
     Route::post('review', [ReviewController::class, 'create'])->name('review.create');
 
