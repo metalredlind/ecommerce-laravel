@@ -45,13 +45,13 @@
 
                                     if ($type === 'category') {
                                         $categoryModel = \App\Models\Category::find($id);
-                                        $items = $categoryModel ? \App\Models\Product::where('category_id', $categoryModel->id)->orderBy('id','DESC')->take(12)->get() : collect();
+                                        $items = $categoryModel ? \App\Models\Product::with('reviews')->where('category_id', $categoryModel->id)->orderBy('id','DESC')->take(12)->get() : collect();
                                     } elseif ($type === 'sub_category') {
                                         $categoryModel = \App\Models\SubCategory::find($id);
-                                        $items = $categoryModel ? \App\Models\Product::where('sub_category_id', $categoryModel->id)->orderBy('id','DESC')->take(12)->get() : collect();
+                                        $items = $categoryModel ? \App\Models\Product::with('reviews')->where('sub_category_id', $categoryModel->id)->orderBy('id','DESC')->take(12)->get() : collect();
                                     } elseif ($type === 'child_category') {
                                         $categoryModel = \App\Models\ChildCategory::find($id);
-                                        $items = $categoryModel ? \App\Models\Product::where('child_category_id', $categoryModel->id)->orderBy('id','DESC')->take(12)->get() : collect();
+                                        $items = $categoryModel ? \App\Models\Product::with('reviews')->where('child_category_id', $categoryModel->id)->orderBy('id','DESC')->take(12)->get() : collect();
                                     }
                                 }
 
@@ -78,11 +78,18 @@
                                     <div class="wsus__hot_deals__single_text">
                                         <h5>{!!limitText($item->name ?? '')!!}</h5>
                                         <p class="wsus__rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
+                                            @php
+                                                $avgRating = $item->reviews()->avg('rating');
+                                                $fullRating = round($avgRating);
+                                            @endphp
+
+                                            @for ($i=1; $i <= 5; $i++)
+                                                @if ($i <= $fullRating)
+                                                    <i class="fas fa-star"></i>
+                                                @else
+                                                    <i class="far fa-star"></i>
+                                                @endif
+                                            @endfor
                                         </p>
                                         @if (checkDiscount($item))
                                             <p class="wsus__tk">{{ $settings->currency_icon ?? '$' }}{{ $item->offer_price ?? '0.00' }} <del>{{ $settings->currency_icon ?? '$' }}{{ $item->price ?? '0.00' }}</del></p>

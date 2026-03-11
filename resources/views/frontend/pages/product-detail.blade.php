@@ -52,12 +52,19 @@
                                     <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
                                     <h4>$50.00 <del>$60.00</del></h4>
                                     <p class="review">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                        <span>20 review</span>
+                                        @php
+                                            $avgRating = $product->reviews()->avg('rating');
+                                            $fullRating = round($avgRating);
+                                        @endphp
+
+                                        @for ($i=1; $i <= 5; $i++)
+                                            @if ($i <= $fullRating)
+                                                <i class="fas fa-star"></i>
+                                            @else
+                                                <i class="far fa-star"></i>
+                                            @endif
+                                        @endfor
+                                        <span>({{count($product->reviews)}} review)</span>
                                     </p>
                                     {{-- <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> --}}
 
@@ -226,12 +233,19 @@
                                 <h4>{{ $settings->currency_icon ?? '$' }}{{ $product->price }}</h4>
                             @endif
                             <p class="review">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>20 review</span>
+                                @php
+                                    $avgRating = $product->reviews()->avg('rating');
+                                    $fullRating = round($avgRating);
+                                @endphp
+
+                                @for ($i=1; $i <= 5; $i++)
+                                    @if ($i <= $fullRating)
+                                        <i class="fas fa-star"></i>
+                                    @else
+                                        <i class="far fa-star"></i>
+                                    @endif
+                                @endfor
+                                <span>({{count($product->reviews)}} review)</span>
                             </p>
                             <p class="description">{!! $product->short_description !!}</p>
 
