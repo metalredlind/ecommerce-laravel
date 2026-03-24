@@ -121,6 +121,16 @@
           </ul>
         </li>
 
+        <li class="dropdown {{setActive([
+          'admin.vendor-request.*',
+        ])}}">
+          <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Users</span></a>
+          <ul class="dropdown-menu">
+            <li class="{{setActive(['admin.vendor-request.index'])}}"><a class="nav-link" href="{{route('admin.vendor-request.index')}}">Pending Vendor Request</a></li>
+
+          </ul>
+        </li>
+
         <li class="{{setActive(['advertisement.*'])}}"><a href="{{route('admin.advertisement.index')}}"><i class="far fa-square"></i> <span>Advertisement</span></a></li>
 
         <li class="{{setActive(['admin.subscribers.*'])}}"><a href="{{route('admin.subscribers.index')}}"><i class="far fa-square"></i> <span>Subscriber</span></a></li>
