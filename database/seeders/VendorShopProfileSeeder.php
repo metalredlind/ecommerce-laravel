@@ -24,6 +24,8 @@ class VendorShopProfileSeeder extends Seeder
         $vendor->address = 'Jakarta, Indonesia';
         $vendor->description = 'Shop Descriptions';
         $vendor->user_id = $user->id;
+        $vendor->status = 1;
+
         $vendor->save();
     }
 }

@@ -5,9 +5,7 @@
 @endsection
 
 @section('content')
-    <!--=============================
-            DASHBOARD START
-          ==============================-->
+
     <section id="wsus__dashboard">
         <div class="container-fluid">
             @include('frontend.dashboard.layouts.sidebar')
@@ -23,7 +21,8 @@
                         <br>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
-                                <form action="">
+                                <form action="{{route('user.vendor-request.create')}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="wsus__dash_pro_single">
                                         <i class="fas fa-user-tie" aria-hidden="true"></i>
                                         <input type="file" name="shop_image" placeholder="Shop Banner Image">
@@ -32,6 +31,7 @@
                                         <i class="fas fa-user-tie" aria-hidden="true"></i>
                                         <input type="text" name="shop_name" placeholder="Shop Name">
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="wsus__dash_pro_single">
@@ -46,10 +46,12 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="wsus__dash_pro_single">
                                         <i class="fas fa-user-tie" aria-hidden="true"></i>
                                         <input type="text" name="shop_address" placeholder="Shop Address">
                                     </div>
+
                                     <div class="wsus__dash_pro_single">
                                         <textarea name="about" placeholder="About You"></textarea>
                                     </div>
@@ -63,7 +65,5 @@
             </div>
         </div>
     </section>
-    <!--=============================
-            DASHBOARD START
-          ==============================-->
+
 @endsection

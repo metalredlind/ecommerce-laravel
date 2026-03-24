@@ -95,6 +95,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
 
     //vendor request route
     Route::get('vendor-request', [UserVendorRequestController::class, 'index'])->name('vendor-request.index');
+    Route::post('vendor-request', [UserVendorRequestController::class, 'create'])->name('vendor-request.create');
 
     //checkout routes
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
