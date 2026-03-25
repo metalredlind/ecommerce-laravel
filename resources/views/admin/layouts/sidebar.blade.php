@@ -123,9 +123,13 @@
 
         <li class="dropdown {{setActive([
           'admin.vendor-request.*',
+          'admin.customers.*',
+          'admin.vendors.*'
         ])}}">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Users</span></a>
           <ul class="dropdown-menu">
+            <li class="{{setActive(['admin.customers.index'])}}"><a class="nav-link" href="{{route('admin.customers.index')}}">Customers</a></li>
+            <li class="{{setActive(['admin.vendors.index'])}}"><a class="nav-link" href="{{route('admin.vendors.index')}}">Vendors</a></li>
             <li class="{{setActive(['admin.vendor-request.index'])}}"><a class="nav-link" href="{{route('admin.vendor-request.index')}}">Pending Vendor Request</a></li>
 
           </ul>
