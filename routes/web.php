@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontEndProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsLetterController;
+use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
@@ -69,6 +70,8 @@ Route::get('newsletter-verify/{token}', [NewsLetterController::class, 'newsLette
 Route::get('vendor', [HomeController::class,'vendorPage'])->name('vendor.index');
 Route::get('vendor-product/{id}', [HomeController::class,'vendorProductsPage'])->name('vendor.products');
 
+//about page routes
+Route::get('about', [PageController::class, 'about'])->name('about');
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function(){
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
@@ -92,6 +95,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
 
     //review routes
     Route::post('review', [ReviewController::class, 'create'])->name('review.create');
+    
 
     //vendor request route
     Route::get('vendor-request', [UserVendorRequestController::class, 'index'])->name('vendor-request.index');

@@ -98,13 +98,15 @@
         <li class="dropdown {{setActive([
           'admin.slider.*',
           'admin.home-page-setting',
-          'admin.vendor-condition.*'
+          'admin.vendor-condition.*',
+          'admin.about.index'
         ])}}">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Website</span></a>
           <ul class="dropdown-menu">
             <li class="{{setActive(['admin.slider.*'])}}"><a class="nav-link" href="{{route('admin.slider.index')}}">Slider</a></li>
             <li class="{{setActive(['admin.home-page-setting'])}}"><a class="nav-link" href="{{route('admin.home-page-setting')}}">Home Page Setting</a></li>
             <li class="{{setActive(['admin.vendor-condition.index'])}}"><a class="nav-link" href="{{route('admin.vendor-condition.index')}}">Vendor Condition</a></li>
+            <li class="{{setActive(['admin.about.index'])}}"><a class="nav-link" href="{{route('admin.about.index')}}">About</a></li>
           </ul>
         </li>
 
