@@ -31,6 +31,7 @@ use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubscribersController;
 use App\Http\Controllers\Backend\TransactionController;
+use App\Http\Controllers\Backend\VendorConditionController;
 use App\Http\Controllers\Backend\VendorListController;
 use App\Http\Controllers\Backend\VendorRequestController;
 use Illuminate\Support\Facades\Route;
@@ -164,6 +165,11 @@ Route::put('customers/change-status', [CustomerListController::class, 'changeSta
 //vendor list route
 Route::get('vendors', [VendorListController::class, 'index'])->name('vendors.index');
 Route::put('vendors/change-status', [VendorListController::class, 'changeStatus'])->name('vendors.change-status');
+
+//vendor condition
+Route::get('vendor-condition', [VendorConditionController::class, 'index'])->name('vendor-condition.index');
+Route::put('vendor-condition/update', [VendorConditionController::class, 'update'])->name('vendor-condition.update');
+
 
 // footer routes
 Route::resource('footer-info', FooterInfoController::class);
