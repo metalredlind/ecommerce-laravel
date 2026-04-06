@@ -72,6 +72,8 @@ Route::get('vendor-product/{id}', [HomeController::class,'vendorProductsPage'])-
 
 //about page routes
 Route::get('about', [PageController::class, 'about'])->name('about');
+//terms & conditions page routes
+Route::get('terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function(){
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
@@ -95,7 +97,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
 
     //review routes
     Route::post('review', [ReviewController::class, 'create'])->name('review.create');
-    
+
 
     //vendor request route
     Route::get('vendor-request', [UserVendorRequestController::class, 'index'])->name('vendor-request.index');
