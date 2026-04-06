@@ -20,4 +20,9 @@ class PageController extends Controller
         $terms = TermsAndConditions::first();
         return view('frontend.pages.terms-and-conditions', compact('terms'));
     }
+
+    public function contact()
+    {
+        return view('frontend.pages.contact');
+    }
 }
