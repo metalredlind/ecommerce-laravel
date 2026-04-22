@@ -9,6 +9,8 @@ A modern, feature-rich ecommerce platform built with Laravel 10, featuring a mul
 - Vendor shop profiles and settings
 - Vendor product management with approval system
 - Vendor dashboard and order handling
+- Vendor terms and conditions on dashboard
+- Vendor role verification on sidebar
 
 ### 🛍️ **Product Management**
 - Product catalog with categories, subcategories, and child categories
@@ -47,6 +49,9 @@ A modern, feature-rich ecommerce platform built with Laravel 10, featuring a mul
 - Product approval system
 - Order management
 - User and vendor management
+- Customer and vendor lists
+- Vendor request approval system
+- Warning alerts for inactive/banned accounts
 - Settings and configuration
 - Analytics and reporting
 - Homepage settings management (popular categories + multi product sliders)
@@ -63,6 +68,9 @@ A modern, feature-rich ecommerce platform built with Laravel 10, featuring a mul
 - Shopping cart sidebar
 - Newsletter subscription with email verification
 - Dynamic footer with customizable sections
+- Contact page with email functionality
+- About page
+- Terms and conditions page
 
 ## 🛠️ **Technology Stack**
 
@@ -216,11 +224,12 @@ After running the seeders, you can access the admin panel with:
 ## 🎯 **Key Features in Detail**
 
 ### Multi-Vendor System
-- Vendor Registration: Complete vendor onboarding process
+- Vendor Registration: Complete vendor onboarding process with request system
 - Vendor Profiles: Comprehensive vendor shop profiles with customizable settings
 - Product Approval: Admin approval system for vendor products with pending/approved status
 - Vendor Dashboard: Dedicated dashboard for vendors to manage products, variants, and orders
 - Vendor Orders: Separate order management for vendors with status updates
+- Vendor Request Approval: Admin dashboard for approving vendor registration requests
 
 ### Product Management
 - Categories: Hierarchical category system (Category → Subcategory → Child Category)
@@ -253,6 +262,9 @@ After running the seeders, you can access the admin panel with:
 - Product approval system
 - Order management with status tracking
 - User and vendor management
+- Customer and vendor lists with detailed management
+- Vendor request approval system
+- Warning alerts for inactive or banned accounts
 - System settings
 - Payment gateway configuration
 - Analytics and reporting
@@ -365,6 +377,12 @@ If you encounter any issues or have questions:
 - ✅ Subscriber management with bulk email campaigns
 - ✅ Homepage customization (sliders, popular categories, product sections)
 - ✅ Transaction tracking and reporting
+- ✅ Contact page with email functionality
+- ✅ About page
+- ✅ Terms and conditions page
+- ✅ Vendor request approval system
+- ✅ Customer and vendor management lists
+- ✅ Warning alerts for inactive/banned accounts
 - 🔄 Continuous improvements and optimizations
 
 ---
